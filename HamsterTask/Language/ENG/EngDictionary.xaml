@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <system:String x:Key="HamsterTask.MainWindow">HamsterTask - Welcome!</system:String>
+    
+    <system:String x:Key="LabelLogin">Login:</system:String>
+    <system:String x:Key="LabelPass">Password:</system:String>
+
+    <system:String x:Key="LoginBtn">Entry</system:String>
+    <system:String x:Key="RegOrgBtn">Company registration</system:String>
+    <system:String x:Key="RegEmpBtn">Employee registration</system:String>
+
+
+    <system:String x:Key="HamsterTask.RegistrationOrg">HamsterTask - Registration!</system:String>
+
+    <system:String x:Key="LabelCompanyRegDescript">In order to register, please specify: name of the organization, type of company, date of creation of the company. All fields are required.</system:String>
+    <system:String x:Key="LabelCompanyName">Name:</system:String>
+    <system:String x:Key="LabelCompanyType">Company type:</system:String>
+    <system:String x:Key="LabelCompanyBirth">Date of creation:</system:String>
+
+    <system:String x:Key="BtnContinueReg">Continue with registration of the Owner/Director/Manager account</system:String>
+    <system:String x:Key="BtnContinueNoReg">Continue without creating a profile, because I have an account</system:String>
+
+    <system:String x:Key="HamsterTask.RegistrationUse">HamsterTask - user registration</system:String>
+
+    <system:String x:Key="LabelFName">Name:</system:String>
+    <system:String x:Key="LabelSName">Surname:</system:String>
+    <system:String x:Key="LabelFNumber">Phone number:</system:String>
+    <system:String x:Key="LabelEmail">Email:</system:String>
+    <system:String x:Key="LabelUserBirth">Date of birth:</system:String>
+</ResourceDictionary>

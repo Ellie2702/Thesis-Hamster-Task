@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="HamsterTask.MainWindow">HamsterTask - Добро пожаждовать!</system:String>
+    
+    <system:String x:Key="LabelLogin">Логин:</system:String>
+    <system:String x:Key="LabelPass">Пароль:</system:String>
+
+    <system:String x:Key="LoginBtn">Вход</system:String>
+    <system:String x:Key="RegOrgBtn">Регистрация компании</system:String>
+    <system:String x:Key="RegEmpBtn">Регистрация пользователя</system:String>
+
+
+    <system:String x:Key="HamsterTask.RegistrationOrg">HamsterTask - регистрация компании</system:String>
+
+    <system:String x:Key="LabelCompanyRegDescript">Для того чтобы пройти регистрацию, пожалуйста, укажите: наименование организации, тип компании, дату создания компании. Все поля обязательны.</system:String>
+    <system:String x:Key="LabelCompanyName">Наименование:</system:String>
+    <system:String x:Key="LabelCompanyType">Тип компании:</system:String>
+    <system:String x:Key="LabelCompanyBirth">Дата создания:</system:String>
+
+    <system:String x:Key="BtnContinueReg">Продолжить с регистрацией акаунта пользователя</system:String>
+    <system:String x:Key="BtnContinueNoReg">Продолжить без создания профиля, т.к у меня есть аккаунт</system:String>
+
+
+    <system:String x:Key="HamsterTask.RegistrationUse">HamsterTask - регистрация пользователя</system:String>
+
+    <system:String x:Key="LabelFName">Имя:</system:String>
+    <system:String x:Key="LabelSName">Фамилия:</system:String>
+    <system:String x:Key="LabelFNumber">Номер телефона:</system:String>
+    <system:String x:Key="LabelEmail">Адрес почты:</system:String>
+    <system:String x:Key="LabelUserBirth">Дата рождения:</system:String>
+  
+
+</ResourceDictionary>

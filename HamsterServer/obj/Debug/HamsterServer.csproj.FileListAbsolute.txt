@@ -1,0 +1,11 @@
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\HamsterServer.exe.config
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\HamsterServer.exe
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\HamsterServer.pdb
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\EntityFramework.dll
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\EntityFramework.xml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\obj\Debug\HamsterServer.csprojAssemblyReference.cache
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\obj\Debug\HamsterServer.csproj.CopyComplete
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\obj\Debug\HamsterServer.exe
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterServer\obj\Debug\HamsterServer.pdb

@@ -30,6 +30,10 @@
     <system:String x:Key="LabelFNumber">Номер телефона:</system:String>
     <system:String x:Key="LabelEmail">Адрес почты:</system:String>
     <system:String x:Key="LabelUserBirth">Дата рождения:</system:String>
-  
+    
+    <system:String x:Key="LabelUserRegDescript">Все поля, кроме номера телефона, обязательны!</system:String>
+    <system:String x:Key="RegistrationUserBTN">Зарегистрироваться</system:String>
 
+    <system:String x:Key="BTNTasks">Задачник</system:String>
+    <system:String x:Key="BTNMail">Сообщения</system:String>
 </ResourceDictionary>

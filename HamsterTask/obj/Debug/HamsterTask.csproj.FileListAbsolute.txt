@@ -21,6 +21,12 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Hamster
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\HamsterTask.pdb
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\RegistrationOrg.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\RegistrationOrg.baml
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\HamsterTask.csprojAssemblyReference.cache
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\RegistrationUser.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\RegistrationUser.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AdminPanel.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserPanel.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AdminPanel.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserPanel.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\HamsterTask.csprojAssemblyReference.cache
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Tasks.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Tasks.baml

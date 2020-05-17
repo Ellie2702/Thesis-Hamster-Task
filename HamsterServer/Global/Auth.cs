@@ -17,5 +17,6 @@ namespace HamsterServer.Global
 
         public Guid guid;
         public User user;
+
     }
 }

@@ -24,5 +24,29 @@ namespace HamsterTask
             InitializeComponent();
             Global.LanguageSwitch(this);
         }
+
+        private void RegistrationUserBTN_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (RegPhone.Text == string.Empty)
+                {
+                    Global.Guid = Helper.Http.GetRequest("http://localhost:8080/reguserA/" + RegLogin.Text + "/" + RegPass.Password + "/" + RegName.Text + "/" + RegSurName.Text + "/" + RegMail.Text + "/" + RegBirth.SelectedDate);
+                    new UserPanel().Show();
+                    this.Close();
+                }
+                else
+                {
+                    Global.Guid = Helper.Http.GetRequest("http://localhost:8080/reguserFull/" + RegLogin.Text + "/" + RegPass.Password + "/" + RegName.Text + "/" + RegSurName.Text + "/" + RegMail.Text + "/" + RegPhone.Text + "/" + RegBirth.SelectedDate);
+                    new UserPanel().Show();
+                    this.Close();
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

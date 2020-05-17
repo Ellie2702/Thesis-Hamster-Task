@@ -73,10 +73,40 @@ namespace HamsterServer
                 switch (part[1])
                 {
                     case "auth":
-                        if (part.Length != 4) return "need 2 arguments";
+                        if (part.Length != 4) return part.Length.ToString();
                         return TryAuth(part[2], part[3]);
+                    case "reguserA":
+                        if (part.Length != 8) return part.Length.ToString();
+                        return TryRegistration("A", part);
+                    case "reguserFull":
+                        if (part.Length != 9) return part.Length.ToString();
+                        return TryRegistration("Full", part);
+                    case "RegOrg":
+                        if (part.Length != 6) return part.Length.ToString();
+                        return TryRegistrationOrg(part);
                     default:
-                        return "404";
+                        Auth user = Global.GlobalList.IsAuthed(new Guid(part[1]));
+                        if (user != null)
+                        {
+                            switch (part[2])
+                            {
+                                case "tasks":
+
+                                    return "task";
+                                case "mainprofile":
+
+                                    return "profile";
+                                case "News":
+
+                                    return "News";
+                                case "EmployeeCode":
+
+                                    return "EmpCode";
+                                default:
+                                    return "shit";
+                            }
+                        }
+                        else return "fuck";
                 }
             }
             else return "need more arguments!";
@@ -87,14 +117,95 @@ namespace HamsterServer
             using (DataContext db = new DataContext())
             {
                 User user = db.Users.Where(User => User.Login == login).FirstOrDefault();
-                if(user.PassHash == DATA.BLL.Cipher.PassHash(password, user.Salt).ToString())
+                if(Encoding.UTF8.GetString(user.PassHash) == Encoding.UTF8.GetString(DATA.BLL.Cipher.PassHash(password, user.Salt)))
                 {
                     var guid = Guid.NewGuid();
                     Auth auth = new Auth(guid, user);
                     Global.GlobalList.Authorized.Add(auth);
-                    return "ok";
+                    string info = string.Empty;
+                    var infoEmp = db.Employees.Where(emp => emp.UserID == user.UserID).FirstOrDefault();
+                    if (user.PhoneNumber != null)
+                    {
+                        if (infoEmp != null)
+                        {
+                            info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber + "|" + infoEmp.Position + "|" + infoEmp.Company;
+                        }
+                        else info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
+                    }
+                    else {
+                        if (infoEmp != null)
+                        {
+                            info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + infoEmp.Position + "|" + infoEmp.Company;
+                        } else info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email; }
+                    return guid.ToString() + "|" + info;
                 }
                 return "bad";
+            }
+        }
+
+        private string TryRegistrationOrg(string [] parts)
+        {
+            using(DataContext db = new DataContext())
+            {
+                Company company = new Company();
+                company.CompanyName = parts[2];
+                company.CompanyType = parts[3];
+                company.FoundationDate = Convert.ToDateTime(parts[4]);
+                company.RegDate = DateTime.Now;
+                
+            }
+        }
+
+        private string TryRegistration(string ABC, string [] parts)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = new User();
+                byte[] salt = DATA.BLL.Cipher.NewSalt();
+                byte[] PassHash = DATA.BLL.Cipher.PassHash(parts[3], salt);
+                var guid = Guid.NewGuid();
+                Auth auth;
+                int role = 2;
+                string info = string.Empty;
+                switch (ABC)
+                {
+                    case "A":
+                        user.Login = parts[2];
+                        user.Salt = salt;
+                        user.PassHash = PassHash;
+                        user.FirstName = parts[4];
+                        user.SecondName = parts[5];
+                        user.Email = parts[6];
+                        user.Birth = Convert.ToDateTime(parts[7]);
+                        user.RegDate = DateTime.Today;
+                        user.RoleID = role;
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                        user = db.Users.Where(p => p.Login == user.Login).FirstOrDefault();
+                        auth = new Auth(guid, user);
+                        Global.GlobalList.Authorized.Add(auth);
+                        info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email;
+                        return guid.ToString() + "|" + info;
+                    case "Full":
+                        user.Login = parts[2];
+                        user.Salt = salt;
+                        user.PassHash = PassHash;
+                        user.FirstName = parts[4];
+                        user.SecondName = parts[5];
+                        user.Email = parts[6];
+                        user.PhoneNumber = parts[7];
+                        user.Birth = Convert.ToDateTime(parts[8]);
+                        user.RegDate = DateTime.Today;
+                        user.RoleID = role;
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                        user = db.Users.Where(p => p.Login == user.Login).FirstOrDefault();
+                        auth = new Auth(guid, user);
+                        Global.GlobalList.Authorized.Add(auth);
+                        info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
+                        return guid.ToString() + "|" + info;
+                    default: return "meow";
+                }
             }
         }
     }

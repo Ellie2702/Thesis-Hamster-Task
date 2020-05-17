@@ -44,13 +44,15 @@
             <TextBlock TextWrapping="Wrap" FontSize="15" Width="509" Text="{DynamicResource LabelCompanyRegDescript}" Height="45"></TextBlock>
         </Label>
 
-        <Button x:Name="BtnContinueReg" Grid.Column="2" Grid.Row="4" Margin="10, 10, 10, 10">
+        <Button x:Name="BtnContinueReg" Grid.Column="2" Grid.Row="4" Margin="10, 10, 10, 10" Click="BtnContinueReg_Click">
             <TextBlock TextWrapping="Wrap" Text="{DynamicResource BtnContinueReg}" ></TextBlock>
         </Button>
 
-        <Button x:Name="BtnContinueNoReg" Grid.Column="3" Grid.Row="4" Margin="10, 10, 10, 10">
+        <Button x:Name="BtnContinueNoReg" Grid.Column="3" Grid.Row="4" Margin="10, 10, 10, 10" Click="BtnContinueNoReg_Click">
             <TextBlock TextWrapping="Wrap" Text="{DynamicResource BtnContinueNoReg}"></TextBlock>
         </Button>
+
+        <Button x:Name="Back" Grid.Column="3" Grid.Row="5" Margin="10"/>
 
         <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6">
             <Rectangle.Fill>

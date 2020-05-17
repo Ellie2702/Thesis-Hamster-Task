@@ -23,13 +23,14 @@ namespace HamsterServer.DATA.Entities
         public string SecondName { get; set; }
         [Required]
         [MaxLength(8)]
-        public string  Salt { get; set; }
+        public byte[]  Salt { get; set; }
         [Required]
         [MaxLength(100)]
-        public string PassHash { get; set; }
+        public byte[] PassHash { get; set; }
         [Required]
         [StringLength(50)]
         public string Login { get; set; }
+        [Required]
         public DateTime Birth { get; set; }
         [Required]
         public DateTime RegDate { get; set; }

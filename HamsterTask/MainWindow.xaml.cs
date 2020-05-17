@@ -60,12 +60,12 @@ namespace HamsterTask
             this.Close();
         }
 
-        private string guid = "";
-
-      
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            guid = Helper.Http.GetRequest("http://localhost:8080/auth/" + Login.Text + "/" + Password.Password + "/");
+            Global.Guid = Helper.Http.GetRequest("http://localhost:8080/auth/" + Login.Text + "/" + Password.Password + "/");
+            MessageBox.Show(Global.Guid);
+            new UserPanel().Show();
+            this.Close();
         }
 
         

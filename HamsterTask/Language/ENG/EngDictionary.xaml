@@ -29,4 +29,7 @@
     <system:String x:Key="LabelFNumber">Phone number:</system:String>
     <system:String x:Key="LabelEmail">Email:</system:String>
     <system:String x:Key="LabelUserBirth">Date of birth:</system:String>
+
+    <system:String x:Key="LabelUserRegDescript">All fields except phone number are required!</system:String>
+    <system:String x:Key="RegistrationUserBTN">Registration</system:String>
 </ResourceDictionary>

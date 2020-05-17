@@ -24,5 +24,21 @@ namespace HamsterTask
             InitializeComponent();
             Global.LanguageSwitch(this);
         }
+
+        private void BtnContinueNoReg_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnContinueReg_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            } catch
+            {
+
+            }
+        }
     }
 }

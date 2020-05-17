@@ -19,11 +19,11 @@ namespace HamsterServer.DATA.BLL
             return salt;
         }
 
-        public static byte[] PassHash(string pass, string salt)
+        public static byte[] PassHash(string pass, byte[] salt)
         {
             HashAlgorithm algorithm = new SHA256Managed();
 
-            var temp = Encoding.UTF8.GetBytes(pass + salt);
+            var temp = Encoding.UTF8.GetBytes(pass);
             byte[] res = new byte[temp.Length + salt.Length];
 
             int i = 0;
@@ -32,10 +32,10 @@ namespace HamsterServer.DATA.BLL
                 res[i++] = b;
             }
 
-           // foreach (var b in salt)
-          //  {
-         //       res[i++] = b;
-          //  }
+            foreach (var b in salt)
+            {
+                res[i++] = b;
+            }
 
             return algorithm.ComputeHash(res);
         }

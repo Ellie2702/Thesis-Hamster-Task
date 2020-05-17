@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\App.xaml
-515431716
+84717838
 
-10-913576861
+13-274226820
 161937909381
-Language\ENG\EngDictionary.xaml;Language\RUS\RusDictionary.xaml;MainWindow.xaml;RegistrationOrg.xaml;RegistrationUser.xaml;
+AdminPanel.xaml;Language\ENG\EngDictionary.xaml;Language\RUS\RusDictionary.xaml;MainWindow.xaml;RegistrationOrg.xaml;RegistrationUser.xaml;Tasks.xaml;UserPanel.xaml;
 
-False
+True
 

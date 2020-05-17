@@ -18,7 +18,7 @@ namespace HamsterServer.Global
             {
                 User user = db.Users.Where(p => p.Login == login).FirstOrDefault();
                 byte[] hash = DATA.BLL.Cipher.PassHash(pass, user.Salt);
-                if(user.PassHash == hash.ToString())
+                if(user.PassHash == hash)
                 {
                     return user;
                 }

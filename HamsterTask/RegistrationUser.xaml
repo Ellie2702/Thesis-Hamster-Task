@@ -53,10 +53,26 @@
             <TextBlock TextWrapping="Wrap" Margin="0, 20, 0, 0" Text="All fields except phone number are required!" Height="47"></TextBlock>
         </Label>
 
-        <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="10, 5, 2, 60" Click="RegistrationUserBTN_Click"/>
-        <Button x:Name="Back" Grid.Column="3" Grid.Row="4" Margin="10, 5, 2, 60"/>
+        <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="10, 5, 2, 60" Click="RegistrationUserBTN_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="10, 5, 2, 60" BorderBrush="{x:Null}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
-        <Rectangle  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="100">
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="100" Grid.Row="100">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

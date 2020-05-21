@@ -21,7 +21,7 @@ namespace HamsterServer.DATA.DTO
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
 
-
-        public List<Avatar> Avatars { get; set; }
+  
+        public List<Image> Images { get; set; }
     }
 }

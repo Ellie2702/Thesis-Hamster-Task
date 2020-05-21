@@ -23,5 +23,29 @@ namespace HamsterTask
         {
             InitializeComponent();
         }
+
+        private void ProjectsHeader_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string[] parts = Global.Guid.Split('|');
+                var data = Helper.Http.GetRequest("http://localhost:8080/GetProjects/" + parts[1]);
+                if (data == null)
+                {
+                    NoneProj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    NoneProj.Visibility = Visibility.Hidden;
+
+                }
+
+
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

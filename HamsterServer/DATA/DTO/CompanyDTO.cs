@@ -12,6 +12,7 @@ namespace HamsterServer.DATA.DTO
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
         public string CompanyType { get; set; }
+        public int UserID { get; set; }
         public DateTime FoundationDate { get; set; }
         public DateTime RegDate { get; set; }
 

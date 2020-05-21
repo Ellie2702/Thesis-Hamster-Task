@@ -5,8 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="Tasks" Height="450" Width="800">
+        Title="Tasks" Height="550" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="3" x:Name="AddTask" Margin="141,10,10,56" Foreground="{x:Null}" BorderBrush="{x:Null}">
+            <Button.OpacityMask>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#992D97BF" Offset="0"/>
+                    <GradientStop Color="#3F2F8387" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/Add.png"/>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock x:Name="ToolTopAddTask" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"></TextBlock>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button Grid.Column="3" x:Name="AddProject" Margin="76,10,75,56" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+            <Button.OpacityMask>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#992D97BF" Offset="0"/>
+                    <GradientStop Color="#3F2F8387" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/Projects.png"/>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock x:Name="ToolTopAddProject" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"></TextBlock>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4" Margin="0,29,0,0">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF031419" Offset="0.989"/>
+                    <GradientStop Color="#FF126A7A" Offset="0.342"/>
+                    <GradientStop Color="#FF579CB6" Offset="0.232"/>
+                    <GradientStop Color="#FF0E6376" Offset="0.644"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <GroupBox x:Name="ProjectsHeader" Grid.ColumnSpan="4" Header="{DynamicResource ProjectsHeader}" HorizontalAlignment="Left" Height="129" Margin="10,53,0,0" FontSize="15" Grid.RowSpan="2" VerticalAlignment="Top" Width="761" Loaded="ProjectsHeader_Loaded">
+            <GroupBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#3376A7B6" Offset="0.958"/>
+                    <GradientStop Color="#33FFFFFF"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
+
+            <Label x:Name="NoneProj" Content="{DynamicResource NoneProj}" Margin="123,10,123,15" FontSize="20">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#F2000000" Offset="0"/>
+                        <GradientStop Color="#66535353" Offset="1"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+        </GroupBox>
+        <GroupBox x:Name="TaskHeader" Grid.ColumnSpan="4" Header="{DynamicResource TaskHeader}" HorizontalAlignment="Left" Height="241" Margin="10,83,0,0" FontSize="15" Grid.RowSpan="4" VerticalAlignment="Top" Width="761" Grid.Row="1">
+            <GroupBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#3376A7B6" Offset="0.958"/>
+                    <GradientStop Color="#33FFFFFF"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
+            <Label x:Name="NoneTask" Content="{DynamicResource ResourceKey=NoneTask}" Margin="123,30,123,107" FontSize="20">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#F2000000" Offset="0"/>
+                        <GradientStop Color="#66535353" Offset="1"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+        </GroupBox>
     </Grid>
+
+
 </Window>

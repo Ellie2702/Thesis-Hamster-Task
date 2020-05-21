@@ -32,4 +32,28 @@
 
     <system:String x:Key="LabelUserRegDescript">All fields except phone number are required!</system:String>
     <system:String x:Key="RegistrationUserBTN">Registration</system:String>
+
+    <system:String x:Key="HamsterTask.UserRegOrg">Registration of the first employee in the company</system:String>
+    
+    <system:String x:Key="PositionName">Position:</system:String>
+    <system:String x:Key="UserRegOrgDesc">Please enter your login information and position in the created company!</system:String>
+
+    <system:String x:Key="BTNLoginReg">Complete registration and log in</system:String>
+    <system:String x:Key="BTNBackToMain">Go back to the main page</system:String>
+
+    <system:String x:Key="UserCompany">Company</system:String>
+    <system:String x:Key="UserTask">Tasks</system:String>
+    <system:String x:Key="UserMessages">Messages</system:String>
+    <system:String x:Key="UserCustom">Profile setting</system:String>
+    <system:String x:Key="Exit">Exit</system:String>
+
+    <system:String x:Key="ToolTopUserTask">Here you can interact with projects and tasks</system:String>
+    <system:String x:Key="ProjectsHeader">Projects</system:String>
+    <system:String x:Key="TaskHeader">Tasks</system:String>
+
+    <system:String x:Key="ToolTopAddTask">Add task</system:String>
+    <system:String x:Key="ToolTopAddProject">Add project</system:String>
+
+    <system:String x:Key="NoneProj">You don't have any projects</system:String>
+    <system:String x:Key="NoneTask">You don't have any tasks</system:String>
 </ResourceDictionary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace HamsterServer.DATA.Entities
         public User()
         {
             Images = new HashSet<Image>();
+            
         }
         [Key]
         public int UserID { get; set; }
@@ -30,7 +32,6 @@ namespace HamsterServer.DATA.Entities
         [Required]
         [StringLength(50)]
         public string Login { get; set; }
-        [Required]
         public DateTime Birth { get; set; }
         [Required]
         public DateTime RegDate { get; set; }
@@ -44,9 +45,7 @@ namespace HamsterServer.DATA.Entities
 
 
         public Role Role { get; set; }
-
         public virtual ICollection<Image> Images { get; set; }
- 
-
+       
     }
 }

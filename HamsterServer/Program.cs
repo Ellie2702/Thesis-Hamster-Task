@@ -81,9 +81,24 @@ namespace HamsterServer
                     case "reguserFull":
                         if (part.Length != 9) return part.Length.ToString();
                         return TryRegistration("Full", part);
-                    case "RegOrg":
-                        if (part.Length != 6) return part.Length.ToString();
-                        return TryRegistrationOrg(part);
+                    case "RegOrgU":
+                        if (part.Length != 9) return part.Length.ToString();
+                        return TryRegistrationOrg("A", part);
+                    case "GetAvatarUser":
+                        if(part.Length != 3) return part.Length.ToString();
+                        return GetAvatar(part[2]);
+                    case "GetProjects":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetAvatar(part[2]);
+                    case "GetTasks":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetAvatar(part[2]);
+                    case "CreateProject":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetAvatar(part[2]);
+                    case "CreateTask":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetAvatar(part[2]);
                     default:
                         Auth user = Global.GlobalList.IsAuthed(new Guid(part[1]));
                         if (user != null)
@@ -112,6 +127,11 @@ namespace HamsterServer
             else return "need more arguments!";
         }
 
+        private string GetAvatar(string UserID)
+        {
+            return "wow";
+        }
+
         private string TryAuth(string login, string password)
         {
             using (DataContext db = new DataContext())
@@ -123,36 +143,80 @@ namespace HamsterServer
                     Auth auth = new Auth(guid, user);
                     Global.GlobalList.Authorized.Add(auth);
                     string info = string.Empty;
-                    var infoEmp = db.Employees.Where(emp => emp.UserID == user.UserID).FirstOrDefault();
+                    Employee infoEmp = db.Employees.Include("User").Include("Position").Include("Company").FirstOrDefault(emp => emp.User.UserID == user.UserID);
+                    Position positionName = null;
+                    Company companyName = null;
+                    if (infoEmp != null)
+                    {
+                        int pos = infoEmp.Position.PositionID;
+                        int comp = infoEmp.Company.CompanyID;
+                        positionName = db.Positions.Where(p => p.PositionID == pos).FirstOrDefault();
+                        companyName = db.Companies.Where(p => p.CompanyID == comp).FirstOrDefault();
+                    }
                     if (user.PhoneNumber != null)
                     {
                         if (infoEmp != null)
                         {
-                            info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber + "|" + infoEmp.Position + "|" + infoEmp.Company;
+                            info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber + "|" + positionName.PositionName + "|" + companyName.CompanyName + "|" + "WP";
                         }
-                        else info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
+                        else info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
                     }
                     else {
                         if (infoEmp != null)
                         {
-                            info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + infoEmp.Position + "|" + infoEmp.Company;
-                        } else info = user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email; }
+                            info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + positionName.PositionName + "|" + companyName.CompanyName + "|" + "W";
+                        } else info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email; }
                     return guid.ToString() + "|" + info;
                 }
                 return "bad";
             }
         }
 
-        private string TryRegistrationOrg(string [] parts)
+        private string TryRegistrationOrg(string AB, string [] parts)
         {
-            using(DataContext db = new DataContext())
+            using (DataContext db = new DataContext())
             {
                 Company company = new Company();
-                company.CompanyName = parts[2];
-                company.CompanyType = parts[3];
-                company.FoundationDate = Convert.ToDateTime(parts[4]);
-                company.RegDate = DateTime.Now;
-                
+                Employee employee = new Employee();
+                Position position = new Position();
+                switch (AB) {
+                    case "A":
+                        company.CompanyName = parts[2];
+                        company.CompanyType = parts[3];
+                        company.FoundationDate = Convert.ToDateTime(parts[4]);
+                        company.RegDate = DateTime.Now;
+                        string[] infoUser = TryAuth(parts[5], parts[6]).Split('|');
+                        if (infoUser != null)
+                        {
+                            int id = Convert.ToInt32(infoUser[1]);
+                            employee.User = db.Users.Where(p => p.UserID == id).FirstOrDefault();
+                            company.UserID = id;
+                        }
+                        else return "Логин или пароль введены неверно или такого пользователя не сущетствует";
+                        db.Companies.Add(company);
+                        db.SaveChanges();
+                        
+                        employee.Company = company;
+                        string name = parts[7];
+                        position = db.Positions.Where(p => p.PositionName == name).FirstOrDefault();
+
+                        if (position != null)
+                        {
+                            employee.Position = position;
+                        } else {
+                            position = new Position();
+                            position.PositionName = parts[7];
+                            db.Positions.Add(position);
+                            db.SaveChanges();
+                            employee.Position = position;
+                        }
+
+                        db.Employees.Add(employee);
+                        db.SaveChanges();
+                        return TryAuth(parts[5], parts[6]);
+                    default: return "WrongKeys";
+            }
+
             }
         }
 

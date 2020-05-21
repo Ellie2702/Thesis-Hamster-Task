@@ -11,10 +11,7 @@ namespace HamsterServer.DATA.Entities
     {
         [Key]
         public int ReportID { get; set; }
-        [Required]
-        public int UserID { get; set; }
-        [Required]
-        public int DocumentID { get; set; }
+  
         [Required]
         public DateTime Date { get; set; }
 

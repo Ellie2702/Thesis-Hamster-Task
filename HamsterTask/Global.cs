@@ -29,6 +29,6 @@ namespace HamsterTask
         }
 
         public static string Guid;
-        
+        public static string RegOrgInfo;
     }
 }

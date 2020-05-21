@@ -14,9 +14,5 @@ namespace HamsterServer.DATA.Entities
         [StringLength(50)]
         [Required]
         public string PositionName { get; set; }
-       
-
-       
-    
     }
 }

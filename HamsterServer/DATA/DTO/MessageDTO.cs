@@ -11,7 +11,7 @@ namespace HamsterServer.DATA.DTO
         public int MessgeID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public int From { get; set; }
-        public int To { get; set; }
+        public int UserFrom { get; set; }
+        public int UserTo { get; set; }
     }
 }

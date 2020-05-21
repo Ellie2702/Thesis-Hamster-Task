@@ -1,0 +1,64 @@
+﻿<Window x:Class="HamsterTask.UserRegOrg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HamsterTask"
+        mc:Ignorable="d"
+        Title="{DynamicResource HamsterTask.UserRegOrg}" Height="450" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="UserRegOrgDesc" Content="{DynamicResource UserRegOrgDesc}" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+        <Label x:Name="LabelLogin" Content="{DynamicResource LabelLogin}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" Margin="0,0,132,0"/>
+        <TextBox Name="Login" Grid.Row="1" Margin="84,0,118,81" FontSize="15"  Grid.ColumnSpan="2"/>
+        <Label x:Name="LabelPass" Content="{DynamicResource LabelPass}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" Margin="0,0,119,0"/>
+        <PasswordBox Name="Pass" Grid.Row="1" Margin="84,42,118,39" FontSize="15"  Grid.ColumnSpan="2"/>
+        <Label x:Name="PositionName" Content="{DynamicResource PositionName}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"/>
+        <TextBox Name="Position" Grid.Row="1" Margin="84,81,118,0" FontSize="15" Grid.ColumnSpan="2"/>
+
+        <Button x:Name="BTNlLoginReg"  Margin="10,0,10,59" Grid.Row="2" Grid.Column="2" Click="BTNlLoginReg_Click" BorderBrush="{x:Null}" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <TextBlock TextWrapping="Wrap" Text="{DynamicResource BTNLoginReg}"/>
+        </Button>
+        <Button x:Name="BTNBackToMain"  Margin="10,59,10,0" Grid.Row="2" Grid.Column="2" Click="BTNBackToMain_Click" BorderBrush="{x:Null}" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <TextBlock TextWrapping="Wrap" Text="{DynamicResource BTNBackToMain}"/>
+        </Button>
+
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="100" Grid.Row="100">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF031419" Offset="0.989"/>
+                    <GradientStop Color="#FF126A7A" Offset="0.342"/>
+                    <GradientStop Color="#FF579CB6" Offset="0.232"/>
+                    <GradientStop Color="#FF0E6376" Offset="0.644"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
+</Window>

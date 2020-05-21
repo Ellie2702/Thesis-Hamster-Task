@@ -27,7 +27,16 @@ namespace HamsterTask
 
         private void BtnContinueNoReg_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Global.RegOrgInfo = CompanyName.Text + "/" + CompanyType.Text + "/" + CompanyBirth.SelectedDate.ToString() + "/";
+                new UserRegOrg().Show();
+                this.Close();
+            }
+            catch
+            {
 
+            }
         }
 
         private void BtnContinueReg_Click(object sender, RoutedEventArgs e)

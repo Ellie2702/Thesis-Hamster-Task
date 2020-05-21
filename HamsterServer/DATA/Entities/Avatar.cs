@@ -13,13 +13,9 @@ namespace HamsterServer.DATA.Entities
         public int AvatarID { get; set; }
         [Required]
         public int ImageID { get; set; }
-        
         [Required]
-       
-      
         public bool IsUsed { get; set; }
 
-       
         public Image Image { get; set; }
     }
 }

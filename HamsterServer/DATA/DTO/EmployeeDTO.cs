@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HamsterServer.DATA.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,10 @@ namespace HamsterServer.DATA.DTO
     public class EmployeeDTO
     {
         public int CompanyEmployeeID { get; set; }
-        public int CompanyID { get; set; }
-        public int UserID { get; set; }
-        public int Position { get; set; }
+        public Company CompanyID { get; set; }
+        public User UserID { get; set; }
+        public Position PositionID { get; set; }
+
+
     }
 }

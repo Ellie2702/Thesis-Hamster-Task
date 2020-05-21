@@ -13,9 +13,8 @@ namespace HamsterServer.DATA.Entities
         public int ImageID { get; set; }
         [Required]
         [StringLength(7)]
+        public byte[] ImageBytes { get; set; }
         public string ImgType { get; set; }
-        [Required]
-        public int UserID { get; set; }
 
         public User User { get; set; }
     }

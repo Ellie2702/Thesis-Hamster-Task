@@ -12,8 +12,6 @@ namespace HamsterServer.DATA.Entities
         [Key]
         public int TaskID { get; set; }
         [Required]
-        public int UserID { get; set; }
-        [Required]
         [StringLength(30)]
         public string Title { get; set; }
         [Required]

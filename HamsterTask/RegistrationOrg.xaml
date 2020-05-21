@@ -33,26 +33,37 @@
         <TextBox  Name="CompanyName" Grid.Row="2" Grid.Column="1" Margin="5, 25,5,15" FontSize="20"/>
 
         <Label x:Name="LabelCompanyType" Content="{DynamicResource LabelCompanyType}" Grid.Row="3" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-        <TextBox  Name="CompanyType" Grid.Row="3" Grid.Column="1" Margin="5, 25,5,15" FontSize="20"/>
+        <TextBox  Name="CompanyType" Grid.Row="3" Grid.Column="1" Margin="5,25,5,24" FontSize="20"/>
 
         <Label x:Name="LabelCompanyBirth" Content="{DynamicResource LabelCompanyBirth}" Grid.Row="4" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
         <DatePicker x:Name="CompanyBirth"   Grid.Row="4" Grid.Column="1" FontSize="20" VerticalAlignment="Center" Height="34" Margin="0,20,0,17">
-            
+
         </DatePicker>
 
         <Label x:Name="LabelCompanyRegDescript" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalContentAlignment="Bottom" Margin="70, 5, 5, 5">
             <TextBlock TextWrapping="Wrap" FontSize="15" Width="509" Text="{DynamicResource LabelCompanyRegDescript}" Height="45"></TextBlock>
         </Label>
 
-        <Button x:Name="BtnContinueReg" Grid.Column="2" Grid.Row="4" Margin="10, 10, 10, 10" Click="BtnContinueReg_Click">
-            <TextBlock TextWrapping="Wrap" Text="{DynamicResource BtnContinueReg}" ></TextBlock>
-        </Button>
-
-        <Button x:Name="BtnContinueNoReg" Grid.Column="3" Grid.Row="4" Margin="10, 10, 10, 10" Click="BtnContinueNoReg_Click">
+        <Button x:Name="BtnContinueNoReg" Grid.Column="2" Grid.Row="4" Margin="10" Click="BtnContinueNoReg_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <TextBlock TextWrapping="Wrap" Text="{DynamicResource BtnContinueNoReg}"></TextBlock>
         </Button>
 
-        <Button x:Name="Back" Grid.Column="3" Grid.Row="5" Margin="10"/>
+        <Button x:Name="BTNBackToMain" Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="10,7,10,10" BorderBrush="{x:Null}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
         <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="6">
             <Rectangle.Fill>

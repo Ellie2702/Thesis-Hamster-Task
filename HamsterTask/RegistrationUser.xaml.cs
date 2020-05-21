@@ -31,15 +31,17 @@ namespace HamsterTask
             {
                 if (RegPhone.Text == string.Empty)
                 {
-                    Global.Guid = Helper.Http.GetRequest("http://localhost:8080/reguserA/" + RegLogin.Text + "/" + RegPass.Password + "/" + RegName.Text + "/" + RegSurName.Text + "/" + RegMail.Text + "/" + RegBirth.SelectedDate);
-                    new UserPanel().Show();
-                    this.Close();
+                    
+                        Global.Guid = Helper.Http.GetRequest("http://localhost:8080/reguserA/" + RegLogin.Text + "/" + RegPass.Password + "/" + RegName.Text + "/" + RegSurName.Text + "/" + RegMail.Text + "/" + RegBirth.SelectedDate);
+                        new UserPanel().Show();
+                        this.Close();
                 }
                 else
                 {
-                    Global.Guid = Helper.Http.GetRequest("http://localhost:8080/reguserFull/" + RegLogin.Text + "/" + RegPass.Password + "/" + RegName.Text + "/" + RegSurName.Text + "/" + RegMail.Text + "/" + RegPhone.Text + "/" + RegBirth.SelectedDate);
-                    new UserPanel().Show();
-                    this.Close();
+                   
+                        Global.Guid = Helper.Http.GetRequest("http://localhost:8080/reguserFull/" + RegLogin.Text + "/" + RegPass.Password + "/" + RegName.Text + "/" + RegSurName.Text + "/" + RegMail.Text + "/" + RegPhone.Text + "/" + RegBirth.SelectedDate);
+                        new UserPanel().Show();
+                        this.Close();
                 }
                 
             }

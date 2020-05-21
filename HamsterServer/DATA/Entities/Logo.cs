@@ -11,10 +11,6 @@ namespace HamsterServer.DATA.Entities
     {
         [Key]
         public int LogoID { get; set; }
-        
-        [Required]
-        public int ImageID { get; set; }
-
         public Image Image { get; set; }
      
     }

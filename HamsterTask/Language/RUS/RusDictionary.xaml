@@ -19,8 +19,7 @@
     <system:String x:Key="LabelCompanyType">Тип компании:</system:String>
     <system:String x:Key="LabelCompanyBirth">Дата создания:</system:String>
 
-    <system:String x:Key="BtnContinueReg">Продолжить с регистрацией акаунта пользователя</system:String>
-    <system:String x:Key="BtnContinueNoReg">Продолжить без создания профиля, т.к у меня есть аккаунт</system:String>
+    <system:String x:Key="BtnContinueNoReg">Закрепить свой аккаунт в компании</system:String>
 
 
     <system:String x:Key="HamsterTask.RegistrationUse">HamsterTask - регистрация пользователя</system:String>
@@ -34,6 +33,28 @@
     <system:String x:Key="LabelUserRegDescript">Все поля, кроме номера телефона, обязательны!</system:String>
     <system:String x:Key="RegistrationUserBTN">Зарегистрироваться</system:String>
 
-    <system:String x:Key="BTNTasks">Задачник</system:String>
-    <system:String x:Key="BTNMail">Сообщения</system:String>
+
+    <system:String x:Key="HamsterTask.UserRegOrg">Регистрация первого сотрудника в компании</system:String>
+    
+    <system:String x:Key="PositionName">Должность:</system:String>
+    <system:String x:Key="UserRegOrgDesc">Пожалуйста, введите данные для входа и должность в созданной компании!</system:String>
+    
+    <system:String x:Key="BTNLoginReg">Завершить регистрацию и войти</system:String>
+    <system:String x:Key="BTNBackToMain">Вернуться на главную</system:String>
+
+    <system:String x:Key="UserCompany">Компания</system:String>
+    <system:String x:Key="UserTask">Задачник</system:String>
+    <system:String x:Key="UserMessages">Сообщения</system:String>
+    <system:String x:Key="UserCustom">Настройки профиля</system:String>
+    <system:String x:Key="Exit">Выйти</system:String>
+
+    <system:String x:Key="ToolTopUserTask"> Здесь вы можете взаимодействовать с проектами и задачами</system:String>
+    <system:String x:Key="ProjectsHeader">Проекты</system:String>
+    <system:String x:Key="TaskHeader">Задачи</system:String>
+
+    <system:String x:Key="ToolTopAddTask">Создать задачу</system:String>
+    <system:String x:Key="ToolTopAddProject">Создать проект</system:String>
+
+    <system:String x:Key="NoneProj">У вас нет проектов</system:String>
+    <system:String x:Key="NoneTask">У вас нет задач</system:String>
 </ResourceDictionary>

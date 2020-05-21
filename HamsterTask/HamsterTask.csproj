@@ -65,6 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEmpForRegOrg.xaml.cs">
+      <DependentUpon>AddEmpForRegOrg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminPanel.xaml.cs">
       <DependentUpon>AdminPanel.xaml</DependentUpon>
     </Compile>
@@ -76,12 +79,22 @@
     <Compile Include="RegistrationUser.xaml.cs">
       <DependentUpon>RegistrationUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Task.xaml.cs">
+      <DependentUpon>Task.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserPanel.xaml.cs">
       <DependentUpon>UserPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserRegOrg.xaml.cs">
+      <DependentUpon>UserRegOrg.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddEmpForRegOrg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,11 +127,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Task.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tasks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserRegOrg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,7 +178,13 @@
     <Resource Include="Image\ru.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ac3052907181f73969050cc58580dca9.jpg" />
+    <Resource Include="Image\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Projects.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

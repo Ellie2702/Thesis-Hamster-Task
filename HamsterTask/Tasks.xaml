@@ -34,7 +34,7 @@
             </Button.Background>
             <Button.ToolTip>
                 <ToolTip>
-                    <TextBlock x:Name="ToolTopAddTask" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock x:Name="ToolTopAddTask" Text="{DynamicResource ToolTopAddTask}" TextWrapping="Wrap"></TextBlock>
                 </ToolTip>
             </Button.ToolTip>
         </Button>
@@ -50,7 +50,7 @@
             </Button.Background>
             <Button.ToolTip>
                 <ToolTip>
-                    <TextBlock x:Name="ToolTopAddProject" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock x:Name="ToolTopAddProject" Text="{DynamicResource ToolTopAddProject}" TextWrapping="Wrap"></TextBlock>
                 </ToolTip>
             </Button.ToolTip>
         </Button>
@@ -83,6 +83,7 @@
                 </Label.Foreground>
             </Label>
         </GroupBox>
+        
         <GroupBox x:Name="TaskHeader" Grid.ColumnSpan="4" Header="{DynamicResource TaskHeader}" HorizontalAlignment="Left" Height="241" Margin="10,83,0,0" FontSize="15" Grid.RowSpan="4" VerticalAlignment="Top" Width="761" Grid.Row="1">
             <GroupBox.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -98,6 +99,7 @@
                     </LinearGradientBrush>
                 </Label.Foreground>
             </Label>
+            
         </GroupBox>
     </Grid>
 

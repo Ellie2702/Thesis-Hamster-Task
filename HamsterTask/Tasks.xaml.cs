@@ -29,17 +29,43 @@ namespace HamsterTask
             try
             {
                 string[] parts = Global.Guid.Split('|');
-                var data = Helper.Http.GetRequest("http://localhost:8080/GetProjects/" + parts[1]);
-                if (data == null)
+                var dataP = Helper.Http.GetRequest("http://localhost:8080/GetProjects/" + parts[1]);
+                var dataT = Helper.Http.GetRequest("http://localhost:8080/GetTasks/" + parts[1]);
+                if (dataP == "0")
                 {
                     NoneProj.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     NoneProj.Visibility = Visibility.Hidden;
-
                 }
 
+
+                if (dataT == "0")
+                {
+                    NoneTask.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    NoneTask.Visibility = Visibility.Hidden;
+                }
+
+                if(dataT != null)
+                {
+                    ScrollViewer scroll = new ScrollViewer();
+                    StackPanel stack = new StackPanel();
+                    for(int i = 0; i < Convert.ToInt32(dataT); i++)
+                    {
+                        var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[1] + "/" + i.ToString()).Split('|');
+                        stack.Children.Add(new Task(task[0], task[1], task[2], task[3]));
+                        stack.UpdateLayout();
+                        //TaskHeader.Content = new StackPanel();
+                        //  ;
+                    }
+                    stack.Children.Add(scroll);
+                    stack.UpdateLayout();
+                    TaskHeader.UpdateLayout();
+                }
 
             }
             catch

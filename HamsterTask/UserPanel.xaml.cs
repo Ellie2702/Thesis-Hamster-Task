@@ -41,11 +41,12 @@ namespace HamsterTask
             }
                 Birth.Content = parts[5];
                 Email.Content = parts[6];
-            
-            if(parts[parts.Length - 1] != "W" || parts[parts.Length - 1] != "WP")
+
+            if (parts[parts.Length - 1] != "W" && parts[parts.Length - 1] != "WP")
             {
                 UserCompany.Visibility = Visibility.Hidden;
             }
+            else UserCompany.Visibility = Visibility.Visible;
 
         }
 

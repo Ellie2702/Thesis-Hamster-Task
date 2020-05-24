@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HamsterTask
 {
     /// <summary>
-    /// Логика взаимодействия для Task.xaml
+    /// Логика взаимодействия для AddTask.xaml
     /// </summary>
-    public partial class Task : UserControl
+    public partial class AddTask : Window
     {
-        public Task(string Name, string Content, string Order, string Deadline)
+        public AddTask()
         {
             InitializeComponent();
-
-            TaskName.Content = Name;
-            TaskContent.Content = Content;
-            TaskOrder.Content = Order;
-            TaskDeadline.Content = Deadline;
         }
     }
 }

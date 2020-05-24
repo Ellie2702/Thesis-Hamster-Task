@@ -36,3 +36,5 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserReg
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Task.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Task.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\HamsterTask.csprojAssemblyReference.cache
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddTask.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddTask.baml

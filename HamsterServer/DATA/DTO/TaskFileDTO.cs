@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HamsterServer.DATA.DTO
 {
-    public class LogoDTO
+    public class TaskFileDTO
     {
-        public int LogoID { get; set; }
-    
-        public int ImageID { get; set; }
+        public int TaskFileID { get; set; }
+        public int FileID { get; set; }
+        public int TaskID { get; set; }
     }
 }

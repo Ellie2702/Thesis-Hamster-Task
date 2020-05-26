@@ -16,6 +16,7 @@ namespace HamsterServer.DATA.Entities
         public string Code { get; set; }
         [Required]
         public bool isUsed { get; set; }
+        [Required]
         public Company Company { get; set; }
     }
 }

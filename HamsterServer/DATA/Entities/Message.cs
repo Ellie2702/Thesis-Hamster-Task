@@ -18,7 +18,11 @@ namespace HamsterServer.DATA.Entities
         [Required]
         [MaxLength(600)]
         public string Content { get; set; }
+        [Required]
         public User UserTo { get; set; }
+        [Required]
         public User UserFrom { get; set; }
+        [Required]
+        public bool isCheck { get; set; }
     }
 }

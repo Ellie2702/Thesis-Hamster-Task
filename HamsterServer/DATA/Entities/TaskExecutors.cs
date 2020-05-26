@@ -11,7 +11,9 @@ namespace HamsterServer.DATA.Entities
     {
         [Key]
         public int TaskExecutorsID { get; set; }
+        [Required]
         public Task Task { get; set; }
+        [Required]
         public User User { get; set; }
     }
 }

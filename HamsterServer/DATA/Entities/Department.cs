@@ -7,17 +7,13 @@ using System.Threading.Tasks;
 
 namespace HamsterServer.DATA.Entities
 {
-    public class SystemMessage
+    public class Department
     {
         [Key]
-        public int SystemMessageID { get; set; }
+        public int DepartamentID { get; set; }
         [Required]
-        [StringLength(300)]
-        public string MessageType { get; set; }
+        public string DepartmentName { get; set; }
         [Required]
-         public string Title { get; set; }
-        [Required]
-        public string Content { get; set; }
-
+        public Company Company { get; set; }
     }
 }

@@ -23,7 +23,6 @@ namespace HamsterServer.DATA
         public DbSet<Position> Positions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<Logo> Logos { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<EmployeeCode> EmployeeCodes { get; set; }
@@ -33,6 +32,10 @@ namespace HamsterServer.DATA
         public DbSet<Projects> Projects { get; set; }
         public DbSet<TaskExecutors> TaskExecutors { get; set; }
         public DbSet<ProjectsTasks> ProjectsTasks { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<TaskFile> TaskFiles { get; set; }
+        public DbSet<DepartamentEmployees> DepartamentEmployees { get; set; }
+        public DbSet<AccessRight> AccessRights { get; set; }
 
 
     }

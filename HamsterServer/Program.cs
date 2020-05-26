@@ -4,6 +4,7 @@ using HamsterServer.Global;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -48,17 +49,28 @@ namespace HamsterServer
                 Console.WriteLine("Got request from: {0}", request.Url);
 
 
-                // Obtain a response object.
+                
                 HttpListenerResponse response = context.Response;
-                // Construct a response.
+                
                 string responseString = GetResult(request.Url.LocalPath);
-                //string responseString = "Hello world!";
+                
                 byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-                // Get a response stream and write the response to it.
+                
                 response.ContentLength64 = buffer.Length;
                 System.IO.Stream output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
-                // You must close the output stream.
+
+                using (DataContext db = new DataContext())
+                {
+                    if(db.Roles.ToList().Count == 0)
+                    {
+                        db.Roles.Add(new Role { RoleName = "Admin" });
+                        db.SaveChanges();
+                        db.Roles.Add(new Role { RoleName = "User" });
+                        db.SaveChanges();
+                    }
+                }
+                
                 output.Close();
             }
         }
@@ -114,6 +126,15 @@ namespace HamsterServer
                     case "SetPosition":
                         if (part.Length != 4) return part.Length.ToString();
                         return SetPosition(part[2], part[3]);
+                    case "SetRights":
+                        if (part.Length != 11) return part.Length.ToString();
+                        return SetRights(part[2], part[3], part[4], part[5], part[6], part[7], part[8], part[9], part[10]);
+                    case "TaskExecutors":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return SetExecutor(part[2], part[3], part[4]);
+                    case "UploadImage":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return UpUmage(part[2], part[4]);
                     default:
                         Auth user = Global.GlobalList.IsAuthed(new Guid(part[1]));
                         if (user != null)
@@ -140,6 +161,41 @@ namespace HamsterServer
                 }
             }
             else return "need more arguments!";
+        }
+
+        private string SetExecutor(string guid, string TaskID, string UserID)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int ExecID = Convert.ToInt32(UserID);
+                int temp = Convert.ToInt32(TaskID);
+                User Exec = db.Users.FirstOrDefault(u => u.UserID == ExecID);
+                DATA.Entities.Task T = db.Tasks.FirstOrDefault(t => t.TaskID == temp);
+                db.TaskExecutors.Add(new TaskExecutors { Task = T, User = Exec });
+                db.SaveChanges();
+                return "Ok";
+            }
+        }
+
+        private string SetRights(string guid, string UserID, string Report, string Task, string Departament, string Projects, string EmpCode, string Schedule, string Marks)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int ID = Convert.ToInt32(UserID);
+                Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == ID);
+                bool R = Convert.ToBoolean(Report);
+                bool T = Convert.ToBoolean(Task);
+                bool D = Convert.ToBoolean(Departament);
+                bool P = Convert.ToBoolean(Projects);
+                bool E = Convert.ToBoolean(EmpCode);
+                bool S = Convert.ToBoolean(Schedule);
+                bool M = Convert.ToBoolean(Marks);
+                db.AccessRights.Add(new AccessRight { Report = R, Tasks = T, Departament = D, Projects = P, EmpCode = E, Schedule = S, Marks = M });
+                db.SaveChanges();
+                return "Access rights saved";
+            }
         }
 
         private string SetPosition(string guid, string pos)
@@ -428,6 +484,7 @@ namespace HamsterServer
 
                         db.Employees.Add(employee);
                         db.SaveChanges();
+                        Directory.CreateDirectory(@"\Documents\" + company.CompanyName);
                         return TryAuth(parts[5], parts[6]);
                     default: return "WrongKeys";
             }

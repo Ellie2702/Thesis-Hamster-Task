@@ -12,12 +12,10 @@ namespace HamsterServer.DATA.Entities
         [Key]
         public int CompanyLogoID { get; set; }
         [Required]
-        public int LogoID { get; set; }
+        public Image Logo { get; set; }
         [Required]
-        public int CompanyID { get; set; }
-
         public Company Company { get; set; }
-        public Logo Logo { get; set; }
+      
 
     }
 }

@@ -67,4 +67,10 @@
     <system:String x:Key="TabProject">Проекты</system:String>
     <system:String x:Key="TabTask">Задачи</system:String>
     <system:String x:Key="TaskExecutor">Исполнитель:</system:String>
+
+    <system:String x:Key="AddTaskDescript">Чтобы добавить задачу обязательно укажите наименование, описание, дату окончания и выберите исполнителя. Эти поля обязательны! Так же можете прикрепить нужные файлы к вашей задаче!</system:String>
+
+    <system:String x:Key="TaskName">Наименование:</system:String>
+    <system:String x:Key="TaskDescript">Описание:</system:String>
+    <system:String x:Key="TaskDeadline">Дата окончания:</system:String>
 </ResourceDictionary>

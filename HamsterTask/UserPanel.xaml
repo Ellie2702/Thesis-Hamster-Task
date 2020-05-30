@@ -16,51 +16,53 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="62*"/>
-            <RowDefinition Height="12*"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="74*"/>
+            <RowDefinition Height="97*"/>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="96*"/>
         </Grid.RowDefinitions>
 
         <Label x:Name="UserProfileHello" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Label Name="UserName" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right"/>
+        <Label Name="Position" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+        <Label Name="Company" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
 
-        <Image x:Name="UserAvatar" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,5,0"/>
-        <Label Name="UserName" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Grid.RowSpan="2"/>
-        <Label Name="Position" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2"/>
-        <Label Name="Company" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Grid.RowSpan="2"/>
+        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}" Grid.Column="3" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="1,63,0,0"/>
+        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}" Grid.Column="3" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,95,1,56"/>
 
-        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}" Grid.Column="3" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="1,63,0,0"/>
-        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}" Grid.Column="3" Grid.Row="2" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,15,1,56"/>
-
-        <Label Name="Birth" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-        <Label Name="Email" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
+        <Label Name="Birth" Grid.Column="1" Grid.Row="2" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+        <Label Name="Email" Grid.Column="1" Grid.Row="2" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
 
 
-        <GroupBox x:Name="UserInform" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4" BorderBrush="#4C488897" Margin="10,0,0,0">
+        <GroupBox x:Name="UserInform" Grid.RowSpan="4" Grid.ColumnSpan="4" BorderBrush="#4C488897" Margin="10,10,0,0">
             <GroupBox.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#7253BDD4" Offset="0"/>
-                    <GradientStop Color="#7272D2FF" Offset="1"/>
+                    <GradientStop Color="#7272FF8C" Offset="1"/>
                 </LinearGradientBrush>
             </GroupBox.Background>
+            <Image HorizontalAlignment="Left" Height="174" Margin="0,91,0,0" VerticalAlignment="Top" Width="164">
+                <Image.OpacityMask>
+                    <ImageBrush ImageSource="user.png"/>
+                </Image.OpacityMask>
+            </Image>
 
 
         </GroupBox>
-        <GroupBox x:Name="Graphic" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="10,5,0,0">
+        <GroupBox x:Name="Graphic" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="10,5,0,0">
             <GroupBox.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#3376A7B6" Offset="0.958"/>
-                    <GradientStop Color="#33FFFFFF"/>
+                    <GradientStop Color="#332E91B0" Offset="0.958"/>
+                    <GradientStop Color="#338DD485"/>
                 </LinearGradientBrush>
             </GroupBox.Background>
 
         </GroupBox>
 
-        <Button x:Name="UserCustom" Content="{DynamicResource UserCustom}" Grid.Column="4" Grid.Row="1" Margin="15,15,15,30" BorderBrush="{x:Null}">
+        <Button x:Name="UserCustom" Content="{DynamicResource UserCustom}" Grid.Column="4" Grid.Row="1" Margin="20,21,10,48" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -69,7 +71,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="UserTask" Content="{DynamicResource UserTask}" Grid.Column="4" Grid.Row="1" Margin="20,63,10,0"  BorderBrush="{x:Null}" Click="UserTask_Click" Grid.RowSpan="2">
+        <Button x:Name="UserTask" Content="{DynamicResource UserTask}" Grid.Column="4" Grid.Row="1" Margin="20,53,10,16"  BorderBrush="{x:Null}" Click="UserTask_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -83,7 +85,7 @@
                 </ToolTip>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="UserMessages" Content="{DynamicResource UserMessages}" Grid.Column="4" Grid.Row="3" Margin="20,10,10,56" BorderBrush="{x:Null}" Click="UserMessages_Click">
+        <Button x:Name="UserMessages" Content="{DynamicResource UserMessages}" Grid.Column="4" Grid.Row="1" Margin="20,85,10,79" BorderBrush="{x:Null}" Click="UserMessages_Click" Grid.RowSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -92,7 +94,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="UserCompany" Content="{DynamicResource UserCompany}" Grid.Column="4" Grid.Row="5" Margin="20,0,10,63" BorderBrush="{x:Null}">
+        <Button x:Name="UserCompany" Content="{DynamicResource UserCompany}" Grid.Column="4" Grid.Row="2" Margin="20,58,10,10" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -101,7 +103,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="Exit" Content="{DynamicResource Exit}" Grid.Column="4" Margin="20,57,10,10" Click="Exit_Click" BorderBrush="{x:Null}" Grid.Row="5">
+        <Button x:Name="Exit" Content="{DynamicResource Exit}" Grid.Column="4" Margin="20,68,10,0" Click="Exit_Click" BorderBrush="{x:Null}" Grid.Row="3">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -112,7 +114,7 @@
         </Button>
 
 
-        <Rectangle  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="7">
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="6">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -123,21 +125,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="BTN_EditProfile" Content="{DynamicResource BTN_EditProfile}" Grid.Column="4" Grid.Row="3" Margin="20,47,10,20"  BorderBrush="{x:Null}" Click="UserTask_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="#FFF4FAFF"/>
-                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
-                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Button.ToolTip>
-                <ToolTip>
-                    <TextBlock x:Name="ToolTopUserTask1" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"/>
-                </ToolTip>
-            </Button.ToolTip>
-        </Button>
-        <Button x:Name="BTN_IHaveCode" Content="{DynamicResource BTN_IHaveCode}" Grid.Column="4" Grid.Row="4" Margin="20,0,10,66"  BorderBrush="{x:Null}" Click="BTN_IHaveCode_Click" >
+        <Button x:Name="BTN_IHaveCode" Content="{DynamicResource BTN_IHaveCode}" Grid.Column="4" Grid.Row="2" Margin="20,25,10,43"  BorderBrush="{x:Null}" Click="BTN_IHaveCode_Click" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>

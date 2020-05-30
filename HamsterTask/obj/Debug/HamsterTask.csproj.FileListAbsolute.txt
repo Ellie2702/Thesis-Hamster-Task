@@ -33,8 +33,6 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddEmpF
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserRegOrg.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddEmpForRegOrg.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserRegOrg.baml
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Task.g.cs
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Task.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\HamsterTask.csprojAssemblyReference.cache
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddTask.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddTask.baml
@@ -44,3 +42,10 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\TaskCon
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserMessage.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserProfileSettings.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddProject.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddProject.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Company.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\CompanyCode.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\TaskControl.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserMessage.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserProfileSettings.baml

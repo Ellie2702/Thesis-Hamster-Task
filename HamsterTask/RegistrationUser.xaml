@@ -29,31 +29,31 @@
             <RowDefinition Height="107*"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="LabelLogin" Content="{DynamicResource LabelLogin}" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="18"/>
-        <Label x:Name="LabelPass" Content="{DynamicResource LabelPass}" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="18"/>
-        <Label x:Name="LabelEmail" Content="{DynamicResource LabelEmail}" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="18"/>
+        <Label x:Name="LabelLogin" Content="{DynamicResource LabelLogin}" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
+        <Label x:Name="LabelPass" Content="{DynamicResource LabelPass}" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
+        <Label x:Name="LabelEmail" Content="{DynamicResource LabelEmail}" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
 
-        <Label x:Name="LabelFName" Content="{DynamicResource LabelFName}" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="18"/>
-        <Label x:Name="LabelSName" Content="{DynamicResource LabelSName}" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="18"/>
-        <Label x:Name="LabelFNumber" Content="{DynamicResource LabelFNumber}" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="18"/>
+        <Label x:Name="LabelFName" Content="{DynamicResource LabelFName}" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
+        <Label x:Name="LabelSName" Content="{DynamicResource LabelSName}" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
+        <Label x:Name="LabelFNumber" Content="{DynamicResource LabelFNumber}" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
 
-        <Label x:Name="LabelUserBirth" Content="{DynamicResource LabelUserBirth}" Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="18"/>
+        <Label x:Name="LabelUserBirth" Content="{DynamicResource LabelUserBirth}" Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="18" Grid.ColumnSpan="2" Margin="42,0,117,0"/>
 
-        <TextBox Name="RegLogin" Grid.Row="1" Grid.Column="1" Height="27" VerticalAlignment="Top"/>
-        <PasswordBox Name="RegPass" Grid.Row="1" Grid.Column="1" Height="27" VerticalAlignment="Center" />
-        <TextBox Name="RegMail" Grid.Row="1" Grid.Column="1" Height="27" VerticalAlignment="Bottom"/>
+        <TextBox Name="RegLogin" Grid.Row="1" Grid.Column="1" Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="42,0,116,0"/>
+        <PasswordBox Name="RegPass" Grid.Row="1" Grid.Column="1" Height="26" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="42,35,116,35" />
+        <TextBox Name="RegMail" Grid.Row="1" Grid.Column="1" Height="27" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="42,0,116,0"/>
 
-        <TextBox Name="RegName" Grid.Row="3" Grid.Column="1" Height="27" VerticalAlignment="Top" />
-        <TextBox Name="RegSurName" Grid.Row="3" Grid.Column="1" Height="27" VerticalAlignment="Center"  />
-        <TextBox Name="RegPhone" Grid.Row="3" Grid.Column="1" Margin="0,61,0,0" />
+        <TextBox Name="RegName" Grid.Row="3" Grid.Column="1" Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="42,0,116,0" />
+        <TextBox Name="RegSurName" Grid.Row="3" Grid.Column="1" Height="28" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="42,30,116,30"  />
+        <TextBox Name="RegPhone" Grid.Row="3" Grid.Column="1" Margin="42,61,116,0" Grid.ColumnSpan="2" />
 
-        <DatePicker x:Name="RegBirth" Grid.Row="4" Grid.Column="1" FontSize="18" Margin="0,5,0,60"/>
+        <DatePicker x:Name="RegBirth" Grid.Row="4" Grid.Column="1" FontSize="18" Margin="42,5,116,60" Grid.ColumnSpan="2"/>
 
         <Label x:Name="LabelUserRegDescript"  FontSize="18" Grid.Column="1" Grid.ColumnSpan="3">
             <TextBlock TextWrapping="Wrap" Margin="0, 20, 0, 0" Text="All fields except phone number are required!" Height="47"></TextBlock>
         </Label>
 
-        <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="79,5,92,60" Click="RegistrationUserBTN_Click" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
+        <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="78,17,93,48" Click="RegistrationUserBTN_Click" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -62,7 +62,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="84,5,86,60" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
+        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="97,17,73,48" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -83,6 +83,14 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        <GroupBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="250" Margin="70,82,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="301">
+            <GroupBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#3F53BDD4" Offset="0"/>
+                    <GradientStop Color="#4C72FF8C" Offset="1"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
+        </GroupBox>
 
     </Grid>
 </Window>

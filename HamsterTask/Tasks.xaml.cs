@@ -182,5 +182,19 @@ namespace HamsterTask
 
             }
         }
+
+        private void AddThing_Click(object sender, RoutedEventArgs e)
+        {
+            if (TabTask.IsSelected)
+            {
+                new AddTask().Show();
+                this.Close();
+
+            } else if (TabProject.IsSelected)
+            {
+                new AddProject().Show();
+                this.Close();
+            }
+        }
     }
 }

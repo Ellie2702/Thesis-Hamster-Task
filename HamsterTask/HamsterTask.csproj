@@ -68,6 +68,9 @@
     <Compile Include="AddEmpForRegOrg.xaml.cs">
       <DependentUpon>AddEmpForRegOrg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddProject.xaml.cs">
+      <DependentUpon>AddProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddTask.xaml.cs">
       <DependentUpon>AddTask.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <DependentUpon>UserRegOrg.xaml</DependentUpon>
     </Compile>
     <Page Include="AddEmpForRegOrg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +236,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\tasks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

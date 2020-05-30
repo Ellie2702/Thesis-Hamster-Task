@@ -67,4 +67,11 @@
     <system:String x:Key="TabTask">Tasks</system:String>
 
     <system:String x:Key="TaskExecutor">Executor:</system:String>
+
+    <system:String x:Key="AddTaskDescript">To add a task, you must specify the name, description, deadline, and select the executor. These fields are required! You can also attach the necessary files to your task!</system:String>
+
+    <system:String x:Key="TaskName">Title:</system:String>
+    <system:String x:Key="TaskDescript">Description:</system:String>
+
+    <system:String x:Key="TaskDeadline">Deadline:</system:String>
 </ResourceDictionary>

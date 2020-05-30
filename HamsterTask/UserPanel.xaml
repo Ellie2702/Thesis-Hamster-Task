@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="UserPanel" Height="550" Width="800">
+        Title="UserPanel" Height="700" Width="950">
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -33,6 +33,9 @@
         <Label Name="Position" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2"/>
         <Label Name="Company" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Grid.RowSpan="2"/>
 
+        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}" Grid.Column="3" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="1,63,0,0"/>
+        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}" Grid.Column="3" Grid.Row="2" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,15,1,56"/>
+
         <Label Name="Birth" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
         <Label Name="Email" Grid.Column="1" Grid.Row="3" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
 
@@ -57,7 +60,7 @@
 
         </GroupBox>
 
-        <Button x:Name="UserCustom" Content="{DynamicResource UserCustom}" Grid.Column="4" Grid.Row="1" Margin="15,15,15,2.636" BorderBrush="{x:Null}">
+        <Button x:Name="UserCustom" Content="{DynamicResource UserCustom}" Grid.Column="4" Grid.Row="1" Margin="15,15,15,30" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -66,7 +69,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="UserTask" Content="{DynamicResource UserTask}" Grid.Column="4" Grid.Row="3" Margin="15"  BorderBrush="{x:Null}" Click="UserTask_Click">
+        <Button x:Name="UserTask" Content="{DynamicResource UserTask}" Grid.Column="4" Grid.Row="1" Margin="20,63,10,0"  BorderBrush="{x:Null}" Click="UserTask_Click" Grid.RowSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -80,7 +83,7 @@
                 </ToolTip>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="UserMessages" Content="{DynamicResource UserMessages}" Grid.Column="4" Grid.Row="4" Margin="15" BorderBrush="{x:Null}">
+        <Button x:Name="UserMessages" Content="{DynamicResource UserMessages}" Grid.Column="4" Grid.Row="3" Margin="20,10,10,56" BorderBrush="{x:Null}" Click="UserMessages_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -89,7 +92,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="UserCompany" Content="{DynamicResource UserCompany}" Grid.Column="4" Grid.Row="5" Margin="15" BorderBrush="{x:Null}">
+        <Button x:Name="UserCompany" Content="{DynamicResource UserCompany}" Grid.Column="4" Grid.Row="5" Margin="20,0,10,63" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -98,7 +101,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="Exit" Content="{DynamicResource Exit}" Grid.Column="4" Margin="15,0,15,30" Click="Exit_Click" BorderBrush="{x:Null}" Grid.Row="6">
+        <Button x:Name="Exit" Content="{DynamicResource Exit}" Grid.Column="4" Margin="20,57,10,10" Click="Exit_Click" BorderBrush="{x:Null}" Grid.Row="5">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -120,5 +123,33 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        <Button x:Name="BTN_EditProfile" Content="{DynamicResource BTN_EditProfile}" Grid.Column="4" Grid.Row="3" Margin="20,47,10,20"  BorderBrush="{x:Null}" Click="UserTask_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock x:Name="ToolTopUserTask1" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"/>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="BTN_IHaveCode" Content="{DynamicResource BTN_IHaveCode}" Grid.Column="4" Grid.Row="4" Margin="20,0,10,66"  BorderBrush="{x:Null}" Click="BTN_IHaveCode_Click" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock x:Name="ToolTopUserTask2" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"/>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </Window>

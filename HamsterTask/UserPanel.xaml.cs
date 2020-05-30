@@ -45,8 +45,28 @@ namespace HamsterTask
             if (parts[parts.Length - 1] != "W" && parts[parts.Length - 1] != "WP")
             {
                 UserCompany.Visibility = Visibility.Hidden;
+                BTN_IHaveCode.Visibility = Visibility.Visible;
             }
-            else UserCompany.Visibility = Visibility.Visible;
+            else
+            {
+                UserCompany.Visibility = Visibility.Visible;
+                BTN_IHaveCode.Visibility = Visibility.Hidden;
+            }
+
+            var task = Helper.Http.GetRequest("http://localhost:8080/GetTaskCount/" + parts[0] + "/");
+            var mess = Helper.Http.GetRequest("http://localhost:8080/GetTaskCount/" + parts[0] + "/");
+
+            if (task == "No tasks")
+            {
+                TaskCount.Visibility = Visibility.Hidden;
+            }
+            else TaskCount.Content = task + " " + TaskCount.Content;
+
+            if (mess == "No messages")
+            {
+                MessagesCount.Visibility = Visibility.Hidden;
+            }
+            else MessagesCount.Content = mess + " " + MessagesCount.Content;
 
         }
 
@@ -61,6 +81,17 @@ namespace HamsterTask
         {
             new Tasks().Show();
             this.Close();
+        }
+
+        private void UserMessages_Click(object sender, RoutedEventArgs e)
+        {
+            new UserMessage().Show();
+            this.Close();
+        }
+
+        private void BTN_IHaveCode_Click(object sender, RoutedEventArgs e)
+        {
+            new CompanyCode().Show();
         }
     }
 }

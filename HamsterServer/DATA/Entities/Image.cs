@@ -11,9 +11,7 @@ namespace HamsterServer.DATA.Entities
     {
         [Key]
         public int ImageID { get; set; }
-        [Required]
-        [StringLength(7)]
-        public string ImgType { get; set; }
+        
         [Required]
         public User User { get; set; }
     }

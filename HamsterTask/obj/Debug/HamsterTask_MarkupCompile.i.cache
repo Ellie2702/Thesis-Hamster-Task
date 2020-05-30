@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\App.xaml
-12-2123616839
+161038110187
 
-17492039905
+211151470407
 161937909381
-AddEmpForRegOrg.xaml;AddTask.xaml;AdminPanel.xaml;Language\ENG\EngDictionary.xaml;Language\RUS\RusDictionary.xaml;MainWindow.xaml;RegistrationOrg.xaml;RegistrationUser.xaml;Task.xaml;Tasks.xaml;UserPanel.xaml;UserRegOrg.xaml;
+AddEmpForRegOrg.xaml;AddTask.xaml;AdminPanel.xaml;Company.xaml;CompanyCode.xaml;Language\ENG\EngDictionary.xaml;Language\RUS\RusDictionary.xaml;MainWindow.xaml;RegistrationOrg.xaml;RegistrationUser.xaml;TaskControl.xaml;Tasks.xaml;UserMessage.xaml;UserPanel.xaml;UserProfileSettings.xaml;UserRegOrg.xaml;
 
-True
+False
 

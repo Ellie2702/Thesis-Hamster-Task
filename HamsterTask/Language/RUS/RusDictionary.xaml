@@ -57,4 +57,14 @@
 
     <system:String x:Key="NoneProj">У вас нет проектов</system:String>
     <system:String x:Key="NoneTask">У вас нет задач</system:String>
+
+    <system:String x:Key="BTN_EditProfile">Редактировать профиль</system:String>
+    <system:String x:Key="BTN_IHaveCode">Код компании</system:String>
+
+    <system:String x:Key="TaskCount">незаконченные задачи </system:String>
+    <system:String x:Key="MessagesCount">новых сообщений</system:String>
+
+    <system:String x:Key="TabProject">Проекты</system:String>
+    <system:String x:Key="TabTask">Задачи</system:String>
+    <system:String x:Key="TaskExecutor">Исполнитель:</system:String>
 </ResourceDictionary>

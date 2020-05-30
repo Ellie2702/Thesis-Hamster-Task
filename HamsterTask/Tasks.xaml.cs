@@ -24,49 +24,158 @@ namespace HamsterTask
             InitializeComponent();
         }
 
-        private void ProjectsHeader_Loaded(object sender, RoutedEventArgs e)
+        public int k = 1;
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
                 string[] parts = Global.Guid.Split('|');
-                var dataP = Helper.Http.GetRequest("http://localhost:8080/GetProjects/" + parts[1]);
-                var dataT = Helper.Http.GetRequest("http://localhost:8080/GetTasks/" + parts[1]);
-                if (dataP == "0")
-                {
-                    NoneProj.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    NoneProj.Visibility = Visibility.Hidden;
-                }
-
-
+                var dataT = Helper.Http.GetRequest("http://localhost:8080/GetTasks/" + parts[0]);
+                
                 if (dataT == "0")
                 {
                     NoneTask.Visibility = Visibility.Visible;
-                }
-                else
+                    LastPageTask.Visibility = Visibility.Hidden;
+                    NexPageTask.Visibility = Visibility.Hidden;
+                } else
                 {
-                    NoneTask.Visibility = Visibility.Hidden;
-                }
+                   
+                    int i = 0;
+                    int z = 1;
+                    int p = Convert.ToInt32(Math.Ceiling((double)Convert.ToInt32(dataT) / (double)6.0));
 
-                if(dataT != null)
-                {
-                    ScrollViewer scroll = new ScrollViewer();
-                    StackPanel stack = new StackPanel();
-                    for(int i = 0; i < Convert.ToInt32(dataT); i++)
+                    if(k == 1 && k < p)
                     {
-                        var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[1] + "/" + i.ToString()).Split('|');
-                        stack.Children.Add(new Task(task[0], task[1], task[2], task[3]));
-                        stack.UpdateLayout();
-                        //TaskHeader.Content = new StackPanel();
-                        //  ;
+                        LastPageTask.Visibility = Visibility.Hidden;
+                        NexPageTask.Visibility = Visibility.Visible;
                     }
-                    stack.Children.Add(scroll);
-                    stack.UpdateLayout();
-                    TaskHeader.UpdateLayout();
-                }
 
+                    if (k == 1 && k == p)
+                    {
+                        LastPageTask.Visibility = Visibility.Hidden;
+                        NexPageTask.Visibility = Visibility.Hidden;
+                    }
+
+                    if (1 < k && k < p)
+                    {
+                        LastPageTask.Visibility = Visibility.Visible;
+                        NexPageTask.Visibility = Visibility.Visible;
+                    }
+
+                    if(k > 1 && k == p)
+                    {
+                        LastPageTask.Visibility = Visibility.Visible;
+                        NexPageTask.Visibility = Visibility.Hidden;
+                    }
+
+                    if(p > 1)
+                    {
+                        i = (6 * k) - 6;
+                        while (z > 7)
+                        {
+                            var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + i.ToString()).Split('|');
+                            TaskControl temp = new TaskControl();
+
+                            temp.TaskID.Content = task[0];
+                            temp.TaskName.Content = task[1];
+                            temp.TaskDescript.Content = task[2];
+                            temp.UserExecutor.Content = task[5];
+                            temp.deadLine.Content = task[4];
+
+                            switch (z)
+                            {
+                                case 1:
+                                    Task1 = temp;
+                                    break;
+                                case 2:
+                                    Task2 = temp;
+                                    break;
+                                case 3:
+                                    Task3 = temp;
+                                    break;
+                                case 4:
+                                    Task4 = temp;
+                                    break;
+                                case 5:
+                                    Task5 = temp;
+                                    break;
+                                case 6:
+                                    Task6 = temp;
+                                    break;
+                            }
+                            TabTask.UpdateLayout();
+                            z++;
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        while (z > Convert.ToInt32(dataT) + 1)
+                        {
+                            var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + i.ToString()).Split('|');
+                            TaskControl temp = new TaskControl();
+
+                            temp.TaskID.Content = task[0];
+                            temp.TaskName.Content = task[1];
+                            temp.TaskDescript.Content = task[2];
+                            temp.UserExecutor.Content = task[5];
+                            temp.deadLine.Content = task[4];
+
+                            switch (z)
+                            {
+                                case 1:
+                                    Task1 = temp;
+                                    break;
+                                case 2:
+                                    Task2 = temp;
+                                    break;
+                                case 3:
+                                    Task3 = temp;
+                                    break;
+                                case 4:
+                                    Task4 = temp;
+                                    break;
+                                case 5:
+                                    Task5 = temp;
+                                    break;
+                                case 6:
+                                    Task6 = temp;
+                                    break;
+                            }
+                            TabTask.UpdateLayout();
+                            z++;
+                            i++;
+                        }
+                    }
+                    
+                }
+            }
+            catch
+            {
+                
+            }
+       
+        }
+
+        private void LastPageTask_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                k++;
+                TabTask.UpdateLayout();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void NexPageTask_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                k--;
+                TabTask.UpdateLayout();
             }
             catch
             {

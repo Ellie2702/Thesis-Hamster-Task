@@ -20,15 +20,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="UserRegOrgDesc" Content="{DynamicResource UserRegOrgDesc}" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
-        <Label x:Name="LabelLogin" Content="{DynamicResource LabelLogin}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" Margin="0,0,132,0"/>
-        <TextBox Name="Login" Grid.Row="1" Margin="84,0,118,81" FontSize="15"  Grid.ColumnSpan="2"/>
-        <Label x:Name="LabelPass" Content="{DynamicResource LabelPass}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" Margin="0,0,119,0"/>
-        <PasswordBox Name="Pass" Grid.Row="1" Margin="84,42,118,39" FontSize="15"  Grid.ColumnSpan="2"/>
-        <Label x:Name="PositionName" Content="{DynamicResource PositionName}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"/>
-        <TextBox Name="Position" Grid.Row="1" Margin="84,81,118,0" FontSize="15" Grid.ColumnSpan="2"/>
+        <Label x:Name="UserRegOrgDesc" Content="{DynamicResource UserRegOrgDesc}" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="-60,0,60,0"/>
+        <Label x:Name="LabelLogin" Content="{DynamicResource LabelLogin}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" Margin="39,24,93,81" Grid.RowSpan="2"/>
+        <TextBox Name="Login" Grid.Row="1" Margin="123,24,79,57" FontSize="15"  Grid.ColumnSpan="2"/>
+        <Label x:Name="LabelPass" Content="{DynamicResource LabelPass}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" Margin="39,24,80,81" Grid.RowSpan="2"/>
+        <PasswordBox Name="Pass" Grid.Row="1" Margin="123,66,79,15" FontSize="15"  Grid.ColumnSpan="2"/>
+        <Label x:Name="PositionName" Content="{DynamicResource PositionName}" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" Margin="39,24,0,81" Grid.RowSpan="2"/>
+        <TextBox Name="Position" Grid.Row="2" Margin="123,0,79,81" FontSize="15" Grid.ColumnSpan="2"/>
 
-        <Button x:Name="BTNlLoginReg"  Margin="10,0,10,59" Grid.Row="2" Grid.Column="2" Click="BTNlLoginReg_Click" BorderBrush="{x:Null}" >
+        <Button x:Name="BTNlLoginReg"  Margin="10,24,10,35" Grid.Row="1" Grid.Column="2" Click="BTNlLoginReg_Click" BorderBrush="{x:Null}" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -38,7 +38,7 @@
             </Button.Background>
             <TextBlock TextWrapping="Wrap" Text="{DynamicResource BTNLoginReg}"/>
         </Button>
-        <Button x:Name="BTNBackToMain"  Margin="10,59,10,0" Grid.Row="2" Grid.Column="2" Click="BTNBackToMain_Click" BorderBrush="{x:Null}" >
+        <Button x:Name="BTNBackToMain"  Margin="10,83,10,81" Grid.Row="1" Grid.Column="2" Click="BTNBackToMain_Click" BorderBrush="{x:Null}" Grid.RowSpan="2" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>

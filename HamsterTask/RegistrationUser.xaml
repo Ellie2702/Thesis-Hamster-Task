@@ -45,7 +45,7 @@
 
         <TextBox Name="RegName" Grid.Row="3" Grid.Column="1" Height="27" VerticalAlignment="Top" />
         <TextBox Name="RegSurName" Grid.Row="3" Grid.Column="1" Height="27" VerticalAlignment="Center"  />
-        <TextBox Name="RegPhone" Grid.Row="3" Grid.Column="1" Height="27" VerticalAlignment="Bottom" />
+        <TextBox Name="RegPhone" Grid.Row="3" Grid.Column="1" Margin="0,61,0,0" />
 
         <DatePicker x:Name="RegBirth" Grid.Row="4" Grid.Column="1" FontSize="18" Margin="0,5,0,60"/>
 
@@ -53,7 +53,7 @@
             <TextBlock TextWrapping="Wrap" Margin="0, 20, 0, 0" Text="All fields except phone number are required!" Height="47"></TextBlock>
         </Label>
 
-        <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="10, 5, 2, 60" Click="RegistrationUserBTN_Click" BorderBrush="{x:Null}">
+        <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="79,5,92,60" Click="RegistrationUserBTN_Click" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -62,7 +62,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="10, 5, 2, 60" BorderBrush="{x:Null}">
+        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="84,5,86,60" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 
 namespace HamsterServer
@@ -112,7 +113,7 @@ namespace HamsterServer
                         if (part.Length != 4) return part.Length.ToString();
                         return GetTask(part[2], part[3]);
                     case "CreateProject":
-                        if (part.Length != 7) return part.Length.ToString();
+                        if (part.Length != 6) return part.Length.ToString();
                         return CreateProject(part[2], part[3], part[4], part[5]);
                     case "CreateTask":
                         if (part.Length != 8) return part.Length.ToString();
@@ -133,34 +134,82 @@ namespace HamsterServer
                         if (part.Length != 5) return part.Length.ToString();
                         return SetExecutor(part[2], part[3], part[4]);
                     case "UploadImage":
-                        if (part.Length != 5) return part.Length.ToString();
-                        return UpUmage(part[2], part[4]);
+                        if (part.Length != 6) return part.Length.ToString();
+                        return UpImage(part[2], part[4], part[5]);
+                    case "MessageCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetMesssagesCount(part[2]);
+                    case "TaskCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetTaskCount(part[2]);
                     default:
-                        Auth user = Global.GlobalList.IsAuthed(new Guid(part[1]));
-                        if (user != null)
-                        {
-                            switch (part[2])
-                            {
-                                case "tasks":
-
-                                    return "task";
-                                case "mainprofile":
-
-                                    return "profile";
-                                case "News":
-
-                                    return "News";
-                                case "EmployeeCode":
-
-                                    return "EmpCode";
-                                default:
-                                    return "shit";
-                            }
-                        }
-                        else return "fuck";
+                        return "404";
                 }
             }
             else return "need more arguments!";
+        }
+
+
+        private string GetTaskCount(string guid)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int count = db.TaskExecutors.Include("User").Where(u => u.User.UserID == user.UserID && u.Task.Deadline < DateTime.Now).Count();
+
+                if (count > 0)
+                {
+                    return count.ToString();
+                }
+                else return "No tasks";
+            }
+        }
+
+        private string GetMesssagesCount(string guid)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+
+                int count = db.Messages.Include("User").Where(u => u.UserTo.UserID == user.UserID && u.isCheck == false).Count();
+                if (count > 0)
+                {
+                    return count.ToString();
+                }
+                else return "No messages";
+            }
+        }
+
+
+
+        private string UpImage(string guid, string bytes, string A)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+
+                Encoding encoding = Encoding.Default;
+               
+                byte[] Img = encoding.GetBytes(bytes);
+                DATA.Entities.Image temp = db.Images.Add(new DATA.Entities.Image { User = user });
+                db.SaveChanges();
+                MemoryStream ms = new MemoryStream(Img);
+                Bitmap image = new Bitmap(ms);
+                switch (A)
+                {
+                    case "A":
+                        image.Save(@"\Documents\Users\" + user.UserID.ToString() + @"\Images\" + temp.ImageID.ToString());
+                        return "Saved!";
+                    case "B":
+                        Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        String CompanyName = db.Companies.FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID).CompanyName;
+                        image.Save(@"\Documents\Companies\" + CompanyName + @"\Images\" + temp.ImageID.ToString());
+                        return "Saved!";
+                    default:
+                        return "We are can't upload this";
+                }
+                
+            }
         }
 
         private string SetExecutor(string guid, string TaskID, string UserID)
@@ -344,23 +393,23 @@ namespace HamsterServer
             }
         }
 
-        private string GetProjects(string ID)
+        private string GetProjects(string guid)
         {
             using (DataContext db = new DataContext())
             {
-                int id = Convert.ToInt32(ID);
-                var data = db.Projects.Include("User").Where(p => p.User.UserID == id).ToList();
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                var data = db.Projects.Include("User").Where(p => p.User.UserID == user.UserID).ToList();
                 return data.Count.ToString();
             }
         }
 
-        private string GetProject(string ID,string Num)
+        private string GetProject(string guid, string Num)
         {
             using (DataContext db = new DataContext())
             {
-                int id = Convert.ToInt32(ID);
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
                 int i = Convert.ToInt32(Num);
-                var data = db.Projects.Include("User").Where(p => p.User.UserID == id).ToList();
+                var data = db.Projects.Include("User").Where(p => p.User.UserID == user.UserID).ToList();
                 string title = data[i].Title;
                 string content = data[i].Descript;
                 string creater = data[i].User.FirstName + " " + data[i].User.SecondName;
@@ -487,7 +536,42 @@ namespace HamsterServer
                         Directory.CreateDirectory(@"\Documents\" + company.CompanyName);
                         return TryAuth(parts[5], parts[6]);
                     default: return "WrongKeys";
-            }
+                    case "B":
+                        User user = GlobalList.IsAuthed(new Guid(parts[parts.Length - 1])).user;
+                        if (user != null)
+                        {
+                            company.CompanyName = parts[2];
+                            company.CompanyType = parts[3];
+                            company.FoundationDate = Convert.ToDateTime(parts[4]);
+                            company.RegDate = DateTime.Now;
+                            employee.User = db.Users.Where(p => p.UserID == user.UserID).FirstOrDefault();
+                            company.UserID = user.UserID;
+                            db.Companies.Add(company);
+                            db.SaveChanges();
+                            employee.Company = company;
+                            position = db.Positions.Where(p => p.PositionName == parts[5]).FirstOrDefault();
+
+                            if (position != null)
+                            {
+                                employee.Position = position;
+                            }
+                            else
+                            {
+                                position = new Position();
+                                position.PositionName = parts[5];
+                                db.Positions.Add(position);
+                                db.SaveChanges();
+                                employee.Position = position;
+                            }
+
+                            db.Employees.Add(employee);
+                            db.SaveChanges();
+                            Directory.CreateDirectory(@"\Documents\" + company.CompanyName);
+                            return "ok";
+                        }
+                        else return "404";
+
+                }
 
             }
         }

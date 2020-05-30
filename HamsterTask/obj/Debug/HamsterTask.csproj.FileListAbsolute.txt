@@ -38,3 +38,9 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Task.ba
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\HamsterTask.csprojAssemblyReference.cache
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddTask.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddTask.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Company.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\CompanyCode.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\TaskControl.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserMessage.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserProfileSettings.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\GeneratedInternalTypeHelper.g.cs

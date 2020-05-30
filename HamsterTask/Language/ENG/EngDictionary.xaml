@@ -56,4 +56,15 @@
 
     <system:String x:Key="NoneProj">You don't have any projects</system:String>
     <system:String x:Key="NoneTask">You don't have any tasks</system:String>
+
+    <system:String x:Key="BTN_EditProfile">Edit profile</system:String>
+    <system:String x:Key="BTN_IHaveCode">Company code</system:String>
+
+    <system:String x:Key="TaskCount">unfinished tasks</system:String>
+    <system:String x:Key="MessagesCount">new messages</system:String>
+
+    <system:String x:Key="TabProject">Projects</system:String>
+    <system:String x:Key="TabTask">Tasks</system:String>
+
+    <system:String x:Key="TaskExecutor">Executor:</system:String>
 </ResourceDictionary>

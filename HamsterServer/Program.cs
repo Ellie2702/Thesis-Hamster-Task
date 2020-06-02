@@ -151,11 +151,76 @@ namespace HamsterServer
                     case "TaskIsDone":
                         if (part.Length != 4) return part.Length.ToString();
                         return TaskIsDone(part[2], part[3]);
+                    case "ChooseExec":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return FindExec(part[2]);
+                    case "GetUserProjectsC":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetUserProgectsCount(part[2]);
+                    case "GetUserProjects":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetUserProgects(part[2], part[3]);
                     default:
                         return "404";
                 }
             }
             else return "need more arguments!";
+        }
+
+        private string GetUserProgects(string guid, string num)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int i = Convert.ToInt32(num);
+                var data = db.Projects.Include("User").Where(p => p.User.UserID == user.UserID).ToList();
+                Projects project = db.Projects.Include("User").FirstOrDefault(p => p.User.UserID == user.UserID && data[i].ProjectID == p.ProjectID);
+                string name = project.Title;
+                string descript = project.Descript;
+                string dead = project.Deadline.ToString();
+                string projectID = project.ProjectID.ToString();
+
+                var tasks = db.ProjectsTasks.Include("Task").Where(t => t.ProjectID == project.ProjectID);
+                int countask = tasks.Count();
+                var done = db.ProjectsTasks.Include("Task").Where(t => t.ProjectID == project.ProjectID && t.Task.isDone == true);
+                int countdone = done.Count();
+                string dones = countask.ToString() + "/" + countdone.ToString();
+                return projectID + "|" + name + "|" + descript + "|" + dead + "|" + dones;
+            }
+        }
+
+        private string GetUserProgectsCount(string guid)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                var data = db.Projects.Include("User").Where(p => p.User.UserID == user.UserID).ToList();
+                if (data == null)
+                {
+                    return "Null";
+                }
+                else return data.Count.ToString();
+            }
+        }
+        private string FindExec(string guid)
+        {
+            try{
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    var data = db.Employees.Include("Company").Include("User").FirstOrDefault(d => d.User.UserID == user.UserID);
+                    var emp = db.Employees.Include("Company").Include("User").Where(d => d.Company.CompanyID == data.Company.CompanyID).ToList();
+                    string res = string.Empty;
+                    for (int i = 0; i < emp.Count; i++)
+                    {
+                        res += emp[i].User.UserID + "/" + emp[i].User.FirstName + " " + emp[i].User.SecondName + "|";
+                    }
+                    return res;
+                }
+            } catch
+            {
+                return "Something wrong";
+            }
         }
 
         private string TaskIsDone(string guid, string TaskID)
@@ -506,8 +571,9 @@ namespace HamsterServer
                 string deadline = task.Deadline.ToString();
                 string creater = task.User.FirstName + " " + task.User.SecondName;
                 string exec = data[i].User.FirstName + " " + data[i].User.SecondName;
+                string done = task.isDone.ToString();
                 string TaskID = Convert.ToString(task.TaskID);
-                return TaskID + "|" + title + "|" + Descript + "|" + deadline + "|" + creater + "|" + exec;
+                return TaskID + "|" + title + "|" + Descript + "|" + deadline + "|" + creater + "|" + exec + "|" + done;
             }
         }
 

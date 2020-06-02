@@ -84,4 +84,12 @@
     <system:String x:Key="TaskIsDoneHead">Подтверждение</system:String>
     <system:String x:Key="TaskIsDone">Задача выполнена?</system:String>
     <system:String x:Key="TaskIsDoneWarn">Вы не являетесь владельцем или исполнителем задачи!</system:String>
+
+    <system:String x:Key="TaskExecSel">Выберите исполнителя:</system:String>
+    <system:String x:Key="TaskExecSelMe">Я исполнитель!</system:String>
+
+    <system:String x:Key="BTNCancel">Отмена</system:String>
+    <system:String x:Key="TasksDone">Выполнено:</system:String>
+
+    <system:String x:Key="Fail">В результате вашего запроса случилась ошибка. Пожалуйста сделайте скриншоты и опишите ситуацию в сообщении для разработчика.</system:String>
 </ResourceDictionary>

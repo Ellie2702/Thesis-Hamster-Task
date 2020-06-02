@@ -10,7 +10,7 @@
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#3FA7E87A" Offset="0.897"/>
-                <GradientStop Color="#FF8AF7C1"/>
+                <GradientStop Color="#337BFDBD"/>
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -36,20 +36,15 @@
         <ListBox Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
 
         </ListBox>
-        <Button Content="Button" Grid.Column="3" Margin="41,5,10,5" Foreground="{x:Null}" Click="Button_Click">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF83F1F1" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <ImageBrush ImageSource="search.png"/>
-            </Button.Background>
-        </Button>
 
         <Label Grid.Row="0" Grid.Column="2" x:Name="TaskExecutor"  Content="{DynamicResource TaskExecutor}" FontSize="8" VerticalContentAlignment="Top"/>
         <Label Grid.Row="0" Grid.Column="2" x:Name="UserExecutor"  FontSize="8" VerticalContentAlignment="Center"/>
         <Label Grid.Row="0" Grid.Column="2" x:Name="deadLine" FontSize="7" VerticalContentAlignment="Bottom"/>
+        <Image x:Name="Done" Visibility="Hidden" Source="/Image/tick.png" Grid.Column="3" HorizontalAlignment="Left" Height="32" Margin="2,0,0,0" VerticalAlignment="Top" Width="34"/>
+        <Button Content="Button" Grid.Column="3" HorizontalAlignment="Left" Margin="41,5,0,0" VerticalAlignment="Top" Width="29" Height="24" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="/Image/search.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </UserControl>

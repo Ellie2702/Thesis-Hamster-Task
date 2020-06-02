@@ -17,6 +17,7 @@ namespace HamsterServer.DATA.Entities
         [Required]
         [StringLength(30)]
         public string Descript { get; set; }
+        public DateTime Deadline { get; set; }
         public Company Company { get; set; }
         public User User { get; set; }
 

@@ -15,19 +15,14 @@ using System.Windows.Shapes;
 
 namespace HamsterTask
 {
-    
-    public partial class TaskControl : UserControl
+    /// <summary>
+    /// Логика взаимодействия для ProjectControll.xaml
+    /// </summary>
+    public partial class ProjectControll : UserControl
     {
-        public TaskControl()
+        public ProjectControll()
         {
             InitializeComponent();
-            Global.LanguageSwitchControll(this);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Global.GlobTaskID = this.TaskID.Content.ToString();
-            new TaskForm().Show();
         }
     }
 }

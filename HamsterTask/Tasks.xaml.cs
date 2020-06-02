@@ -26,6 +26,7 @@ namespace HamsterTask
         }
 
         public int k = 1;
+        public int l = 1;
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -72,7 +73,7 @@ namespace HamsterTask
                     if(p > 1)
                     {
                         i = (6 * k) - 6;
-                        while (z > 7)
+                        while (z < 7)
                         {
                             var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + i.ToString()).Split('|');
                             TaskControl temp = new TaskControl();
@@ -82,7 +83,10 @@ namespace HamsterTask
                             temp.TaskDescript.Content = task[2];
                             temp.UserExecutor.Content = task[5];
                             temp.deadLine.Content = task[4];
-
+                            if(task[6] == "true")
+                            {
+                                temp.Done.Visibility = Visibility.Visible;
+                            }
                             switch (z)
                             {
                                 case 1:
@@ -121,6 +125,11 @@ namespace HamsterTask
                             temp.TaskDescript.Content = task[2];
                             temp.UserExecutor.Content = task[5];
                             temp.deadLine.Content = task[4];
+                            if(task[6] == "true")
+                            {
+                                temp.Done.Visibility = Visibility.Visible;
+                            }
+
 
                             switch (z)
                             {
@@ -188,15 +197,157 @@ namespace HamsterTask
         {
             if (TabTask.IsSelected)
             {
+                Global.FROM = "UserPanel";
                 new AddTask().Show();
                 this.Close();
 
             } else if (TabProject.IsSelected)
             {
+                Global.FROM = "UserPanel";
                 new AddProject().Show();
                 this.Close();
             }
         }
 
+        private void Grid_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string[] parts = Global.Guid.Split('|');
+                var dataT = Helper.Http.GetRequest("http://localhost:8080/GetUserProjectsC/" + parts[0]);
+
+                if (dataT == "0" || dataT == null)
+                {
+                    NoneProj.Visibility = Visibility.Visible;
+                    LastPageProj.Visibility = Visibility.Hidden;
+                    NexPageProj.Visibility = Visibility.Hidden;
+                } else
+                {
+                    int i = 0;
+                    int z = 1;
+                    int p = Convert.ToInt32(Math.Ceiling((double)Convert.ToInt32(dataT) / (double)4.0));
+
+                    if (l == 1 && l < p)
+                    {
+                        LastPageProj.Visibility = Visibility.Hidden;
+                        NexPageProj.Visibility = Visibility.Visible;
+                    }
+
+                    if (l == 1 && l == p)
+                    {
+                        LastPageProj.Visibility = Visibility.Hidden;
+                        NexPageProj.Visibility = Visibility.Hidden;
+                    }
+
+                    if (1 < l && l < p)
+                    {
+                        LastPageProj.Visibility = Visibility.Visible;
+                        NexPageProj.Visibility = Visibility.Visible;
+                    }
+
+                    if (l > 1 && l == p)
+                    {
+                        LastPageProj.Visibility = Visibility.Visible;
+                        NexPageProj.Visibility = Visibility.Hidden;
+                    }
+
+                    if (p > 1)
+                    {
+                        i = (4 * l) - 4;
+                        while (z < 5)
+                        {
+                            var proj = Helper.Http.GetRequest("http://localhost:8080/GetUserProjects/" + parts[0] + "/" + i.ToString()).Split('|');
+                            ProjectControll temp = new ProjectControll();
+
+                            temp.ProjectID.Content = proj[0];
+                            temp.ProjectDesc.Text = proj[2];
+                            temp.ProjectName.Content = proj[1];
+                            temp.DateDeadline.Content = proj[3];
+                            temp.TasksDone.Content += " " + proj[4];
+
+                           
+                            switch (z)
+                            {
+                                case 1:
+                                    Proj1 = temp;
+                                    break;
+                                case 2:
+                                    Proj2 = temp;
+                                    break;
+                                case 3:
+                                    Proj3 = temp;
+                                    break;
+                                case 4:
+                                    Proj4 = temp;
+                                    break;
+                            }
+                            TabTask.UpdateLayout();
+                            z++;
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        while (z > Convert.ToInt32(dataT) + 1)
+                        {
+                            var proj = Helper.Http.GetRequest("http://localhost:8080/GetUserProjects/" + parts[0] + "/" + i.ToString()).Split('|');
+
+                            ProjectControll temp = new ProjectControll();
+
+                            temp.ProjectID.Content = proj[0];
+                            temp.ProjectDesc.Text = proj[2];
+                            temp.ProjectName.Content = proj[1];
+                            temp.DateDeadline.Content = proj[3];
+                            temp.TasksDone.Content += " " + proj[4];
+
+
+                            switch (z)
+                            {
+                                case 1:
+                                    Proj1 = temp;
+                                    break;
+                                case 2:
+                                    Proj2 = temp;
+                                    break;
+                                case 3:
+                                    Proj3 = temp;
+                                    break;
+                                case 4:
+                                    Proj4 = temp;
+                                    break;
+                            }
+                            TabTask.UpdateLayout();
+                            z++;
+                            i++;
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void NexPageProj_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                l++;
+                TabProject.UpdateLayout();
+            }
+            catch { }
+        }
+
+        private void LastPageProj_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                l--;
+                TabProject.UpdateLayout();
+            }
+            catch { }
+        }
     }
 }

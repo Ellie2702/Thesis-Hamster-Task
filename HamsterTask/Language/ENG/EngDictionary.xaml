@@ -86,4 +86,12 @@
     <system:String x:Key="TaskIsDoneHead">Confirmation</system:String>
     <system:String x:Key="TaskIsDone">The task is completed?</system:String>
     <system:String x:Key="TaskIsDoneWarn">You are not the owner or executor of the task!</system:String>
+
+    <system:String x:Key="TaskExecSel">Select an executor:</system:String>
+    <system:String x:Key="TaskExecSelMe">I'm an executor!</system:String>
+
+    <system:String x:Key="TasksDone">Done:</system:String>
+    <system:String x:Key="BTNCancel">Cancel</system:String>
+
+    <system:String x:Key="Fail">An error occurred as a result of your request. Please take screenshots and describe the situation in a message to the developer.</system:String>
 </ResourceDictionary>

@@ -10,8 +10,9 @@ using System.Windows;
 namespace HamsterTask
 {
     public class Global
-    { 
+    {
         public static string GlobTaskID;
+        public static string FROM;
 
         public static string GlobLang;
         public static void LanguageSwitch(Window win)
@@ -30,8 +31,30 @@ namespace HamsterTask
 
         }
 
+        public static void LanguageSwitchControll(TaskControl task)
+        {
+            ResourceDictionary res = new ResourceDictionary();
+            switch (Global.GlobLang)
+            {
+                case "ENG":
+                    res.Source = new Uri("/Language/ENG/EngDictionary.xaml", UriKind.Relative);
+                    break;
+                case "RUS":
+                    res.Source = new Uri("/Language/RUS/RusDictionary.xaml", UriKind.Relative);
+                    break;
+            }
+            task.Resources.MergedDictionaries.Add(res);
+
+        }
+
         public static string Guid;
         public static string RegOrgInfo;
+
+        public class Emps
+        {
+            public int id;
+            public string name;
+        }
     }
 }
    

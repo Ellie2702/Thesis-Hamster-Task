@@ -92,6 +92,6 @@
 
     <system:String x:Key="TasksDone">Done:</system:String>
     <system:String x:Key="BTNCancel">Cancel</system:String>
-
+    <system:String x:Key="TabManagement">Management:</system:String>
     <system:String x:Key="Fail">An error occurred as a result of your request. Please take screenshots and describe the situation in a message to the developer.</system:String>
 </ResourceDictionary>

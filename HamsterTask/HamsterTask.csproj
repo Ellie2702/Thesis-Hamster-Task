@@ -66,6 +66,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddDepartament.xaml.cs">
+      <DependentUpon>AddDepartament.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddEmpForRegOrg.xaml.cs">
       <DependentUpon>AddEmpForRegOrg.xaml</DependentUpon>
     </Compile>
@@ -84,16 +87,37 @@
     <Compile Include="CompanyCode.xaml.cs">
       <DependentUpon>CompanyCode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CompanyReports.xaml.cs">
+      <DependentUpon>CompanyReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmployyesManagment.xaml.cs">
+      <DependentUpon>EmployyesManagment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Helper\Http.cs" />
+    <Compile Include="NewEmployee.xaml.cs">
+      <DependentUpon>NewEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewReport.xaml.cs">
+      <DependentUpon>NewReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectControll.xaml.cs">
       <DependentUpon>ProjectControll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectForm.xaml.cs">
+      <DependentUpon>ProjectForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistrationOrg.xaml.cs">
       <DependentUpon>RegistrationOrg.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistrationUser.xaml.cs">
       <DependentUpon>RegistrationUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RightsEmployeeEditor.xaml.cs">
+      <DependentUpon>RightsEmployeeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
     <Compile Include="TaskControl.xaml.cs">
       <DependentUpon>TaskControl.xaml</DependentUpon>
@@ -116,6 +140,10 @@
     <Compile Include="UserRegOrg.xaml.cs">
       <DependentUpon>UserRegOrg.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddDepartament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddEmpForRegOrg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +168,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CompanyReports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployyesManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Language\ENG\EngDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,7 +196,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProjectControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,6 +217,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegistrationUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RightsEmployeeEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,9 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\tick.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

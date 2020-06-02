@@ -22,7 +22,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="449" Margin="10,26,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="835" Grid.ColumnSpan="4">
+        <TabControl HorizontalAlignment="Left" Height="520" Margin="10,26,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="907" Grid.ColumnSpan="4">
             <TabItem x:Name="TabProject" Header="{DynamicResource TabProject}">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -34,7 +34,7 @@
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFF3FEFF"/>
-                            <GradientStop Color="#FF29B9C7" Offset="1"/>
+                            <GradientStop Color="#5929B9C7" Offset="1"/>
                             <GradientStop Color="#66D3E595" Offset="0.28"/>
                         </LinearGradientBrush>
                     </Grid.Background>
@@ -54,7 +54,27 @@
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFF3FEFF"/>
-                            <GradientStop Color="#FF29B9C7" Offset="1"/>
+                            <GradientStop Color="#5929B9C7" Offset="1"/>
+                            <GradientStop Color="#66D3E595" Offset="0.28"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabCustoms" Header="{DynamicResource TabManagement}">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FF29B9C7" Offset="0"/>
+                        <GradientStop Color="#4CADD473" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFF3FEFF"/>
+                            <GradientStop Color="#5929B9C7" Offset="1"/>
                             <GradientStop Color="#66D3E595" Offset="0.28"/>
                         </LinearGradientBrush>
                     </Grid.Background>

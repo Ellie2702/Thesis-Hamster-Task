@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HamsterTask
 {
     /// <summary>
-    /// Логика взаимодействия для ProjectControll.xaml
+    /// Логика взаимодействия для ProjectForm.xaml
     /// </summary>
-    public partial class ProjectControll : UserControl
+    public partial class ProjectForm : Window
     {
-        public ProjectControll()
+        public ProjectForm()
         {
             InitializeComponent();
-        }
-
-        private void ViewProj_Click(object sender, RoutedEventArgs e)
-        {
-            Global.GlobProjectID = ProjectID.Content.ToString();
         }
     }
 }

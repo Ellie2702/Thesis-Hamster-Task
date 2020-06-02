@@ -90,6 +90,8 @@
 
     <system:String x:Key="BTNCancel">Отмена</system:String>
     <system:String x:Key="TasksDone">Выполнено:</system:String>
+    <system:String x:Key="TabManagement">Управление:</system:String>
+
 
     <system:String x:Key="Fail">В результате вашего запроса случилась ошибка. Пожалуйста сделайте скриншоты и опишите ситуацию в сообщении для разработчика.</system:String>
 </ResourceDictionary>

@@ -12,6 +12,7 @@ namespace HamsterTask
     public class Global
     {
         public static string GlobTaskID;
+        public static string GlobProjectID;
         public static string FROM;
 
         public static string GlobLang;

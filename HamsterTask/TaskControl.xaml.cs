@@ -15,14 +15,18 @@ using System.Windows.Shapes;
 
 namespace HamsterTask
 {
-    /// <summary>
-    /// Логика взаимодействия для TaskControl.xaml
-    /// </summary>
+    
     public partial class TaskControl : UserControl
     {
         public TaskControl()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Global.GlobTaskID = this.TaskID.Content.ToString();
+            new TaskForm().Show();
         }
     }
 }

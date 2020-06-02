@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,7 @@ namespace HamsterTask
         public UserPanel()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -67,6 +70,27 @@ namespace HamsterTask
                 MessagesCount.Visibility = Visibility.Hidden;
             }
             else MessagesCount.Content = mess + " " + MessagesCount.Content;
+
+            string[] avatar = Helper.Http.GetRequest("http://localhost:8080/GetAvatarUser/" + parts[0] + "/").Split('|');
+
+            if(avatar[0] != "No Avatar")
+            {
+                string[] temp = Directory.GetFiles(@"\UserFolder\Images\", avatar[1] + ".png", SearchOption.AllDirectories);
+                if(temp != null)
+                {
+                    
+                    UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
+                } else
+                {
+                    Encoding encoding = Encoding.Default;
+
+                    byte[] Img = encoding.GetBytes(avatar[0]);
+                    MemoryStream ms = new MemoryStream(Img);
+                    Bitmap image = new Bitmap(ms);
+                    image.Save(@"\UserFolder\Images\" + avatar[1] + ".png");
+                    UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
+                }
+            }
 
         }
 

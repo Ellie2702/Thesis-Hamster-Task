@@ -22,6 +22,7 @@ namespace HamsterTask
         public UserMessage()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
     }
 }

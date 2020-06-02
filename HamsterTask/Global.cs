@@ -10,7 +10,9 @@ using System.Windows;
 namespace HamsterTask
 {
     public class Global
-    {
+    { 
+        public static string GlobTaskID;
+
         public static string GlobLang;
         public static void LanguageSwitch(Window win)
         {
@@ -32,3 +34,4 @@ namespace HamsterTask
         public static string RegOrgInfo;
     }
 }
+   

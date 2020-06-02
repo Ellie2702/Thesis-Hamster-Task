@@ -16,6 +16,7 @@ namespace HamsterServer.DATA.Entities
         [Required]
         public bool IsUsed { get; set; }
 
+        public User Owner { get; set; }
         public Image Image { get; set; }
     }
 }

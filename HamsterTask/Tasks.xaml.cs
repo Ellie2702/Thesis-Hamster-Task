@@ -22,6 +22,7 @@ namespace HamsterTask
         public Tasks()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
 
         public int k = 1;
@@ -196,5 +197,6 @@ namespace HamsterTask
                 this.Close();
             }
         }
+
     }
 }

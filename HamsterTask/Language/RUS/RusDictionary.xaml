@@ -73,4 +73,15 @@
     <system:String x:Key="TaskName">Наименование:</system:String>
     <system:String x:Key="TaskDescript">Описание:</system:String>
     <system:String x:Key="TaskDeadline">Дата окончания:</system:String>
+    <system:String x:Key="AddBTN">Добавить</system:String>
+    <system:String x:Key="TabDepartament">Подразделения</system:String>
+    <system:String x:Key="MessRemTask">Вы уверены что хотите удалить?</system:String>
+    <system:String x:Key="MessRemTaskHead">Удаление задачи</system:String>
+    <system:String x:Key="MessRemTaskRes">Удалено</system:String>
+    <system:String x:Key="MessRemTaskResFail">Вы не можете удалить задачу, созданную другим пользователем!</system:String>
+    <system:String x:Key="TaskOwner">Создатель:</system:String>
+    <system:String x:Key="TaskFailed">Вы не успели к сроку!</system:String>
+    <system:String x:Key="TaskIsDoneHead">Подтверждение</system:String>
+    <system:String x:Key="TaskIsDone">Задача выполнена?</system:String>
+    <system:String x:Key="TaskIsDoneWarn">Вы не являетесь владельцем или исполнителем задачи!</system:String>
 </ResourceDictionary>

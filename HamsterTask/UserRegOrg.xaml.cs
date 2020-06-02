@@ -22,6 +22,7 @@ namespace HamsterTask
         public UserRegOrg()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
 
         private void BTNBackToMain_Click(object sender, RoutedEventArgs e)

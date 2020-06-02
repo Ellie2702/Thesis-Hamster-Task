@@ -22,6 +22,7 @@ namespace HamsterTask
         public AddProject()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
     }
 }

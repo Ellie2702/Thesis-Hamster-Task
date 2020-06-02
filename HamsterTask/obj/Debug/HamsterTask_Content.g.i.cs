@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("user.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("tick.png")]
 
 

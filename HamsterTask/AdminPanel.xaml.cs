@@ -22,6 +22,7 @@ namespace HamsterTask
         public AdminPanel()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
     }
 }

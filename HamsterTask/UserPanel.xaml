@@ -44,9 +44,9 @@
                     <GradientStop Color="#7272FF8C" Offset="1"/>
                 </LinearGradientBrush>
             </GroupBox.Background>
-            <Image HorizontalAlignment="Left" Height="174" Margin="0,91,0,0" VerticalAlignment="Top" Width="164">
+            <Image x:Name="UserA" HorizontalAlignment="Left" Height="174" Margin="0,91,0,0" VerticalAlignment="Top" Width="164">
                 <Image.OpacityMask>
-                    <ImageBrush ImageSource="user.png"/>
+                    <ImageBrush ImageSource="/Image/user.png"/>
                 </Image.OpacityMask>
             </Image>
 

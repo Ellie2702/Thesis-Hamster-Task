@@ -142,6 +142,15 @@ namespace HamsterServer
                     case "TaskCount":
                         if (part.Length != 3) return part.Length.ToString();
                         return GetTaskCount(part[2]);
+                    case "DeleteTask":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return RemoveTask(part[2], part[3]);
+                    case "GetOneTask":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetOneTask(part[2], part[3]);
+                    case "TaskIsDone":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return TaskIsDone(part[2], part[3]);
                     default:
                         return "404";
                 }
@@ -149,6 +158,42 @@ namespace HamsterServer
             else return "need more arguments!";
         }
 
+        private string TaskIsDone(string guid, string TaskID)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int id = Convert.ToInt32(TaskID);
+                DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == id);
+                TaskExecutors executors = db.TaskExecutors.Include("Task").Include("User").FirstOrDefault(e => e.Task.TaskID == id);
+
+                if (task.User.UserID == user.UserID || executors.User.UserID == user.UserID)
+                {
+                    task.isDone = true;
+                    db.SaveChanges();
+                    return "IsDone";
+                }
+                else return "You can't!";
+            }
+        }
+
+        private string RemoveTask(string guid, string TaskID)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int id = Convert.ToInt32(TaskID);
+                DATA.Entities.Task data = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == id);
+                if (data.User.UserID == user.UserID)
+                {
+                    db.Tasks.Remove(data);
+                    db.SaveChanges();
+                    return "Deleted!";
+                }
+                else return "You cant delete someone else's task!";
+            }
+
+        }
 
         private string GetTaskCount(string guid)
         {
@@ -428,6 +473,25 @@ namespace HamsterServer
             }
         }
 
+        private string GetOneTask(string guid, string Id)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                int i = Convert.ToInt32(Id);
+                var task = db.Tasks.Include("User").Where(t => t.TaskID == i).FirstOrDefault();
+                var execU = db.TaskExecutors.Include("Task").Include("User").FirstOrDefault(e => e.Task.TaskID == task.TaskID);
+                string title = task.Title;
+                string Descript = task.Descript;
+                string deadline = task.Deadline.ToString();
+                string creater = task.User.FirstName + " " + task.User.SecondName;
+                string exec = execU.User.FirstName + " " + execU.User.SecondName;
+                string done = task.isDone.ToString();
+                string TaskID = Convert.ToString(task.TaskID);
+                return TaskID + "|" + title + "|" + Descript + "|" + deadline + "|" + creater + "|" + exec + "|" + done;
+            }
+        }
+
         private string GetTask(string guid, string Num)
         {
             using (DataContext db = new DataContext())
@@ -441,15 +505,34 @@ namespace HamsterServer
                 string Descript = task.Descript;
                 string deadline = task.Deadline.ToString();
                 string creater = task.User.FirstName + " " + task.User.SecondName;
-                string exec = data[i].User.FirstName + " " + task.User.SecondName;
+                string exec = data[i].User.FirstName + " " + data[i].User.SecondName;
                 string TaskID = Convert.ToString(task.TaskID);
                 return TaskID + "|" + title + "|" + Descript + "|" + deadline + "|" + creater + "|" + exec;
             }
         }
 
-        private string GetAvatar(string UserID)
+        private string GetAvatar(string guid)
         {
-            return "wow";
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                var data = db.Avatars.Include("User").Include("Image").FirstOrDefault(a => a.Owner.UserID == user.UserID && a.IsUsed == true);
+                if(data == null)
+                {
+                    return "No Avatar";
+                } else
+                {
+                    var image = db.Images.FirstOrDefault(i => i.ImageID == data.ImageID);
+                    Encoding encoding = Encoding.Default;
+                    string path = "/Documents/Users/" + user.UserID.ToString() + "/Images/" + image.ImageID.ToString() + ".png";
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(@"\Documents\Users\" + user.UserID.ToString() + @"\Images\" + image.ImageID.ToString() + ".png");
+                    System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
+                    img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] bytes = memoryStream.ToArray();
+                    string res = encoding.GetString(bytes);
+                    return res + "|" + image.ImageID.ToString();
+                }
+            }
         }
 
         private string TryAuth(string login, string password)

@@ -22,6 +22,7 @@ namespace HamsterTask
         public AddEmpForRegOrg()
         {
             InitializeComponent();
+            Global.LanguageSwitch(this);
         }
     }
 }

@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -93,6 +94,9 @@
     </Compile>
     <Compile Include="TaskControl.xaml.cs">
       <DependentUpon>TaskControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskForm.xaml.cs">
+      <DependentUpon>TaskForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +253,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserFolder\Files\" />
+    <Folder Include="UserFolder\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tick.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

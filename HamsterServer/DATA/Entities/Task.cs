@@ -20,6 +20,7 @@ namespace HamsterServer.DATA.Entities
         [Required]
         public DateTime CreateDate { get; set; }
         public DateTime Deadline { get; set; }
+        public bool isDone { get; set; }
 
         public User User { get; set; }
     }

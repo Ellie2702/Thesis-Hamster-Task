@@ -74,4 +74,16 @@
     <system:String x:Key="TaskDescript">Description:</system:String>
 
     <system:String x:Key="TaskDeadline">Deadline:</system:String>
+    <system:String x:Key="AddBTN">Add</system:String>
+    <system:String x:Key="TabDepartament">Departments</system:String>
+    <system:String x:Key="MessRemTask">Are you sure you want to delete it?</system:String>
+    <system:String x:Key="MessRemTaskHead">Task removing</system:String>
+
+    <system:String x:Key="MessRemTaskRes">deleted</system:String>
+    <system:String x:Key="MessRemTaskResFail">You can't delete the task created by another user!</system:String>
+    <system:String x:Key="TaskOwner">Owner:</system:String>
+    <system:String x:Key="TaskFailed">You didn't meet the deadline!</system:String>
+    <system:String x:Key="TaskIsDoneHead">Confirmation</system:String>
+    <system:String x:Key="TaskIsDone">The task is completed?</system:String>
+    <system:String x:Key="TaskIsDoneWarn">You are not the owner or executor of the task!</system:String>
 </ResourceDictionary>

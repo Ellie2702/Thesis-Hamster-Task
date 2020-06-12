@@ -24,5 +24,30 @@ namespace HamsterTask
             InitializeComponent();
             Global.LanguageSwitch(this);
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Messages_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteCompany_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddAdmin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

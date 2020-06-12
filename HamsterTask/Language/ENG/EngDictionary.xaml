@@ -3,7 +3,23 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     
     <system:String x:Key="HamsterTask.MainWindow">HamsterTask - Welcome!</system:String>
-    
+    <system:String x:Key="AddDepartament">HamsterTask - the addition of the Department</system:String>
+    <system:String x:Key="UserProfileSettings">HamsterTask - profile setting</system:String>
+    <system:String x:Key="UserMessage">HamsterTask - Messages</system:String>
+    <system:String x:Key="HamsterTask.Tasks">HamsterTask - user task</system:String>
+    <system:String x:Key="TaskForm">HamsterTask - task</system:String>
+    <system:String x:Key="HamsterTask.Schedule">HamsterTask - schedule</system:String>
+    <system:String x:Key="RightsEmployeeEditor">HamsterTask - differentiation of employee rights</system:String>
+    <system:String x:Key="HamsterTask.RegistrationUser">HamsterTask - registration of users</system:String>
+    <system:String x:Key="HamsterTask.ProjectForm">HamsterTask - project</system:String>
+    <system:String x:Key="HamsterTask.NewEmployee">HamsterTask - adding a user</system:String>
+    <system:String x:Key="EmployyesManagment">HamsterTask - managing employees</system:String>
+    <system:String x:Key="HamsterTask.CompanyCode">HamsterTask - code generation for a new employee</system:String>
+    <system:String x:Key="HamsterTask.Company">HamsterTask - Company</system:String>
+    <system:String x:Key="HamsterTask.AdminPanel">HamsterTask - admin panel</system:String>
+    <system:String x:Key="HamsterTask.AddTask">HamsterTask - adding a task</system:String>
+    <system:String x:Key="HamsterTask.AddProject">HamsterTask - adding a project</system:String>
+
     <system:String x:Key="LabelLogin">Login:</system:String>
     <system:String x:Key="LabelPass">Password:</system:String>
 
@@ -68,7 +84,7 @@
 
     <system:String x:Key="TaskExecutor">Executor:</system:String>
 
-    <system:String x:Key="AddTaskDescript">To add a task, you must specify the name, description, deadline, and select the executor. These fields are required! You can also attach the necessary files to your task!</system:String>
+    <system:String x:Key="AddTaskDescript">To add a task, you must specify the name, description, deadline, and select the executor. These fields are required!</system:String>
 
     <system:String x:Key="TaskName">Title:</system:String>
     <system:String x:Key="TaskDescript">Description:</system:String>
@@ -92,6 +108,62 @@
 
     <system:String x:Key="TasksDone">Done:</system:String>
     <system:String x:Key="BTNCancel">Cancel</system:String>
-    <system:String x:Key="TabManagement">Management:</system:String>
+    <system:String x:Key="TabManagement">Management</system:String>
     <system:String x:Key="Fail">An error occurred as a result of your request. Please take screenshots and describe the situation in a message to the developer.</system:String>
+
+    <system:String x:Key="DateNull">It looks like you didn't specify a deadline! Please make sure that all fields are filled in.</system:String>
+    <system:String x:Key="TaskIsAdded">Your task is added!</system:String>
+    <system:String x:Key="TaskIsNotAdded">Your task has not been added!Make sure that you entered the correct date and did not violate the rules for filling in the form.</system:String>
+
+    <system:String x:Key="InfoHeader">Info:</system:String>
+
+    <system:String x:Key="AddAdmin">Adding an administrator</system:String>
+    <system:String x:Key="DeleteCompany">Deleting a company</system:String>
+    <system:String x:Key="DeleteUser">Deleting a user</system:String>
+    <system:String x:Key="Hello">Hello </system:String>
+
+    <system:String x:Key="AddProjectDescrip">Fill in all the fields. The maximum length of the name is 30 characters. The maximum length of the description is 300 characters. Please do not use the following characters:"\", "|".</system:String>
+
+    <system:String x:Key="EditLogin">Change login:</system:String>
+    <system:String x:Key="EditPass">Change password</system:String>
+    <system:String x:Key="EditAvatar">Change avatar</system:String>
+    <system:String x:Key="EditMail">Change mail:</system:String>
+    <system:String x:Key="ExitCompany">Leave the company</system:String>
+    <system:String x:Key="DeleteMe">remove the profile</system:String>
+    <system:String x:Key="BackToPanel">Go back to profile</system:String>
+    <system:String x:Key="Iswork">You are working today</system:String>
+
+    <system:String x:Key="From">From:</system:String>
+    <system:String x:Key="To">To:</system:String>
+
+    <system:String x:Key="SendMessage">Send message</system:String>
+    <system:String x:Key="MessageDesc">To send a message to a user, enter their mail.</system:String>
+    <system:String x:Key="nomess">There are no messages</system:String>
+
+    <system:String x:Key="emp">Employee:</system:String>
+    <system:String x:Key="startwork">Start of work:</system:String>
+    <system:String x:Key="endwork">End of work:</system:String>
+    <system:String x:Key="save">Save</system:String>
+
+    <system:String x:Key="EmpSchDesc">Enter the employee's username</system:String>
+
+    <system:String x:Key="TasksS">Creating tasks</system:String>
+    <system:String x:Key="DepS">Creation of departments</system:String>
+    <system:String x:Key="ProjS">Creation of projects</system:String>
+    <system:String x:Key="CodeS">Generation of employee code</system:String>
+    <system:String x:Key="SchS">Work schedule</system:String>
+
+    <system:String x:Key="SchDesc">Enter the employee's email address and check their rights.</system:String>
+    <system:String x:Key="AdminMail">If you have any questions or suggestions, you can write to our administrator!</system:String>
+    <system:String x:Key="AdminCopyTOOL">You can copy your email for convenience, just click here!</system:String>
+
+    <system:String x:Key="PleaseReg">Please do not use characters such as '|' and '/'</system:String>
+    <system:String x:Key="LoginReg">The login must be between 8 and 12 characters! Your username must be unique.</system:String>
+    <system:String x:Key="PassPReg">The password must be between 8 and 16 characters. Also use at least one number, a capital letter, and one of the characters:'!', '#', '$', '%'</system:String>
+
+    <system:String x:Key="LBComp">Company:</system:String>
+    <system:String x:Key="LBUserName">Name:</system:String>
+
+
+    <system:String x:Key="Bad">Invalid login or password!</system:String>
 </ResourceDictionary>

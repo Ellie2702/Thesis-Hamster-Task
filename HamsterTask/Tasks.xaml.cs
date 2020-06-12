@@ -39,14 +39,21 @@ namespace HamsterTask
                     NoneTask.Visibility = Visibility.Visible;
                     LastPageTask.Visibility = Visibility.Hidden;
                     NexPageTask.Visibility = Visibility.Hidden;
+                    Task1.Visibility = Visibility.Hidden;
+                    Task2.Visibility = Visibility.Hidden;
+                    Task3.Visibility = Visibility.Hidden;
+                    Task4.Visibility = Visibility.Hidden;
+                    Task5.Visibility = Visibility.Hidden;
+                    Task6.Visibility = Visibility.Hidden;
+                    TabTask.UpdateLayout();
                 } else
                 {
-                   
+                    int tasksCount = Convert.ToInt32(dataT);
                     int i = 0;
                     int z = 1;
-                    int p = Convert.ToInt32(Math.Ceiling((double)Convert.ToInt32(dataT) / (double)6.0));
+                    int p = Convert.ToInt32(Math.Ceiling((double)Convert.ToInt32(dataT) / (double)6.0)); // count of pages
 
-                    if(k == 1 && k < p)
+                    if(k == 1 && k < p) // set visibility of next/back buttons
                     {
                         LastPageTask.Visibility = Visibility.Hidden;
                         NexPageTask.Visibility = Visibility.Visible;
@@ -69,51 +76,79 @@ namespace HamsterTask
                         LastPageTask.Visibility = Visibility.Visible;
                         NexPageTask.Visibility = Visibility.Hidden;
                     }
+                    TabTask.UpdateLayout();
 
-                    if(p > 1)
+                    if (p > 0)
                     {
-                        i = (6 * k) - 6;
-                        while (z < 7)
+                        i = 6 * (k - 1); // number of first task on page
+                        while (z < Math.Min(7, tasksCount - i+1))
                         {
                             var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + i.ToString()).Split('|');
                             TaskControl temp = new TaskControl();
-
+                            switch (z)
+                            {
+                                case 1:
+                                    temp = Task1;
+                                    break;
+                                case 2:
+                                    temp = Task2;
+                                    break;
+                                case 3:
+                                    temp = Task3;
+                                    break;
+                                case 4:
+                                    temp = Task4;
+                                    break;
+                                case 5:
+                                    temp = Task5;
+                                    break;
+                                case 6:
+                                    temp = Task6;
+                                    break;
+                            }
+                            temp.Visibility = Visibility.Visible;
                             temp.TaskID.Content = task[0];
                             temp.TaskName.Content = task[1];
                             temp.TaskDescript.Content = task[2];
                             temp.UserExecutor.Content = task[5];
                             temp.deadLine.Content = task[4];
-                            if(task[6] == "true")
+                            if(task[6].ToLower() == "true")
                             {
                                 temp.Done.Visibility = Visibility.Visible;
                             }
-                            switch (z)
-                            {
-                                case 1:
-                                    Task1 = temp;
-                                    break;
-                                case 2:
-                                    Task2 = temp;
-                                    break;
-                                case 3:
-                                    Task3 = temp;
-                                    break;
-                                case 4:
-                                    Task4 = temp;
-                                    break;
-                                case 5:
-                                    Task5 = temp;
-                                    break;
-                                case 6:
-                                    Task6 = temp;
-                                    break;
-                            }
+                            
                             TabTask.UpdateLayout();
                             z++;
                             i++;
                         }
+
+                        while (z < 7)
+                        {
+                            switch (z)
+                            {
+                                case 1:
+                                    Task1.Visibility = Visibility.Hidden;
+                                    break;
+                                case 2:
+                                    Task2.Visibility = Visibility.Hidden;
+                                    break;
+                                case 3:
+                                    Task3.Visibility = Visibility.Hidden;
+                                    break;
+                                case 4:
+                                    Task4.Visibility = Visibility.Hidden;
+                                    break;
+                                case 5:
+                                    Task5.Visibility = Visibility.Hidden;
+                                    break;
+                                case 6:
+                                    Task6.Visibility = Visibility.Hidden;
+                                    break;
+                            }
+                            z++;
+                        }
                     }
-                    else
+                    /*else
                     {
                         while (z > Convert.ToInt32(dataT) + 1)
                         {
@@ -156,7 +191,7 @@ namespace HamsterTask
                             z++;
                             i++;
                         }
-                    }
+                    }*/
                     
                 }
             }
@@ -221,6 +256,11 @@ namespace HamsterTask
                     NoneProj.Visibility = Visibility.Visible;
                     LastPageProj.Visibility = Visibility.Hidden;
                     NexPageProj.Visibility = Visibility.Hidden;
+                    Proj1.Visibility = Visibility.Hidden;
+                    Proj2.Visibility = Visibility.Hidden;
+                    Proj3.Visibility = Visibility.Hidden;
+                    Proj4.Visibility = Visibility.Hidden;
+                    TabProject.UpdateLayout();
                 } else
                 {
                     int i = 0;
@@ -251,6 +291,7 @@ namespace HamsterTask
                         NexPageProj.Visibility = Visibility.Hidden;
                     }
 
+                    TabProject.UpdateLayout();
                     if (p > 1)
                     {
                         i = (4 * l) - 4;
@@ -281,7 +322,7 @@ namespace HamsterTask
                                     Proj4 = temp;
                                     break;
                             }
-                            TabTask.UpdateLayout();
+                            TabProject.UpdateLayout();
                             z++;
                             i++;
                         }
@@ -316,7 +357,7 @@ namespace HamsterTask
                                     Proj4 = temp;
                                     break;
                             }
-                            TabTask.UpdateLayout();
+                            TabProject.UpdateLayout();
                             z++;
                             i++;
                         }

@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace HamsterServer.DATA.Entities
 {
-    public class Report
+    public class Sсheldue
     {
         [Key]
-        public int ReportID { get; set; }
-  
-        [Required]
-        public DateTime Date { get; set; }
-
-        public User User { get; set; }
-        public Document Document { get; set; }
+        public int SсheldueID { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
+        public Employee Employee {get;set;}
     }
 }

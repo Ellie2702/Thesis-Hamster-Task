@@ -11,10 +11,13 @@ namespace HamsterServer.DATA.Entities
     public class Employee
     {
         [Key]
-        public int CompanyEmployeeID { get; set; }
+        public int EmployeeID { get; set; }
+        [Required]
         public User User { get; set; }
+        [Required]
         public Company Company { get; set; }
        
         public Position Position { get; set; }
+        public ICollection<DepartamentEmployees> DepartamentEmployees { get; set; }
     }
 }

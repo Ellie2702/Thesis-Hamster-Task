@@ -15,10 +15,12 @@ namespace HamsterServer.DATA.Entities
         [StringLength(30)]
         public string Title { get; set; }
         [Required]
-        [StringLength(30)]
+        [StringLength(300)]
         public string Descript { get; set; }
+        [Required]
         public DateTime Deadline { get; set; }
         public Company Company { get; set; }
+        [Required]
         public User User { get; set; }
 
     }

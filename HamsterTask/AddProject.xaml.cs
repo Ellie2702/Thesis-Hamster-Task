@@ -24,5 +24,15 @@ namespace HamsterTask
             InitializeComponent();
             Global.LanguageSwitch(this);
         }
+
+        private void BTNCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddBTN_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

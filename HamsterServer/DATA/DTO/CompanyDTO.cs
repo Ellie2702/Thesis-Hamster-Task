@@ -17,5 +17,6 @@ namespace HamsterServer.DATA.DTO
         public DateTime RegDate { get; set; }
 
         public List<Employee> Employees { get; set; }
+        public List<EmployeeCode> EmployeesCodes { get; set; }
     }
 }

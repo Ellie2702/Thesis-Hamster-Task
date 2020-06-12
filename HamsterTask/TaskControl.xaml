@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HamsterTask"
              mc:Ignorable="d" 
-             d:DesignHeight="136" d:DesignWidth="306">
+             d:DesignHeight="136" d:DesignWidth="306" >
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -29,21 +29,18 @@
         </Grid.RowDefinitions>
 
         <Label x:Name="TaskName" Grid.ColumnSpan="2" Content="Name" FontSize="12"/>
-        <Label x:Name="TaskDescript" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" FontSize="8">
+        <Label x:Name="TaskDescript" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" FontSize="10">
             <TextBlock TextWrapping="Wrap" ></TextBlock>
         </Label>
         <Label x:Name="TaskID" Visibility="Hidden"/>
-        <ListBox Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
 
-        </ListBox>
-
-        <Label Grid.Row="0" Grid.Column="2" x:Name="TaskExecutor"  Content="{DynamicResource TaskExecutor}" FontSize="8" VerticalContentAlignment="Top"/>
-        <Label Grid.Row="0" Grid.Column="2" x:Name="UserExecutor"  FontSize="8" VerticalContentAlignment="Center"/>
-        <Label Grid.Row="0" Grid.Column="2" x:Name="deadLine" FontSize="7" VerticalContentAlignment="Bottom"/>
+        <Label Grid.Row="0" Grid.Column="2" x:Name="TaskExecutor"  Content="{DynamicResource TaskExecutor}" FontSize="10" VerticalContentAlignment="Top"/>
+        <Label Grid.Row="0" Grid.Column="2" x:Name="UserExecutor"  FontSize="10" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="2" x:Name="deadLine" FontSize="10" VerticalContentAlignment="Bottom"/>
         <Image x:Name="Done" Visibility="Hidden" Source="/Image/tick.png" Grid.Column="3" HorizontalAlignment="Left" Height="32" Margin="2,0,0,0" VerticalAlignment="Top" Width="34"/>
         <Button Content="Button" Grid.Column="3" HorizontalAlignment="Left" Margin="41,5,0,0" VerticalAlignment="Top" Width="29" Height="24" BorderBrush="{x:Null}" Foreground="{x:Null}">
             <Button.Background>
-                <ImageBrush ImageSource="/Image/search.png"/>
+                <ImageBrush ImageSource="Image/search.png"/>
             </Button.Background>
         </Button>
     </Grid>

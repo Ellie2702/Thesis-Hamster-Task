@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace HamsterTask
 {
     /// <summary>
-    /// Логика взаимодействия для AddEmpForRegOrg.xaml
+    /// Логика взаимодействия для Messages.xaml
     /// </summary>
-    public partial class AddEmpForRegOrg : Window
+    public partial class Messages : Window
     {
-        public AddEmpForRegOrg()
+        public Messages()
         {
             InitializeComponent();
-            Global.LanguageSwitch(this);
         }
     }
 }

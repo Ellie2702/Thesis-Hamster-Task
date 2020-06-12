@@ -32,18 +32,32 @@ namespace HamsterTask
             MessageBox.Show(Global.Guid);
             string[] parts = Global.Guid.Split('|');
             UserName.Content = parts[3] + " " + parts[4];
-            if(parts[parts.Length - 1] == "W")
+            if (parts[parts.Length - 1] == "W")
             {
                 Position.Content = parts[7];
                 Company.Content = parts[8];
-            } else if(parts[parts.Length - 1] == "WP")
+                var work = Helper.Http.GetRequest("http://localhost:8080/IsWork/" + parts[0]).Split('|');
+                if (work != null || work[0] != "NotWorking")
+                {
+                    Iswork.Visibility = Visibility.Visible;
+                    Iswork.Content = TryFindResource("IsWork").ToString() + work[1] + " - " + work[2];
+                }
+            }
+            else if (parts[parts.Length - 1] == "WP")
             {
-                
+
                 Position.Content = parts[8];
                 Company.Content = parts[9];
-            }
-                Birth.Content = parts[5];
+                var work = Helper.Http.GetRequest("http://localhost:8080/IsWork/" + parts[0]);
+                if (work != null && work.ToString() != "NotWorking" && work.ToString() != "404")
+                {
+                    work.Split('|');
+                    Iswork.Visibility = Visibility.Visible;
+                    Iswork.Content = TryFindResource("IsWork").ToString() + work[1] + " - " + work[2];
+                }
+                Birth.Content = Convert.ToDateTime(parts[5]).ToShortDateString();
                 Email.Content = parts[6];
+            }
 
             if (parts[parts.Length - 1] != "W" && parts[parts.Length - 1] != "WP")
             {
@@ -56,41 +70,56 @@ namespace HamsterTask
                 BTN_IHaveCode.Visibility = Visibility.Hidden;
             }
 
-            var task = Helper.Http.GetRequest("http://localhost:8080/GetTaskCount/" + parts[0] + "/");
-            var mess = Helper.Http.GetRequest("http://localhost:8080/GetTaskCount/" + parts[0] + "/");
+            var task = Helper.Http.GetRequest("http://localhost:8080/TaskCount/" + parts[0]);
+            var mess = Helper.Http.GetRequest("http://localhost:8080/MessageCount/" + parts[0]);
 
             if (task == "No tasks")
             {
                 TaskCount.Visibility = Visibility.Hidden;
             }
-            else TaskCount.Content = task + " " + TaskCount.Content;
+            else
+            {
+                TaskCount.Content = task + " " + TaskCount.Content;
+                TaskCount.Visibility = Visibility.Visible;
+            }
+
 
             if (mess == "No messages")
             {
                 MessagesCount.Visibility = Visibility.Hidden;
             }
-            else MessagesCount.Content = mess + " " + MessagesCount.Content;
-
-            string[] avatar = Helper.Http.GetRequest("http://localhost:8080/GetAvatarUser/" + parts[0] + "/").Split('|');
-
-            if(avatar[0] != "No Avatar")
+            else
             {
-                string[] temp = Directory.GetFiles(@"\UserFolder\Images\", avatar[1] + ".png", SearchOption.AllDirectories);
-                if(temp != null)
-                {
-                    
-                    UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
-                } else
-                {
-                    Encoding encoding = Encoding.Default;
+                MessagesCount.Content = mess + " " + MessagesCount.Content;
+                MessagesCount.Visibility = Visibility.Visible;
+            }
 
-                    byte[] Img = encoding.GetBytes(avatar[0]);
-                    MemoryStream ms = new MemoryStream(Img);
-                    Bitmap image = new Bitmap(ms);
-                    image.Save(@"\UserFolder\Images\" + avatar[1] + ".png");
-                    UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
+            try
+            {
+                string[] avatar = Helper.Http.GetRequest("http://localhost:8080/GetAvatarUser/" + parts[0]).Split('|');
+
+                if (avatar[0] != "No Avatar")
+                {
+                    string[] temp = Directory.GetFiles(@"\UserFolder\Images\", avatar[1] + ".png", SearchOption.AllDirectories);
+                    if (temp != null)
+                    {
+
+                        UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
+                    }
+                    else
+                    {
+                        Encoding encoding = Encoding.Default;
+
+                        byte[] Img = encoding.GetBytes(avatar[0]);
+                        MemoryStream ms = new MemoryStream(Img);
+                        Bitmap image = new Bitmap(ms);
+                        image.Save(@"\UserFolder\Images\" + avatar[1] + ".png");
+                        UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
+                    }
                 }
             }
+            catch { }
+            this.UpdateLayout();
 
         }
 
@@ -116,6 +145,11 @@ namespace HamsterTask
         private void BTN_IHaveCode_Click(object sender, RoutedEventArgs e)
         {
             new CompanyCode().Show();
+        }
+
+        private void CopyAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Global.userMail = AdminMail.Content.ToString();
         }
     }
 }

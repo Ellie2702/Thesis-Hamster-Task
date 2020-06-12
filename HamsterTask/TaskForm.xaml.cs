@@ -43,7 +43,7 @@ namespace HamsterTask
                 }
 
             }
-            catch { }
+            catch { MessageBox.Show(TryFindResource("MessRemTaskResFail").ToString()); }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -97,6 +97,11 @@ namespace HamsterTask
             {
 
             }
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -59,8 +60,8 @@ namespace HamsterTask
                             }
                             
                             TaskExec.ItemsSource = emps;
-                            TaskExec.DisplayMemberPath = emps1.name;
-                            TaskExec.SelectedIndex = emps1.id;
+                            TaskExec.DisplayMemberPath = "name";
+                            TaskExec.SelectedValuePath= "id";
                             TaskExec.UpdateLayout();
                             break;
                     }
@@ -68,6 +69,33 @@ namespace HamsterTask
             }
             catch {
                 MessageBox.Show(TryFindResource("Fail").ToString());
+            }
+        }
+
+        private void AddBTN_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string[] parts = Global.Guid.Split('|');
+                string title = TaskName.Text;
+                string descript = TaskDesc.Text;
+                string deadline = TaskDeadline.SelectedDate.ToString();
+                if(deadline == null)
+                {
+                    MessageBox.Show(TryFindResource("DateNull").ToString());
+                } else
+                {
+                    string data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
+                    if(data == "Task is added")
+                    {
+                        MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                    }
+                    else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                }
+            }
+            catch (Exception Ex)
+            {
+               
             }
         }
     }

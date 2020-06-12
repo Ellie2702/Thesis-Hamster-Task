@@ -10,6 +10,7 @@ namespace HamsterServer.DATA.Entities
 {
     public class Message
     {
+        
         [Key]
         public int MessageID { get; set; }
         [Required]
@@ -18,11 +19,12 @@ namespace HamsterServer.DATA.Entities
         [Required]
         [MaxLength(600)]
         public string Content { get; set; }
+        
+        public User UserTo_UserId { get; set; }
+   
+        public User UserFrom_UserId { get; set; }
         [Required]
-        public User UserTo { get; set; }
-        [Required]
-        public User UserFrom { get; set; }
-        [Required]
+        public DateTime TimeSend { get; set; }
         public bool isCheck { get; set; }
     }
 }

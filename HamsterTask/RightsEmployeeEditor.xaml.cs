@@ -23,5 +23,15 @@ namespace HamsterTask
         {
             InitializeComponent();
         }
+
+        private void BTNSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BTNExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

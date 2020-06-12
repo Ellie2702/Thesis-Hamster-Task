@@ -14,5 +14,6 @@ namespace HamsterServer.DATA.Entities
         
         [Required]
         public User User { get; set; }
+        public virtual ICollection<CompanyLogo> CompanyLogos { get; set; }
     }
 }

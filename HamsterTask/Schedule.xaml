@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="800">
+        Title="{DynamicResource HamsterTask.Schedule}" Height="333" Width="465" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF031419" Offset="0.989"/>
+                    <GradientStop Color="#FF126A7A" Offset="0.342"/>
+                    <GradientStop Color="#FF579CB6" Offset="0.232"/>
+                    <GradientStop Color="#FF0E6376" Offset="0.644"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Label  Content="{DynamicResource emp}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,0,57,28" Grid.Row="1" />
+        <Label Content="{DynamicResource startwork}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,48,24,40" Grid.Row="1" Grid.RowSpan="2" />
+        <Label Content="{DynamicResource endwork}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,27,24,0" Grid.Row="2" />
+        <Button x:Name="BTNSave" Content="{DynamicResource save}" Grid.Column="1"  BorderBrush="{x:Null}" Grid.Row="3" Margin="10,10,10,20">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="BTNExit" Content="{DynamicResource BackToPanel}" Grid.Column="2"  BorderBrush="{x:Null}" Grid.Row="3" Margin="10,10,10,20">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="EmpMail" FontSize="14" Margin="0,0,47,29" RenderTransformOrigin="0.503,1.199" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" />
+        <DatePicker x:Name="Start" Grid.Row="1" Grid.Column="1" FontSize="18" Margin="0,48,145,40" Grid.ColumnSpan="2" Grid.RowSpan="2" DisplayDate="2021-06-06"/>
+        <DatePicker x:Name="End" Grid.Row="2" Grid.Column="1" FontSize="18" Margin="0,26,145,1" Grid.ColumnSpan="2" DisplayDate="2021-06-06"/>
+        <Label  Content="{DynamicResource EmpSchDesc}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,10,10,18" Grid.ColumnSpan="3" />
     </Grid>
 </Window>

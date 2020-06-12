@@ -55,7 +55,6 @@ namespace HamsterTask
 
         private void RegEmpBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
             new RegistrationUser().Show();
             this.Close();
         }
@@ -63,9 +62,14 @@ namespace HamsterTask
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             Global.Guid = Helper.Http.GetRequest("http://localhost:8080/auth/" + Login.Text + "/" + Password.Password);
-            MessageBox.Show(Global.Guid);
-            new UserPanel().Show();
-            this.Close();
+            if (Global.Guid != "bad" && Global.Guid != "404")
+            {
+                new UserPanel().Show();
+                this.Close();
+            }
+            else MessageBox.Show(TryFindResource("Bad").ToString());
+            
+            
         }
 
         

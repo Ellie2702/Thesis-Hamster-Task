@@ -50,6 +50,7 @@ namespace HamsterTask
 
         public static string Guid;
         public static string RegOrgInfo;
+        public static string userMail;
 
         public class Emps
         {

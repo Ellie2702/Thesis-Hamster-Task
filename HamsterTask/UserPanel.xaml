@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="UserPanel" Height="700" Width="950">
+        Title="UserPanel" Height="700" Width="950" WindowStartupLocation="CenterScreen">
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -16,53 +15,44 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="97*"/>
             <RowDefinition Height="96*"/>
             <RowDefinition Height="95*"/>
             <RowDefinition Height="95*"/>
             <RowDefinition Height="95*"/>
             <RowDefinition Height="95*"/>
-            <RowDefinition Height="96*"/>
+
         </Grid.RowDefinitions>
 
-        <Label x:Name="UserProfileHello" Grid.Column="1" Grid.ColumnSpan="3"/>
-        <Label Name="UserName" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right"/>
-        <Label Name="Position" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-        <Label Name="Company" Grid.Column="1" Grid.Row="1" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
+        <Label x:Name="UserProfileHello" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,33,0,0" HorizontalAlignment="Left" Width="426"/>
+        <Label Name="UserNameLB" Content="{DynamicResource LBUserName}" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="10,0,106,0"/>
+        <Label Name="UserName" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Margin="140,0,10,0" Grid.ColumnSpan="2"/>
+        <Label Name="PositionLB" Content="{DynamicResource PositionName}" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0,0,106,0"/>
+        <Label Name="Position" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="135,0,45,0" Grid.ColumnSpan="2"/>
+        <Label Name="CompanyLBL" Content="{DynamicResource LBComp}" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Margin="0,0,106,0"/>
+        <Label Name="Company" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Margin="135,0,62,0" Grid.ColumnSpan="2"/>
+        <Label Name="Iswork" Grid.Column="1" Grid.ColumnSpan="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10,33,25,0"/>
 
-        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}" Grid.Column="3" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="1,63,0,0"/>
-        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}" Grid.Column="3" Grid.Row="1" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,95,1,56"/>
+        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}" Grid.Column="3" Grid.Row="1" FontSize="15" Visibility="Hidden" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="1,63,0,0"/>
+        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}" Grid.Column="3" Grid.Row="1" FontSize="15" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,95,1,56"/>
 
-        <Label Name="Birth" Grid.Column="1" Grid.Row="2" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-        <Label Name="Email" Grid.Column="1" Grid.Row="2" FontSize="15" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right"/>
+        <Label Name="BirthLB" Content="{DynamicResource LabelUserBirth}" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0,0,106,0"/>
+        <Label Name="Birth" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="286" Grid.ColumnSpan="2" Margin="140,0,0,0"/>
+        <Label Name="EmailLB" Content="{DynamicResource LabelEmail}" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Margin="0,0,106,0"/>
+        <Label Name="Email" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Grid.ColumnSpan="2" Margin="135,0,25,0"/>
 
 
-        <GroupBox x:Name="UserInform" Grid.RowSpan="4" Grid.ColumnSpan="4" BorderBrush="#4C488897" Margin="10,10,0,0">
+        <GroupBox x:Name="UserInform" Grid.RowSpan="3" Grid.ColumnSpan="3" BorderBrush="#4C488897" Margin="10,10,4,0">
             <GroupBox.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#7253BDD4" Offset="0"/>
                     <GradientStop Color="#7272FF8C" Offset="1"/>
                 </LinearGradientBrush>
             </GroupBox.Background>
-            <Image x:Name="UserA" HorizontalAlignment="Left" Height="174" Margin="0,91,0,0" VerticalAlignment="Top" Width="164">
-                <Image.OpacityMask>
-                    <ImageBrush ImageSource="/Image/user.png"/>
-                </Image.OpacityMask>
-            </Image>
-
-
-        </GroupBox>
-        <GroupBox x:Name="Graphic" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="10,5,0,0">
-            <GroupBox.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#332E91B0" Offset="0.958"/>
-                    <GradientStop Color="#338DD485"/>
-                </LinearGradientBrush>
-            </GroupBox.Background>
+            <Image x:Name="UserA" HorizontalAlignment="Left" Height="174" Margin="0,91,0,0" VerticalAlignment="Top" Width="164" Source="Image/user.png"/>
 
         </GroupBox>
 
-        <Button x:Name="UserCustom" Content="{DynamicResource UserCustom}" Grid.Column="4" Grid.Row="1" Margin="20,21,10,48" BorderBrush="{x:Null}">
+        <Button x:Name="UserCustom" Content="{DynamicResource UserCustom}" Grid.Column="3" Grid.Row="1" Margin="20,10,10,86" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -71,7 +61,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="UserTask" Content="{DynamicResource UserTask}" Grid.Column="4" Grid.Row="1" Margin="20,53,10,16"  BorderBrush="{x:Null}" Click="UserTask_Click">
+        <Button x:Name="UserTask" Content="{DynamicResource UserTask}" Grid.Column="3" Grid.Row="1" Margin="20,70,10,25"  BorderBrush="{x:Null}" Click="UserTask_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -85,7 +75,7 @@
                 </ToolTip>
             </Button.ToolTip>
         </Button>
-        <Button x:Name="UserMessages" Content="{DynamicResource UserMessages}" Grid.Column="4" Grid.Row="1" Margin="20,85,10,79" BorderBrush="{x:Null}" Click="UserMessages_Click" Grid.RowSpan="2">
+        <Button x:Name="UserMessages" Content="{DynamicResource UserMessages}" Grid.Column="3" Grid.Row="2" Margin="20,0,10,98" BorderBrush="{x:Null}" Click="UserMessages_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -94,7 +84,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="UserCompany" Content="{DynamicResource UserCompany}" Grid.Column="4" Grid.Row="2" Margin="20,58,10,10" BorderBrush="{x:Null}">
+        <Button x:Name="UserCompany" Content="{DynamicResource UserCompany}" Grid.Column="3" Grid.Row="3" Margin="20,39,10,57" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -103,7 +93,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="Exit" Content="{DynamicResource Exit}" Grid.Column="4" Margin="20,68,10,0" Click="Exit_Click" BorderBrush="{x:Null}" Grid.Row="3">
+        <Button x:Name="Exit" Content="{DynamicResource Exit}" Grid.Column="3" Margin="20,97,10,0" Click="Exit_Click" BorderBrush="{x:Null}" Grid.Row="3">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -125,7 +115,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="BTN_IHaveCode" Content="{DynamicResource BTN_IHaveCode}" Grid.Column="4" Grid.Row="2" Margin="20,25,10,43"  BorderBrush="{x:Null}" Click="BTN_IHaveCode_Click" >
+        <Button x:Name="BTN_IHaveCode" Content="{DynamicResource BTN_IHaveCode}" Grid.Column="3" Grid.Row="2" Margin="20,57,10,39"  BorderBrush="{x:Null}" Click="BTN_IHaveCode_Click" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -136,6 +126,18 @@
             <Button.ToolTip>
                 <ToolTip>
                     <TextBlock x:Name="ToolTopUserTask2" Text="{DynamicResource ToolTopUserTask}" TextWrapping="Wrap"/>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <TextBlock TextWrapping="Wrap" Text="{DynamicResource AdminMail}" Grid.Column="3" FontSize="13" TextAlignment="Center" Margin="1,5,10,60" />
+        <Label x:Name="AdminMail" Content="HamsterAdmin@mail.ru" Grid.Row="0" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="10,75,52,11" Grid.Column="3" Width="173" Foreground="#FF156E62" RenderTransformOrigin="0.633,0.5"/>
+        <Button x:Name="CopyAdmin" Grid.Column="3" HorizontalAlignment="Left" Margin="192,88,0,0" VerticalAlignment="Top" Width="33" Height="36" Foreground="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.682,0.806" Click="CopyAdmin_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/copy.png"/>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource AdminCopyTOOL}" TextWrapping="Wrap"/>
                 </ToolTip>
             </Button.ToolTip>
         </Button>

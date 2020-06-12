@@ -10,6 +10,7 @@ namespace HamsterServer.DATA.DTO
     {
         public int CompanyLogoID { get; set; }
         public int ImageID { get; set; }
+        public bool isUsed { get; set; }
         public int CompanyID { get; set; }
     }
 }

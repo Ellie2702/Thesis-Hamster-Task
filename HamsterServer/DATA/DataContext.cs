@@ -23,20 +23,15 @@ namespace HamsterServer.DATA
         public DbSet<Position> Positions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<Document> Documents { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<EmployeeCode> EmployeeCodes { get; set; }
-        public DbSet<SystemMessage> SystemMessages { get; set; }
         public DbSet<Entities.Task> Tasks { get; set; }
-        public DbSet<Report> Reports { get; set; }
         public DbSet<Projects> Projects { get; set; }
         public DbSet<TaskExecutors> TaskExecutors { get; set; }
         public DbSet<ProjectsTasks> ProjectsTasks { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<TaskFile> TaskFiles { get; set; }
         public DbSet<DepartamentEmployees> DepartamentEmployees { get; set; }
         public DbSet<AccessRight> AccessRights { get; set; }
-
-
+        public DbSet<Sсheldue> Scheldues { get; set; }
     }
 }

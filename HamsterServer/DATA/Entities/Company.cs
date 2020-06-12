@@ -14,6 +14,7 @@ namespace HamsterServer.DATA.Entities
         {
             Employees = new HashSet<Employee>();
             EmployeeCodes = new HashSet<EmployeeCode>();
+            Departments = new HashSet<Department>();
         }
 
         [Key]
@@ -24,13 +25,12 @@ namespace HamsterServer.DATA.Entities
         [StringLength(50)]
         public string CompanyType { get; set; }
         [Required]
-        public int UserID { get; set; }
         public DateTime FoundationDate { get; set; }
         [Required]
         public DateTime RegDate { get; set; }
-        [ForeignKey("UserID")]
         public User User { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<EmployeeCode> EmployeeCodes { get; set; }
     }
 }

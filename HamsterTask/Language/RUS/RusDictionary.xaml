@@ -3,7 +3,23 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:String x:Key="HamsterTask.MainWindow">HamsterTask - Добро пожаждовать!</system:String>
-    
+    <system:String x:Key="AddDepartament">HamsterTask - добавление департамента</system:String>
+    <system:String x:Key="UserProfileSettings">HamsterTask - настройки профиля</system:String>
+    <system:String x:Key="UserMessage">HamsterTask - сообщения</system:String>
+    <system:String x:Key="HamsterTask.Tasks">HamsterTask - задачи пользователя</system:String>
+    <system:String x:Key="TaskForm">HamsterTask - задача</system:String>
+    <system:String x:Key="HamsterTask.Schedule">HamsterTask - график работы</system:String>
+    <system:String x:Key="RightsEmployeeEditor">HamsterTask - разграничение прав сотрудника</system:String>
+    <system:String x:Key="HamsterTask.RegistrationUser">HamsterTask - регистрация пользователя</system:String>
+    <system:String x:Key="HamsterTask.ProjectForm">HamsterTask - проект</system:String>
+    <system:String x:Key="HamsterTask.NewEmployee">HamsterTask - добавление пользователя</system:String>
+    <system:String x:Key="EmployyesManagment">HamsterTask - управление сотрудниками</system:String>
+    <system:String x:Key="HamsterTask.CompanyCode">HamsterTask - генерация кода компании</system:String>
+    <system:String x:Key="HamsterTask.Company">HamsterTask - компания</system:String>
+    <system:String x:Key="HamsterTask.AdminPanel">HamsterTask - панель администратора</system:String>
+    <system:String x:Key="HamsterTask.AddTask">HamsterTask - добавление задачи</system:String>
+    <system:String x:Key="HamsterTask.AddProject">HamsterTask - добавление проекта</system:String>
+
     <system:String x:Key="LabelLogin">Логин:</system:String>
     <system:String x:Key="LabelPass">Пароль:</system:String>
 
@@ -68,7 +84,7 @@
     <system:String x:Key="TabTask">Задачи</system:String>
     <system:String x:Key="TaskExecutor">Исполнитель:</system:String>
 
-    <system:String x:Key="AddTaskDescript">Чтобы добавить задачу обязательно укажите наименование, описание, дату окончания и выберите исполнителя. Эти поля обязательны! Так же можете прикрепить нужные файлы к вашей задаче!</system:String>
+    <system:String x:Key="AddTaskDescript">Чтобы добавить задачу обязательно укажите наименование, описание, дату окончания и выберите исполнителя. Эти поля обязательны!</system:String>
 
     <system:String x:Key="TaskName">Наименование:</system:String>
     <system:String x:Key="TaskDescript">Описание:</system:String>
@@ -90,8 +106,63 @@
 
     <system:String x:Key="BTNCancel">Отмена</system:String>
     <system:String x:Key="TasksDone">Выполнено:</system:String>
-    <system:String x:Key="TabManagement">Управление:</system:String>
+    <system:String x:Key="TabManagement">Управление</system:String>
 
 
     <system:String x:Key="Fail">В результате вашего запроса случилась ошибка. Пожалуйста сделайте скриншоты и опишите ситуацию в сообщении для разработчика.</system:String>
+    <system:String x:Key="DateNull">Похоже вы не указали сроки! Пожалуйста, убедитесь, что все поля заполнены.</system:String>
+    <system:String x:Key="TaskIsAdded">Ваша задача добавлена!</system:String>
+    <system:String x:Key="TaskIsNotAdded">Ваша задача не добавлена!Убедитесь что указали правильно дату и не нарушили правила заполнения.</system:String>
+
+    <system:String x:Key="InfoHeader">Информация:</system:String>
+    <system:String x:Key="EmployeeCount">Количество сотрудников:</system:String>
+    <system:String x:Key="NotEndProjectCount">Количество незавершённых проектов:</system:String>
+    <system:String x:Key="DoneProjects">Количество завершённых проектов:</system:String>
+
+    <system:String x:Key="AddAdmin">Добавление администратора</system:String>
+    <system:String x:Key="DeleteCompany">Удаление компании</system:String>
+    <system:String x:Key="DeleteUser">Удаление пользователя</system:String>
+    <system:String x:Key="Hello">Привет, </system:String>
+
+    <system:String x:Key="AddProjectDescrip">Заполните все поля. Максимальная длина названия 30 символов. Максимальная длина описания 300 символов. Пожалуйста, не используйте следующие символы: "\", "|".</system:String>
+
+    <system:String x:Key="EditLogin">Изменить логин:</system:String>
+    <system:String x:Key="EditPass">Изменить пароль:</system:String>
+    <system:String x:Key="EditAvatar">Изменить аватар</system:String>
+    <system:String x:Key="EditMail">Изменить почту:</system:String>
+    <system:String x:Key="ExitCompany">Уйти из компании</system:String>
+    <system:String x:Key="DeleteMe">Удалить профиль</system:String>
+    <system:String x:Key="BackToPanel">Вернуться в профиль</system:String>
+    <system:String x:Key="Iswork">Сегодня вы работаете</system:String>
+    <system:String x:Key="From">От</system:String>
+    <system:String x:Key="To">Кому</system:String>
+
+    <system:String x:Key="NewMessage">Отправить сообщение</system:String>
+    <system:String x:Key="MessageDesc">Чтобы отправить сообщение пользователю, укажите его почту.</system:String>
+    <system:String x:Key="nomess">Нет сообщений</system:String>
+
+    <system:String x:Key="emp">Сотрудник:</system:String>
+    <system:String x:Key="startwork">Начало работы:</system:String>
+    <system:String x:Key="endwork">Конец работы:</system:String>
+    <system:String x:Key="save">Сохранить</system:String>
+
+    <system:String x:Key="EmpSchDesc">Укажите логин сотрудника</system:String>
+
+    <system:String x:Key="TasksS">Создание задач</system:String>
+    <system:String x:Key="DepS">Создание департаментов</system:String>
+    <system:String x:Key="ProjS">Создание проектов</system:String>
+    <system:String x:Key="CodeS">Генерация кода сотрудника</system:String>
+    <system:String x:Key="SchS">Назначение графика</system:String>
+
+    <system:String x:Key="SchDesc">Укажите почту сотрудника и отметьте его права.</system:String>
+    <system:String x:Key="AdminMail">Если у вас есть вопросы или приложения, вы можете написать нашему администратору!</system:String>
+    <system:String x:Key="AdminCopyTOOL">Вы можете скопировать почту для удобства, просто нажмите сюда!</system:String>
+
+    <system:String x:Key="PleaseReg">Пожалуйста, не используйте такие символы как '|' и '/'</system:String>
+    <system:String x:Key="LoginReg">Логин должен быть от 8 до 12 символов! Ваш логин должен быть уникальный.</system:String>
+    <system:String x:Key="PassPReg">Пароль должен быть от 8 до 16 символов. Также используйте хотя бы одну цифру, заглавную букву и один из символов:'!', '#', '$', '%' </system:String>
+    <system:String x:Key="LBComp">Компания:</system:String>
+    <system:String x:Key="LBUserName">Имя:</system:String>
+
+    <system:String x:Key="Bad">Неправильный логин или пароль!</system:String>
 </ResourceDictionary>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="RegistrationUser" Height="520" Width="800">
+        Title="{DynamicResource HamsterTask.RegistrationUser}" Height="520" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type DatePickerTextBox}">
             <Setter Property="Text" Value="01.01.2001" />
@@ -49,10 +49,14 @@
 
         <DatePicker x:Name="RegBirth" Grid.Row="4" Grid.Column="1" FontSize="18" Margin="42,5,116,60" Grid.ColumnSpan="2"/>
 
-        <Label x:Name="LabelUserRegDescript"  FontSize="18" Grid.Column="1" Grid.ColumnSpan="3">
-            <TextBlock TextWrapping="Wrap" Margin="0, 20, 0, 0" Text="All fields except phone number are required!" Height="47"></TextBlock>
+        <Label x:Name="LabelUserRegDescript"  FontSize="18" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,0,47">
+            <TextBlock TextWrapping="Wrap" Text="{DynamicResource LabelUserRegDescript}" Height="33"/>
         </Label>
 
+        <Label x:Name="LabelUserRegPlease"  FontSize="18" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,44,0,0">
+            <TextBlock TextWrapping="Wrap" Text="{DynamicResource PleaseReg}" Height="33"/>
+        </Label>
+        
         <Button x:Name="RegistrationUserBTN"  Content="{DynamicResource RegistrationUserBTN}" Grid.Column="2" Grid.Row="4" Margin="78,17,93,48" Click="RegistrationUserBTN_Click" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -62,7 +66,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="97,17,73,48" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
+        <Button x:Name="BTNBackToMain"  Content="{DynamicResource BTNBackToMain}" Grid.Column="3" Grid.Row="4" Margin="97,17,73,48" BorderBrush="{x:Null}" Grid.ColumnSpan="2" Click="BTNBackToMain_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -83,14 +87,8 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <GroupBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="250" Margin="70,82,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="301">
-            <GroupBox.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#3F53BDD4" Offset="0"/>
-                    <GradientStop Color="#4C72FF8C" Offset="1"/>
-                </LinearGradientBrush>
-            </GroupBox.Background>
-        </GroupBox>
+        <TextBlock TextWrapping="Wrap" Margin="47,0,28,63" Text="{DynamicResource LoginReg}" Grid.ColumnSpan="3" Grid.Column="2" Grid.Row="1"/>
+        <TextBlock TextWrapping="Wrap" Margin="47,38,10,25" Text="{DynamicResource PassPReg}" Grid.ColumnSpan="3" Grid.Column="2" Grid.Row="1"/>
 
     </Grid>
 </Window>

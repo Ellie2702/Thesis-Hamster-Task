@@ -10,18 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HamsterTask
 {
     /// <summary>
-    /// Логика взаимодействия для CompanyReports.xaml
+    /// Логика взаимодействия для MessageControl.xaml
     /// </summary>
-    public partial class CompanyReports : Window
+    public partial class MessageControl : UserControl
     {
-        public CompanyReports()
+        public MessageControl()
         {
             InitializeComponent();
+        }
+
+        private void ViewMessage_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

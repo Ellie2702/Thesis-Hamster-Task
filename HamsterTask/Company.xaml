@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="Company" Height="600" Width="950">
+        Title="{DynamicResource HamsterTask.Company}" Height="800" Width="1225" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -22,27 +23,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="520" Margin="10,26,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="907" Grid.ColumnSpan="4">
-            <TabItem x:Name="TabProject" Header="{DynamicResource TabProject}">
-                <TabItem.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FF29B9C7" Offset="0"/>
-                        <GradientStop Color="#4CADD473" Offset="1"/>
-                    </LinearGradientBrush>
-                </TabItem.Background>
-                <Grid>
-                    <Grid.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFF3FEFF"/>
-                            <GradientStop Color="#5929B9C7" Offset="1"/>
-                            <GradientStop Color="#66D3E595" Offset="0.28"/>
-                        </LinearGradientBrush>
-                    </Grid.Background>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </TabItem>
+        <TabControl HorizontalAlignment="Left" Height="605" Margin="10,26,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="1050" Grid.ColumnSpan="4">
+
             <TabItem x:Name="TabDepartament" Header="{DynamicResource TabDepartament}">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -50,7 +32,7 @@
                         <GradientStop Color="#4CADD473" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <Grid>
+                <Grid Loaded="Grid_Loaded" Margin="0,-3,-1,3" >
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFF3FEFF"/>
@@ -60,7 +42,47 @@
                     </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="LBDepartments"  Content="{DynamicResource TabDepartament}" FontSize="15" Grid.ColumnSpan="2" Margin="30,23,186,91"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="498" Margin="30,54,0,0" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                        <ListBox  x:Name="Departaments" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+                    </ScrollViewer>
+
+                    <Label x:Name="LbProjects"  Content="{DynamicResource TabProject}" FontSize="15" Grid.ColumnSpan="2" Margin="120,23,96,91" Grid.Column="1"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="498" Margin="90,54,0,0" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2" Grid.Column="1">
+                        <ListBox  x:Name="Projects" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+                    </ScrollViewer>
+
+                    <Button x:Name="AddDepartament" Grid.Column="1" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="42" Height="34" BorderBrush="{x:Null}" Foreground="{x:Null}"  RenderTransformOrigin="0.214,-0.265">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Image/plus.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="AddProject" Grid.Column="2" HorizontalAlignment="Left" Margin="69,23,0,0" VerticalAlignment="Top" Width="42" Height="34" BorderBrush="{x:Null}" Foreground="{x:Null}"  RenderTransformOrigin="0.214,-0.265">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Image/plus.png"/>
+                        </Button.Background>
+                    </Button>
+                    <GroupBox x:Name="Information" FontSize="15" Grid.ColumnSpan="2" Grid.Column="2" Header="{DynamicResource InfoHeader}" HorizontalAlignment="Left" Height="516" Margin="148,40,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="284">
+                        <GroupBox.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#99FBFCFD" Offset="0"/>
+                                <GradientStop Color="#8CD1FFF9" Offset="1"/>
+                            </LinearGradientBrush>
+                        </GroupBox.Background>
+                        <Label x:Name="EmployeeCount" FontSize="15" />
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TabCustoms" Header="{DynamicResource TabManagement}">
@@ -84,6 +106,27 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,32,0,0">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF031419" Offset="0.989"/>
+                    <GradientStop Color="#FF126A7A" Offset="0.342"/>
+                    <GradientStop Color="#FF579CB6" Offset="0.232"/>
+                    <GradientStop Color="#FF0E6376" Offset="0.644"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="BTNExit" Content="{DynamicResource BackToPanel}"  BorderBrush="{x:Null}" Grid.Row="4" Margin="162,59,10,27" Click="BTNExit_Click" Grid.Column="3">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
 
     </Grid>
 </Window>

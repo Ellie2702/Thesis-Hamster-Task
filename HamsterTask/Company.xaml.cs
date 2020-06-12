@@ -24,5 +24,19 @@ namespace HamsterTask
             InitializeComponent();
             Global.LanguageSwitch(this);
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string[] parts = Global.Guid.Split('|');
+                var task = Helper.Http.GetRequest("http://localhost:8080/GetDepartaments/" + parts[0]);
+
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

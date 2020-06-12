@@ -12,8 +12,7 @@ namespace HamsterServer.DATA.Entities
     {
         public User()
         {
-            Images = new HashSet<Image>();
-            
+            Images = new List<Image>();
         }
         [Key]
         public int UserID { get; set; }
@@ -46,6 +45,6 @@ namespace HamsterServer.DATA.Entities
 
         public Role Role { get; set; }
         public virtual ICollection<Image> Images { get; set; }
-       
+
     }
 }

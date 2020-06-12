@@ -62,7 +62,6 @@
     <Compile Include="DATA\DTO\CompanyLogoDTO.cs" />
     <Compile Include="DATA\DTO\DepartamentDTO.cs" />
     <Compile Include="DATA\DTO\DepartamentEmployeesDTO.cs" />
-    <Compile Include="DATA\DTO\DocumentDTO.cs" />
     <Compile Include="DATA\DTO\EmployeeCodeDTO.cs" />
     <Compile Include="DATA\DTO\EmployeeDTO.cs" />
     <Compile Include="DATA\DTO\ImageDTO.cs" />
@@ -70,12 +69,10 @@
     <Compile Include="DATA\DTO\PositionDTO.cs" />
     <Compile Include="DATA\DTO\ProjectsDTO.cs" />
     <Compile Include="DATA\DTO\ProjectsTasksDTO.cs" />
-    <Compile Include="DATA\DTO\ReportDTOcs.cs" />
     <Compile Include="DATA\DTO\RoleDTO.cs" />
-    <Compile Include="DATA\DTO\SystemMessage.cs" />
+    <Compile Include="DATA\DTO\SсheldueDTO.cs" />
     <Compile Include="DATA\DTO\TaskDTO.cs" />
     <Compile Include="DATA\DTO\TaskExecutorsDTO.cs" />
-    <Compile Include="DATA\DTO\TaskFileDTO.cs" />
     <Compile Include="DATA\DTO\UserDTO.cs" />
     <Compile Include="DATA\Entities\AccessRight.cs" />
     <Compile Include="DATA\Entities\Avatar.cs" />
@@ -83,7 +80,6 @@
     <Compile Include="DATA\Entities\CompanyLogo.cs" />
     <Compile Include="DATA\Entities\DepartamentEmployees.cs" />
     <Compile Include="DATA\Entities\Department.cs" />
-    <Compile Include="DATA\Entities\Document.cs" />
     <Compile Include="DATA\Entities\Employee.cs" />
     <Compile Include="DATA\Entities\EmployeeCode.cs" />
     <Compile Include="DATA\Entities\Image.cs" />
@@ -91,12 +87,10 @@
     <Compile Include="DATA\Entities\Position.cs" />
     <Compile Include="DATA\Entities\Projects.cs" />
     <Compile Include="DATA\Entities\ProjectsTasks.cs" />
-    <Compile Include="DATA\Entities\Report.cs" />
     <Compile Include="DATA\Entities\Role.cs" />
-    <Compile Include="DATA\Entities\SystemMessage.cs" />
+    <Compile Include="DATA\Entities\Sсheldue.cs" />
     <Compile Include="DATA\Entities\Task.cs" />
     <Compile Include="DATA\Entities\TaskExecutors.cs" />
-    <Compile Include="DATA\Entities\TaskFile.cs" />
     <Compile Include="DATA\Entities\User.cs" />
     <Compile Include="Global\Auth.cs" />
     <Compile Include="Global\GlobalList.cs" />

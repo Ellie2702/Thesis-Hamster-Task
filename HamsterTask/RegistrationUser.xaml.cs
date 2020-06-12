@@ -50,5 +50,11 @@ namespace HamsterTask
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void BTNBackToMain_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
+        }
     }
 }

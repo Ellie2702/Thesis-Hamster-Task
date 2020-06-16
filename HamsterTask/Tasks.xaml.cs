@@ -25,210 +25,19 @@ namespace HamsterTask
             Global.LanguageSwitch(this);
         }
 
-        public int k = 1;
-        public int l = 1;
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        string[] parts = Global.Guid.Split('|');
+
+        private void UpdateAll()
         {
-            try
+            if(resave == true)
             {
-                string[] parts = Global.Guid.Split('|');
-                var dataT = Helper.Http.GetRequest("http://localhost:8080/GetTasks/" + parts[0]);
-                
-                if (dataT == "0")
-                {
-                    NoneTask.Visibility = Visibility.Visible;
-                    LastPageTask.Visibility = Visibility.Hidden;
-                    NexPageTask.Visibility = Visibility.Hidden;
-                    Task1.Visibility = Visibility.Hidden;
-                    Task2.Visibility = Visibility.Hidden;
-                    Task3.Visibility = Visibility.Hidden;
-                    Task4.Visibility = Visibility.Hidden;
-                    Task5.Visibility = Visibility.Hidden;
-                    Task6.Visibility = Visibility.Hidden;
-                    TabTask.UpdateLayout();
-                } else
-                {
-                    int tasksCount = Convert.ToInt32(dataT);
-                    int i = 0;
-                    int z = 1;
-                    int p = Convert.ToInt32(Math.Ceiling((double)Convert.ToInt32(dataT) / (double)6.0)); // count of pages
-
-                    if(k == 1 && k < p) // set visibility of next/back buttons
-                    {
-                        LastPageTask.Visibility = Visibility.Hidden;
-                        NexPageTask.Visibility = Visibility.Visible;
-                    }
-
-                    if (k == 1 && k == p)
-                    {
-                        LastPageTask.Visibility = Visibility.Hidden;
-                        NexPageTask.Visibility = Visibility.Hidden;
-                    }
-
-                    if (1 < k && k < p)
-                    {
-                        LastPageTask.Visibility = Visibility.Visible;
-                        NexPageTask.Visibility = Visibility.Visible;
-                    }
-
-                    if(k > 1 && k == p)
-                    {
-                        LastPageTask.Visibility = Visibility.Visible;
-                        NexPageTask.Visibility = Visibility.Hidden;
-                    }
-                    TabTask.UpdateLayout();
-
-                    if (p > 0)
-                    {
-                        i = 6 * (k - 1); // number of first task on page
-                        while (z < Math.Min(7, tasksCount - i+1))
-                        {
-                            var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + i.ToString()).Split('|');
-                            TaskControl temp = new TaskControl();
-                            switch (z)
-                            {
-                                case 1:
-                                    temp = Task1;
-                                    break;
-                                case 2:
-                                    temp = Task2;
-                                    break;
-                                case 3:
-                                    temp = Task3;
-                                    break;
-                                case 4:
-                                    temp = Task4;
-                                    break;
-                                case 5:
-                                    temp = Task5;
-                                    break;
-                                case 6:
-                                    temp = Task6;
-                                    break;
-                            }
-                            temp.Visibility = Visibility.Visible;
-                            temp.TaskID.Content = task[0];
-                            temp.TaskName.Content = task[1];
-                            temp.TaskDescript.Content = task[2];
-                            temp.UserExecutor.Content = task[5];
-                            temp.deadLine.Content = task[4];
-                            if(task[6].ToLower() == "true")
-                            {
-                                temp.Done.Visibility = Visibility.Visible;
-                            }
-                            
-                            TabTask.UpdateLayout();
-                            z++;
-                            i++;
-                        }
-
-                        while (z < 7)
-                        {
-                            switch (z)
-                            {
-                                case 1:
-                                    Task1.Visibility = Visibility.Hidden;
-                                    break;
-                                case 2:
-                                    Task2.Visibility = Visibility.Hidden;
-                                    break;
-                                case 3:
-                                    Task3.Visibility = Visibility.Hidden;
-                                    break;
-                                case 4:
-                                    Task4.Visibility = Visibility.Hidden;
-                                    break;
-                                case 5:
-                                    Task5.Visibility = Visibility.Hidden;
-                                    break;
-                                case 6:
-                                    Task6.Visibility = Visibility.Hidden;
-                                    break;
-                            }
-                            z++;
-                        }
-                    }
-                    /*else
-                    {
-                        while (z > Convert.ToInt32(dataT) + 1)
-                        {
-                            var task = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + i.ToString()).Split('|');
-                            TaskControl temp = new TaskControl();
-
-                            temp.TaskID.Content = task[0];
-                            temp.TaskName.Content = task[1];
-                            temp.TaskDescript.Content = task[2];
-                            temp.UserExecutor.Content = task[5];
-                            temp.deadLine.Content = task[4];
-                            if(task[6] == "true")
-                            {
-                                temp.Done.Visibility = Visibility.Visible;
-                            }
-
-
-                            switch (z)
-                            {
-                                case 1:
-                                    Task1 = temp;
-                                    break;
-                                case 2:
-                                    Task2 = temp;
-                                    break;
-                                case 3:
-                                    Task3 = temp;
-                                    break;
-                                case 4:
-                                    Task4 = temp;
-                                    break;
-                                case 5:
-                                    Task5 = temp;
-                                    break;
-                                case 6:
-                                    Task6 = temp;
-                                    break;
-                            }
-                            TabTask.UpdateLayout();
-                            z++;
-                            i++;
-                        }
-                    }*/
-                    
-                }
-            }
-            catch
-            {
-                
-            }
-       
-        }
-
-        private void LastPageTask_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                k++;
-                TabTask.UpdateLayout();
-            }
-            catch
-            {
-
+                UpdateTask();
+                UpdateProj();
+                resave = false;
             }
         }
 
-        private void NexPageTask_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                k--;
-                TabTask.UpdateLayout();
-            }
-            catch
-            {
-
-            }
-        }
-
-        private void AddThing_Click(object sender, RoutedEventArgs e)
+            private void AddThing_Click(object sender, RoutedEventArgs e)
         {
             if (TabTask.IsSelected)
             {
@@ -236,7 +45,8 @@ namespace HamsterTask
                 new AddTask().Show();
                 this.Close();
 
-            } else if (TabProject.IsSelected)
+            }
+            else if (TabProject.IsSelected)
             {
                 Global.FROM = "UserPanel";
                 new AddProject().Show();
@@ -244,151 +54,143 @@ namespace HamsterTask
             }
         }
 
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            new UserPanel().Show();
+            this.Close();
+        }
+
+
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateProj();
+        }
+
         private void Grid_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            UpdateTask();
+        }
+
+        public static bool resave;
+        private void UpdateTask()
         {
             try
             {
-                string[] parts = Global.Guid.Split('|');
-                var dataT = Helper.Http.GetRequest("http://localhost:8080/GetUserProjectsC/" + parts[0]);
+                TaskStack1.Children.Clear();
+                TaskStack2.Children.Clear();
+                string taskend = Helper.Http.GetRequest("http://localhost:8080/GetTasksEndCount/" + parts[0]);
+                string taskdone = Helper.Http.GetRequest("http://localhost:8080/GetTasksDoneCount/" + parts[0]);
+                string tasknotdone = Helper.Http.GetRequest("http://localhost:8080/GetTasksNotDoneCount/" + parts[0]);
 
-                if (dataT == "0" || dataT == null)
+                if (tasknotdone != "No!")
                 {
-                    NoneProj.Visibility = Visibility.Visible;
-                    LastPageProj.Visibility = Visibility.Hidden;
-                    NexPageProj.Visibility = Visibility.Hidden;
-                    Proj1.Visibility = Visibility.Hidden;
-                    Proj2.Visibility = Visibility.Hidden;
-                    Proj3.Visibility = Visibility.Hidden;
-                    Proj4.Visibility = Visibility.Hidden;
-                    TabProject.UpdateLayout();
-                } else
-                {
-                    int i = 0;
-                    int z = 1;
-                    int p = Convert.ToInt32(Math.Ceiling((double)Convert.ToInt32(dataT) / (double)4.0));
-
-                    if (l == 1 && l < p)
+                    for (int i = 0; i < Convert.ToInt32(tasknotdone); i++)
                     {
-                        LastPageProj.Visibility = Visibility.Hidden;
-                        NexPageProj.Visibility = Visibility.Visible;
-                    }
-
-                    if (l == 1 && l == p)
-                    {
-                        LastPageProj.Visibility = Visibility.Hidden;
-                        NexPageProj.Visibility = Visibility.Hidden;
-                    }
-
-                    if (1 < l && l < p)
-                    {
-                        LastPageProj.Visibility = Visibility.Visible;
-                        NexPageProj.Visibility = Visibility.Visible;
-                    }
-
-                    if (l > 1 && l == p)
-                    {
-                        LastPageProj.Visibility = Visibility.Visible;
-                        NexPageProj.Visibility = Visibility.Hidden;
-                    }
-
-                    TabProject.UpdateLayout();
-                    if (p > 1)
-                    {
-                        i = (4 * l) - 4;
-                        while (z < 5)
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksNotDone/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var control = new TaskControl();
+                        control.TaskName.Content = data[0];
+                        control.TaskExecutor.Content += " " + data[1];
+                        control.deadLine.Content += " " + data[2];
+                        control.TaskID.Content = data[4];
+                        control.Owner.Content += " " + data[3];
+                        control.Margin = new Thickness(0, 5, 0, 5);
+                        control.Background = new LinearGradientBrush(Colors.Aqua, Colors.Wheat, 90);
+                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                        control.BorderThickness = new Thickness(2);
+                        if (i % 2 == 0)
                         {
-                            var proj = Helper.Http.GetRequest("http://localhost:8080/GetUserProjects/" + parts[0] + "/" + i.ToString()).Split('|');
-                            ProjectControll temp = new ProjectControll();
-
-                            temp.ProjectID.Content = proj[0];
-                            temp.ProjectDesc.Text = proj[2];
-                            temp.ProjectName.Content = proj[1];
-                            temp.DateDeadline.Content = proj[3];
-                            temp.TasksDone.Content += " " + proj[4];
-
-                           
-                            switch (z)
-                            {
-                                case 1:
-                                    Proj1 = temp;
-                                    break;
-                                case 2:
-                                    Proj2 = temp;
-                                    break;
-                                case 3:
-                                    Proj3 = temp;
-                                    break;
-                                case 4:
-                                    Proj4 = temp;
-                                    break;
-                            }
-                            TabProject.UpdateLayout();
-                            z++;
-                            i++;
+                            TaskStack2.Children.Add(control);
+                            TaskStack2.UpdateLayout();
                         }
-                    }
-                    else
-                    {
-                        while (z > Convert.ToInt32(dataT) + 1)
+                        else
                         {
-                            var proj = Helper.Http.GetRequest("http://localhost:8080/GetUserProjects/" + parts[0] + "/" + i.ToString()).Split('|');
-
-                            ProjectControll temp = new ProjectControll();
-
-                            temp.ProjectID.Content = proj[0];
-                            temp.ProjectDesc.Text = proj[2];
-                            temp.ProjectName.Content = proj[1];
-                            temp.DateDeadline.Content = proj[3];
-                            temp.TasksDone.Content += " " + proj[4];
-
-
-                            switch (z)
-                            {
-                                case 1:
-                                    Proj1 = temp;
-                                    break;
-                                case 2:
-                                    Proj2 = temp;
-                                    break;
-                                case 3:
-                                    Proj3 = temp;
-                                    break;
-                                case 4:
-                                    Proj4 = temp;
-                                    break;
-                            }
-                            TabProject.UpdateLayout();
-                            z++;
-                            i++;
+                            TaskStack1.Children.Add(control);
+                            TaskStack1.UpdateLayout();
                         }
                     }
                 }
+
+                if (taskdone != "No!")
+                {
+                    for (int i = Convert.ToInt32(tasknotdone); i < Convert.ToInt32(tasknotdone) + Convert.ToInt32(tasknotdone); i++)
+                    {
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksDone/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var control = new TaskControl();
+                        control.TaskName.Content = data[0];
+                        control.TaskExecutor.Content += " " + data[1];
+                        control.deadLine.Content += " " + data[2];
+                        control.TaskID.Content = data[4];
+                        control.Owner.Content += " " + data[3];
+                        control.Margin = new Thickness(0, 5, 0, 5);
+                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                        control.BorderThickness = new Thickness(2);
+                        if (i % 2 == 0)
+                        {
+                            TaskStack2.Children.Add(control);
+                            TaskStack2.UpdateLayout();
+                        }
+                        else
+                        {
+                            TaskStack1.Children.Add(control);
+                            TaskStack1.UpdateLayout();
+                        }
+                    }
+                }
+
+                if (taskend != "No!")
+                {
+                    for (int i = Convert.ToInt32(tasknotdone) + Convert.ToInt32(tasknotdone); i < Convert.ToInt32(tasknotdone) + Convert.ToInt32(tasknotdone) + Convert.ToInt32(taskend); i++)
+                    {
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksEnd/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var control = new TaskControl();
+                        control.TaskName.Content = data[0];
+                        control.TaskExecutor.Content += " " + data[1];
+                        control.deadLine.Content += " " + data[2];
+                        control.TaskID.Content = data[4];
+                        control.Owner.Content += " " + data[3];
+                        control.Background = new LinearGradientBrush(Colors.LightSlateGray, Colors.Wheat, 90);
+                        control.Margin = new Thickness(0, 5, 0, 5);
+                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                        control.BorderThickness = new Thickness(2);
+                        if (i % 2 == 0)
+                        {
+                            TaskStack2.Children.Add(control);
+                            TaskStack2.UpdateLayout();
+                        }
+                        else
+                        {
+                            TaskStack1.Children.Add(control);
+                            TaskStack1.UpdateLayout();
+                        }
+                    }
+                }
+
+
+                if(taskend == "No!" && taskdone == "No!" && tasknotdone == "No!")
+                {
+                    TaskStack2.UpdateLayout();
+                    TaskStack1.UpdateLayout();
+                    NoneTask.Visibility = Visibility.Visible;
+                }
+            }
+            catch
+            {
+                NoneTask.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void UpdateProj()
+        {
+            try
+            {
 
             }
             catch
             {
 
             }
-        }
-
-        private void NexPageProj_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                l++;
-                TabProject.UpdateLayout();
-            }
-            catch { }
-        }
-
-        private void LastPageProj_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                l--;
-                TabProject.UpdateLayout();
-            }
-            catch { }
         }
     }
 }

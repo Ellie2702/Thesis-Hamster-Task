@@ -19,6 +19,7 @@
     <system:String x:Key="HamsterTask.AdminPanel">HamsterTask - admin panel</system:String>
     <system:String x:Key="HamsterTask.AddTask">HamsterTask - adding a task</system:String>
     <system:String x:Key="HamsterTask.AddProject">HamsterTask - adding a project</system:String>
+    <system:String x:Key="HamsterTask.Message">HamsterTask - message</system:String>
 
     <system:String x:Key="LabelLogin">Login:</system:String>
     <system:String x:Key="LabelPass">Password:</system:String>
@@ -166,4 +167,29 @@
 
 
     <system:String x:Key="Bad">Invalid login or password!</system:String>
+
+    <system:String x:Key="LoginChanged">Your login has been changed!</system:String>
+    <system:String x:Key="PassChanged">Your password has been changed!</system:String>
+    <system:String x:Key="MailChanged">Your email has been changed!</system:String>
+    <system:String x:Key="LeaveCompany">You are removed from the company!</system:String>
+    <system:String x:Key="LeaveHamsterTask">Your profile has been deleted!</system:String>
+
+    <system:String x:Key="TryAgainL">The change is not saved! Make sure that your login matches the rules. The login must be between 8 and 12 characters! Your username must be unique.</system:String>
+    <system:String x:Key="TryAgainP">The change is not saved! Make sure that your password matches the rules. The password must be between 8 and 16 characters. Also use at least one number, a capital letter, and one of the characters:'!', '#', '$', '%'</system:String>
+    <system:String x:Key="TryAgainM">The change is not saved! Make sure that your email address has not been used before!</system:String>
+    
+    <system:String x:Key="SomethingBroke">Looks like something's broken. Try restarting the app and try again!</system:String>
+
+    <system:String x:Key="MessageIsSend">Your email has been sent.</system:String>
+    <system:String x:Key="MessageNotSend">The email was not sent. Make sure that you entered your email address correctly.</system:String>
+
+    <system:String x:Key="MessageNotFull">It looks like you forgot to fill in one of the fields.</system:String>
+
+    <system:String x:Key="Date">Date:</system:String>
+
+    <system:String x:Key="Reply">Reply to the user. Click this button to copy the user's email.</system:String>
+    <system:String x:Key="CopyMess">Mail was copied.</system:String>
+
+    <system:String x:Key="CodeTool">Here you can activate the company code!</system:String>
+    <system:String x:Key="WrongData">User data entered incorrectly!</system:String>
 </ResourceDictionary>

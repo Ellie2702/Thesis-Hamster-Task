@@ -19,6 +19,7 @@
     <system:String x:Key="HamsterTask.AdminPanel">HamsterTask - панель администратора</system:String>
     <system:String x:Key="HamsterTask.AddTask">HamsterTask - добавление задачи</system:String>
     <system:String x:Key="HamsterTask.AddProject">HamsterTask - добавление проекта</system:String>
+    <system:String x:Key="HamsterTask.Message">HamsterTask - сообшение</system:String>
 
     <system:String x:Key="LabelLogin">Логин:</system:String>
     <system:String x:Key="LabelPass">Пароль:</system:String>
@@ -165,4 +166,30 @@
     <system:String x:Key="LBUserName">Имя:</system:String>
 
     <system:String x:Key="Bad">Неправильный логин или пароль!</system:String>
+
+    <system:String x:Key="LoginChanged">Ваш логин изменён!</system:String>
+    <system:String x:Key="PassChanged">Ваш пароль изменён!</system:String>
+    <system:String x:Key="MailChanged">Ваша почта изменена!</system:String>
+    <system:String x:Key="LeaveCompany">Вы удалены из компании!</system:String>
+    <system:String x:Key="LeaveHamsterTask">Ваш профиль удалён!</system:String>
+
+    <system:String x:Key="TryAgainL">Изменение не сохранено! Убедитесь, что ваш логин соответствует правилам. Логин должен быть от 8 до 12 символов! Ваш логин должен быть уникальный.</system:String>
+    <system:String x:Key="TryAgainP">Изменение не сохранено! Убедитесь, что пароль соответствует правилам. Пароль должен быть от 8 до 16 символов. Также используйте хотя бы одну цифру, заглавную букву и один из символов:'!', '#', '$', '%'</system:String>
+    <system:String x:Key="TryAgainM">Изменение не сохранено! Убедитесь, что ваша почта не использовалась ранее!</system:String>
+
+    <system:String x:Key="SomethingBroke">Похоже что-то сломалось. Попробуйте перезапустить приложение и попробовать снова!</system:String>
+
+    <system:String x:Key="MessageIsSend">Ваше письмо отправлено</system:String>
+    <system:String x:Key="MessageNotSend">Письмо не отправлено. Убедитесь, что указали почту верно.</system:String>
+
+    <system:String x:Key="MessageNotFull">Похоже вы забыли заполнить одно из полей.</system:String>
+
+    <system:String x:Key="Date">Дата:</system:String>
+
+    <system:String x:Key="Reply">Ответить пользователю. Нажав на эту кнопку в скопируете почту пользователя.</system:String>
+    <system:String x:Key="CopyMess">Почта скопирована.</system:String>
+
+    <system:String x:Key="SendMessage">Отправить сообщение</system:String>
+    <system:String x:Key="CodeTool">Здесь вы можете активировать код компании!</system:String>
+    <system:String x:Key="WrongData">Данные пользователя введены неверно!</system:String>
 </ResourceDictionary>

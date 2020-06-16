@@ -38,5 +38,10 @@ namespace HamsterTask
 
             }
         }
+
+        private void BTNExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

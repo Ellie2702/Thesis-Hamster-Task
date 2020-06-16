@@ -36,14 +36,19 @@ namespace HamsterTask
                     if(res == "Deleted!")
                     {
                         MessageBox.Show(TryFindResource("MessRemTaskRes").ToString());
+                        HamsterTask.Tasks.resave = true;
                     } else
                     {
                         MessageBox.Show(TryFindResource("MessRemTaskResFail").ToString());
                     }
+                    this.Close();
                 }
-
             }
-            catch { MessageBox.Show(TryFindResource("MessRemTaskResFail").ToString()); }
+            catch 
+            { 
+                MessageBox.Show(TryFindResource("MessRemTaskResFail").ToString());
+                this.Close();
+            }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -59,7 +64,7 @@ namespace HamsterTask
                 Own.Content += " " + res[4];
                 Deadline.Content += " " + res[3];
 
-                if(Convert.ToDateTime(res[3]) >= DateTime.Now)
+                if(Convert.ToDateTime(res[3]) >= DateTime.Today)
                 {
                     TaskFailed.Visibility = Visibility.Visible;
                     IsDone.Visibility = Visibility.Hidden;
@@ -73,7 +78,8 @@ namespace HamsterTask
             }
             catch
             {
-
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                this.Close();
             }
         }
 
@@ -91,6 +97,7 @@ namespace HamsterTask
                         Done.Visibility = Visibility.Visible;
                     }
                     else MessageBox.Show(TryFindResource("TaskIsDoneWarn").ToString());
+                    HamsterTask.Tasks.resave = true;
                 }
             }
             catch

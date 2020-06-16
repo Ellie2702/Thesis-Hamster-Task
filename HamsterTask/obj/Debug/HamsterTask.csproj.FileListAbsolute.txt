@@ -67,3 +67,7 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Message
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Messages.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\MessageControl.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\MessageControl.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Message.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\MessageViewControl.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Message.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\MessageViewControl.baml

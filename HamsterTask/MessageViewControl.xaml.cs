@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HamsterTask
+namespace HamsterServer
 {
     /// <summary>
-    /// Логика взаимодействия для Messages.xaml
+    /// Логика взаимодействия для MessageViewControl.xaml
     /// </summary>
-    public partial class Messages : Window
+    public partial class MessageViewControl : UserControl
     {
-        public Messages()
+        public MessageViewControl()
         {
             InitializeComponent();
-            Global.LanguageSwitch(this);
         }
     }
 }

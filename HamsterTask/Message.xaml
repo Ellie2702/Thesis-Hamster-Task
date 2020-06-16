@@ -1,0 +1,73 @@
+﻿<Window x:Class="HamsterTask.Message"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HamsterTask"
+        mc:Ignorable="d"
+        Title="{DynamicResource HamsterTask.Message}" Height="369.333" Width="522">
+    <Grid Loaded="Grid_Loaded">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Label x:Name="Title" FontSize="15" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" Margin="5,5,54,5">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#72BBE284" Offset="0"/>
+                    <GradientStop Color="#728BECE3" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+        <ScrollViewer Name="scrollmess" CanContentScroll="True" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="3" Margin="0,0,54,10">
+            <TextBlock x:Name="content"  FontSize="15" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3">
+                <TextBlock.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#7FACECE3" Offset="0"/>
+                        <GradientStop Color="#7FBAEC90" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+        </ScrollViewer>
+
+        <Label x:Name="From" Content="{DynamicResource From}" FontSize="10" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Left" Margin="49,0,0,0"/>
+        <Label x:Name="DateSend" Content="{DynamicResource Date}" FontSize="10" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="49,0,0,0"/>
+        <Label x:Name="Mail" Content="{DynamicResource LabelEmail}" FontSize="10" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Margin="49,0,0,0"/>
+        
+        <Rectangle  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="5"  >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF031419" Offset="0.989"/>
+                    <GradientStop Color="#FF126A7A" Offset="0.342"/>
+                    <GradientStop Color="#FF579CB6" Offset="0.232"/>
+                    <GradientStop Color="#FF0E6376" Offset="0.644"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="Reply" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Height="35" BorderBrush="{x:Null}" Foreground="{x:Null}" Margin="50,5,0,0" Click="Reply_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/copy.png"/>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock x:Name="ToolTopUserTask" Text="{DynamicResource Reply}" TextWrapping="Wrap"></TextBlock>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+    </Grid>
+</Window>

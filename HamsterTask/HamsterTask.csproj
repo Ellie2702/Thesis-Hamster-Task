@@ -90,11 +90,17 @@
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Helper\Http.cs" />
+    <Compile Include="Message.xaml.cs">
+      <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MessageControl.xaml.cs">
       <DependentUpon>MessageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Messages.xaml.cs">
       <DependentUpon>Messages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessageViewControl.xaml.cs">
+      <DependentUpon>MessageViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="NewEmployee.xaml.cs">
       <DependentUpon>NewEmployee.xaml</DependentUpon>
@@ -186,6 +192,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MessageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +203,10 @@
     <Page Include="Messages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessageViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="NewEmployee.xaml">
       <SubType>Designer</SubType>
@@ -340,7 +354,6 @@
     <Resource Include="Image\cash.png" />
     <Resource Include="Image\chat.png" />
     <Resource Include="Image\classroom.png" />
-    <Resource Include="Image\community.png" />
     <Resource Include="Image\conversation.png" />
     <Resource Include="Image\copy.png" />
     <Resource Include="Image\document.png" />
@@ -353,7 +366,6 @@
     <Resource Include="Image\gear.png" />
     <Resource Include="Image\house.png" />
     <Resource Include="Image\id-card.png" />
-    <Resource Include="Image\InBucket.png" />
     <Resource Include="Image\key.png" />
     <Resource Include="Image\link_icon_.png" />
     <Resource Include="Image\mail.png" />
@@ -377,6 +389,9 @@
     <Resource Include="Image\thunder.png" />
     <Resource Include="Image\wall-clock.png" />
     <Resource Include="Image\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\lnput.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

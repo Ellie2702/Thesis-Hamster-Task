@@ -33,9 +33,20 @@ namespace HamsterTask
 
         private void BTNlLoginReg_Click(object sender, RoutedEventArgs e)
         {
-            Global.Guid = Helper.Http.GetRequest("http://localhost:8080/RegOrgU/" + Global.RegOrgInfo  + Login.Text + "/" + Pass.Password + "/" + Position.Text + "/");
-            new UserPanel().Show();
-            this.Close();
+            try
+            {
+                Global.Guid = Helper.Http.GetRequest("http://localhost:8080/RegOrgU/" + Global.RegOrgInfo + Login.Text + "/" + Pass.Password + "/" + Position.Text + "/");
+                if (Global.Guid != "No!" || Global.Guid != "WrongKeys")
+                {
+                    new UserPanel().Show();
+                    this.Close();
+                }
+                else MessageBox.Show(TryFindResource("WrongData").ToString());
+            }
+            catch
+            {
+                MessageBox.Show(TryFindResource("WrongData").ToString());
+            }
         }
     }
 }

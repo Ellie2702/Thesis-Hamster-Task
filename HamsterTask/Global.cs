@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace HamsterTask
 {
@@ -13,6 +14,8 @@ namespace HamsterTask
     {
         public static string GlobTaskID;
         public static string GlobProjectID;
+        public static string GlobMessID;
+        public static string GlobUserID;
         public static string FROM;
 
         public static string GlobLang;
@@ -30,6 +33,21 @@ namespace HamsterTask
             }
             win.Resources.MergedDictionaries.Add(res);
 
+        }
+
+        internal static void LanguageSwitchControll(Control c)
+        {
+            ResourceDictionary res = new ResourceDictionary();
+            switch (Global.GlobLang)
+            {
+                case "ENG":
+                    res.Source = new Uri("/Language/ENG/EngDictionary.xaml", UriKind.Relative);
+                    break;
+                case "RUS":
+                    res.Source = new Uri("/Language/RUS/RusDictionary.xaml", UriKind.Relative);
+                    break;
+            }
+            c.Resources.MergedDictionaries.Add(res);
         }
 
         public static void LanguageSwitchControll(TaskControl task)

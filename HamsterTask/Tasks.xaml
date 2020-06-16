@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="{DynamicResource HamsterTask.Tasks}" Height="700" Width="900" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="{DynamicResource HamsterTask.Tasks}" Height="700" Width="1005" WindowStartupLocation="CenterScreen">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -25,7 +25,7 @@
 
 
 
-        <Rectangle  Grid.Column="0" Grid.ColumnSpan="10" Grid.Row="40" Margin="0,29,0,0">
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="4">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -44,7 +44,7 @@
                         <GradientStop Color="#4CADD473" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <Grid Loaded="Grid_Loaded">
+                <Grid >
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFF3FEFF"/>
@@ -53,34 +53,23 @@
                         </LinearGradientBrush>
                     </Grid.Background>
 
-                    <local:TaskControl x:Name="Task1" Margin="51,10,406,341"></local:TaskControl>
-                    <local:TaskControl x:Name="Task2" Margin="51,165,406,186"/>
-                    <local:TaskControl x:Name="Task3" Margin="51,316,406,35"/>
-                    <local:TaskControl x:Name="Task4" Margin="408,10,49,341"/>
-                    <local:TaskControl x:Name="Task5" Margin="408,165,49,186"/>
-                    <local:TaskControl x:Name="Task6" Margin="408,316,49,35"/>
-                    <Button x:Name="LastPageTask" Content=""  Margin="0,190,754,0" VerticalAlignment="Top" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.812,0.481" Click="LastPageTask_Click">
-                        <Button.OpacityMask>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#99B6E894" Offset="0.009"/>
-                                <GradientStop Color="#991BA699" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.OpacityMask>
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Image/back.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Button x:Name="NexPageTask" HorizontalAlignment="Right" Margin="0,190,5,0" VerticalAlignment="Top" Width="39" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="NexPageTask_Click">
-                        <Button.OpacityMask>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#99B6E894" Offset="0"/>
-                                <GradientStop Color="#991BA699" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.OpacityMask>
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Image/next.png"/>
-                        </Button.Background>
-                    </Button>
+                    
+
+                    <ScrollViewer HorizontalAlignment="Left" Height="487" VerticalAlignment="Top" Width="793" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                        <Grid Loaded="Grid_Loaded_1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel   x:Name="TaskStack1" Margin="4">
+
+
+                            </StackPanel>
+                            <StackPanel x:Name="TaskStack2" Margin="4" Grid.Column="1">
+
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
                     <Label x:Name="NoneTask" Visibility="Hidden" Content="{DynamicResource NoneTask}" FontSize="15" HorizontalAlignment="Left" Margin="211,190,0,0" VerticalAlignment="Top" Width="379"/>
                 </Grid>
             </TabItem>
@@ -92,7 +81,7 @@
                     </LinearGradientBrush>
                 </TabItem.Background>
 
-                <Grid Loaded="Grid_Loaded_1">
+                <Grid>
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFF3FEFF"/>
@@ -114,43 +103,35 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <local:ProjectControll x:Name="Proj1" Grid.ColumnSpan="2" Margin="47,10,23,36" Grid.RowSpan="2" />
-                    <local:ProjectControll x:Name="Proj2" Grid.ColumnSpan="2" Margin="10,10,59,36" Grid.RowSpan="2" Grid.Column="2" />
-                    <local:ProjectControll x:Name="Proj3" Grid.ColumnSpan="2" Margin="47,0,23,31" Grid.RowSpan="2" Grid.Row="2" />
-                    <local:ProjectControll x:Name="Proj4" Grid.ColumnSpan="2" Margin="10,0,59,31" Grid.RowSpan="2" Grid.Column="2" Grid.Row="2" />
-                    <Button x:Name="LastPageProj" Content=""  Margin="0,82,160,0" VerticalAlignment="Top" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.812,0.481"  Grid.Row="1" Click="LastPageProj_Click">
-                        <Button.OpacityMask>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#99B6E894" Offset="0.009"/>
-                                <GradientStop Color="#991BA699" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.OpacityMask>
-                        <Button.Background>
-                            <ImageBrush ImageSource="Image/back.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Button x:Name="NexPageProj" HorizontalAlignment="Right" Margin="0,82,0,0" VerticalAlignment="Top" Width="39" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}"  Grid.Column="3" Grid.Row="1" Click="NexPageProj_Click">
-                        <Button.OpacityMask>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#99B6E894" Offset="0"/>
-                                <GradientStop Color="#991BA699" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.OpacityMask>
-                        <Button.Background>
-                            <ImageBrush ImageSource="Image/next.png"/>
-                        </Button.Background>
-                    </Button>
-
                     <Label x:Name="NoneProj" Visibility="Hidden" Content="{DynamicResource NoneProj}" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="380" Grid.ColumnSpan="3" Margin="148,34,0,0" Grid.Row="1"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="487" VerticalAlignment="Top" Width="793" Grid.ColumnSpan="4" Grid.RowSpan="4">
+                        <Grid Loaded="Grid_Loaded">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="StackProj1" Margin="4"/>
+                            <StackPanel x:Name="StackProj2" Margin="4" Grid.Column="1"/>
+                        </Grid>
+                    </ScrollViewer>
 
                 </Grid>
             </TabItem>
 
 
         </TabControl>
-        <Button Name="AddThing" Grid.Column="4" HorizontalAlignment="Left" Margin="100,46,0,0" VerticalAlignment="Top" Width="68" Height="60" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AddThing_Click">
+        <Button Name="AddThing" Grid.Column="4" HorizontalAlignment="Left" Margin="36,46,0,0" VerticalAlignment="Top" Width="68" Height="60" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AddThing_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Image/plus.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="Back" Content="{DynamicResource BackToPanel}" Grid.Column="4" Margin="26,86.25,20,9.75" BorderBrush="{x:Null}" Grid.Row="3" Click="Back_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
             </Button.Background>
         </Button>
     </Grid>

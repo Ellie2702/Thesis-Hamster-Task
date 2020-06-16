@@ -29,8 +29,50 @@ namespace HamsterTask
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Global.Guid);
-            string[] parts = Global.Guid.Split('|');
+            Upload();
+        }
+
+
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Global.Guid = String.Empty;
+            new MainWindow().Show();
+            this.Close();
+        }
+
+        private void UserTask_Click(object sender, RoutedEventArgs e)
+        {
+            new Tasks().Show();
+            this.Close();
+        }
+
+        private void UserMessages_Click(object sender, RoutedEventArgs e)
+        {
+            new UserMessage().Show();
+            this.Close();
+        }
+
+        private void BTN_IHaveCode_Click(object sender, RoutedEventArgs e)
+        {
+            new CompanyCode().Show();
+        }
+
+        private void CopyAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Global.userMail = AdminMail.Content.ToString();
+        }
+
+        private void UserCustom_Click(object sender, RoutedEventArgs e)
+        {
+            new UserProfileSettings().Show();
+            this.Close();
+        }
+
+        private void Upload()
+        {
+            string[] part = Global.Guid.Split('|');
+            string[] parts = Helper.Http.GetRequest("http://localhost:8080/Inform/" + part[0]).Split('|');
             UserName.Content = parts[3] + " " + parts[4];
             if (parts[parts.Length - 1] == "W")
             {
@@ -55,6 +97,11 @@ namespace HamsterTask
                     Iswork.Visibility = Visibility.Visible;
                     Iswork.Content = TryFindResource("IsWork").ToString() + work[1] + " - " + work[2];
                 }
+                Birth.Content = Convert.ToDateTime(parts[5]).ToShortDateString();
+                Email.Content = parts[6];
+            } else
+            {
+                UserName.Content = parts[3] + " " + parts[4];
                 Birth.Content = Convert.ToDateTime(parts[5]).ToShortDateString();
                 Email.Content = parts[6];
             }
@@ -120,36 +167,6 @@ namespace HamsterTask
             }
             catch { }
             this.UpdateLayout();
-
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Global.Guid = String.Empty;
-            new MainWindow().Show();
-            this.Close();
-        }
-
-        private void UserTask_Click(object sender, RoutedEventArgs e)
-        {
-            new Tasks().Show();
-            this.Close();
-        }
-
-        private void UserMessages_Click(object sender, RoutedEventArgs e)
-        {
-            new UserMessage().Show();
-            this.Close();
-        }
-
-        private void BTN_IHaveCode_Click(object sender, RoutedEventArgs e)
-        {
-            new CompanyCode().Show();
-        }
-
-        private void CopyAdmin_Click(object sender, RoutedEventArgs e)
-        {
-            Global.userMail = AdminMail.Content.ToString();
         }
     }
 }

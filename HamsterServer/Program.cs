@@ -104,9 +104,24 @@ namespace HamsterServer
                     case "GetProjects":
                         if (part.Length != 3) return part.Length.ToString();
                         return GetProjects(part[2]);
-                    case "GetTasks":
+                    case "GetTasksDone":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetTasksDone(part[2], part[3]);
+                    case "GetTasksNotDone":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetTasksNotDone(part[2], part[3]);
+                    case "GetTasksDoneCount":
                         if (part.Length != 3) return part.Length.ToString();
-                        return GetTasks(part[2]);
+                        return GetTasksDoneCount(part[2]);
+                    case "GetTasksNotDoneCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetTasksNotDoneCount(part[2]);
+                    case "GetTasksEndCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetTasksEndCount(part[2]);
+                    case "GetTasksEnd":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetTasksEnd(part[2], part[3]);
                     case "GetProject":
                         if (part.Length != 4) return part.Length.ToString();
                         return GetProject(part[2], part[3]);
@@ -159,13 +174,500 @@ namespace HamsterServer
                         if (part.Length != 4) return part.Length.ToString();
                         return GetUserProgects(part[2], part[3]);
                     case "GetDepartaments":
-                        if (part.Length != 4) return part.Length.ToString();
+                        if (part.Length != 3) return part.Length.ToString();
                         return GetDepartaments(part[2]);
+                    case "ChangeLogin":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return ChangeUserLogin(part[2], part[3]);
+                    case "ChangePass":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return ChangeUserPass(part[2], part[3]);
+                    case "ChangeMail":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return ChangeUserMail(part[2], part[3]);
+                    case "LeaveCompany":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return LeaveCompany(part[2]);
+                    case "RemoveProfile":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return RemoveProfile(part[2]);
+                    case "SendMessage":
+                        if (part.Length != 6) return part.Length.ToString();
+                        return SendMessage(part[2], part[3], part[4], part[5]);
+                    case "UserMessagesCheck":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return UserMessageCheck(part[2], part[3]);
+                    case "UserMessagesNotCheck":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return UserMessageNotCheck(part[2], part[3]);
+                    case "UserMessagesCheckCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return CheckMessageCoun(part[2]);
+                    case "UserMessagesNotCheckCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return NotCheckMessageCoun(part[2]);
+                    case "UserMessage":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return UserMessage(part[2], part[3]);
+                    case "MessageCheck":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return MessageCheck(part[2], part[3]);
+                    case "Inform":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return Inform(part[2]);
+                    case "UpdateTask":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return UpdateTask(part[2], part[3]);
                     default:
                         return "404";
                 }
             }
             else return "need more arguments!";
+        }
+
+        private string UpdateTask(string guid, string num, string title, string desk, string deadline, string exec)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int id = Convert.ToInt32(exec);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User ex = db.Users.FirstOrDefault(u => u.UserID == id);
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        DATA.Entities.Task task = db.Tasks.Include("User").Where(t => t.TaskID == i).FirstOrDefault();
+                        TaskExecutors taskExecutors = db.TaskExecutors.Include("User").Include("Task").FirstOrDefault(e => e.Task.TaskID == task.TaskID);
+                        if(task.User.UserID == user.UserID)
+                        {
+                            task.Title = title;
+                            task.Descript = desk;
+                            task.Deadline = Convert.ToDateTime(deadline);
+                            taskExecutors.User = ex;
+                            db.SaveChanges();
+                            return "Ok!";
+                        }
+                        else return "No!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetTasksEnd(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.Deadline <= DateTime.Today && t.Task.isDone == false).ToList();
+                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == data[i].Task.TaskID);
+                        return task.Title + "|" + data[i].User.FirstName + " " + data[i].User.SecondName + "|" + task.Deadline + "|" + task.User.FirstName + " " + task.User.SecondName + "|" + task.TaskID;
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetTasksNotDone(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.isDone == false && t.Task.Deadline > DateTime.Today).ToList();
+                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == data[i].Task.TaskID);
+                        return task.Title + "|" + data[i].User.FirstName + " " + data[i].User.SecondName + "|" + task.Deadline + "|" + task.User.FirstName + " " + task.User.SecondName + "|" + task.TaskID;
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+
+        private string GetTasksDone(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.isDone == true).ToList();
+                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == data[i].Task.TaskID);
+                        return task.Title + "|" + data[i].User.FirstName + " " + data[i].User.SecondName + "|" + task.Deadline + "|" + task.User.FirstName + " " + task.User.SecondName + "|" + task.TaskID;
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+
+        private string GetTasksEndCount(string guid)
+        {
+            try
+            {
+                
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.Deadline <= DateTime.Today && t.Task.isDone == false).Count();
+                        return data.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetTasksDoneCount(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.isDone == true).Count();
+                        return data.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetTasksNotDoneCount(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.isDone == false && t.Task.Deadline > DateTime.Today).Count();
+                        return data.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string Inform(string guid)
+        {
+            try
+            {
+                string info = string.Empty;
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        if(user.PhoneNumber != null)
+                        {
+                            info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
+                            return guid + "|" + info;
+                        } else
+                        {
+                            info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email;
+                            return guid + "|" + info;
+                        }
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string MessageCheck(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int id = Convert.ToInt32(num);
+                        Message mes = db.Messages.FirstOrDefault(m => m.MessageID == id);
+                        mes.isCheck = true;
+                        db.SaveChanges();
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string UserMessage(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int id = Convert.ToInt32(num);
+                        Message mess = db.Messages.Include("UserTo_UserId").Include("UserFrom_UserId").FirstOrDefault(m => m.MessageID == id);
+                        return mess.Title + "|" + mess.Content + "|" + mess.TimeSend + "|" + mess.UserFrom_UserId.FirstName + " " + mess.UserFrom_UserId.SecondName + "|" + mess.UserFrom_UserId.Email ;
+                    } else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string UserMessageNotCheck(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    int i = Convert.ToInt32(num);
+                    var data1 = db.Messages.Include("UserTo_UserId").Include("UserFrom_UserId");
+                    var data2 = data1.Where(m => m.UserTo_UserId.UserID == UpUser.UserID && m.isCheck == false);
+                    var data = data2.ToList();
+                    return data[i].MessageID + "|" + data[i].Title + "|" + data[i].TimeSend + "|" + data[i].UserFrom_UserId.FirstName + " " + data[i].UserFrom_UserId.SecondName;
+                }
+            }
+            catch (Exception Ex)
+            {
+                return "No!";
+            }
+        }
+
+        private string NotCheckMessageCoun(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    var mesg = db.Messages;
+                    var withUser = mesg.Include("User");
+                    var whereIs = withUser.Where(m => m.UserTo_UserId.UserID == UpUser.UserID && m.isCheck == false);
+                    var data = whereIs.Count();
+                    if(data !=0) return data.ToString();
+                    else return "No!";
+                }
+            }
+            catch (Exception Ex)
+            {
+                return "No!";
+            }
+        }
+
+        private string CheckMessageCoun(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    var data = db.Messages.Include("User").Where(m => m.UserTo_UserId.UserID == UpUser.UserID && m.isCheck == true).Count();
+                    if (data != 0) return data.ToString();
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string UserMessageCheck(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    int i = Convert.ToInt32(num);
+                    var data = db.Messages.Include("UserTo_UserId").Include("UserFrom_UserId").Where(m => m.UserTo_UserId.UserID == UpUser.UserID && m.isCheck == true).ToList();
+                    return data[i].MessageID + "|" + data[i].Title + "|" + data[i].TimeSend + "|" + data[i].UserFrom_UserId.FirstName + " " + data[i].UserFrom_UserId.SecondName;
+                    
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string SendMessage(string guid, string to, string title, string content)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    User UserTo = db.Users.FirstOrDefault(t => t.Email == to);
+                    if (UserTo != null)
+                    {
+                        DateTime sendtime = DateTime.Now;
+                        db.Messages.Add(new Message { Title = title, Content = content, isCheck = false, TimeSend = sendtime, UserFrom_UserId = UpUser, UserTo_UserId = UserTo });
+                        db.SaveChanges();
+                        return "Ok!";
+                    } else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string RemoveProfile(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    db.Users.Remove(UpUser);
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string LeaveCompany(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    Employee emp = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == UpUser.UserID);
+                    db.Employees.Remove(emp);
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string ChangeUserMail(string guid, string mail)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    UpUser.Email = mail;
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string ChangeUserPass(string guid, string pass)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    byte[] passHash = DATA.BLL.Cipher.PassHash(pass, user.Salt);
+                    UpUser.PassHash = passHash;
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string ChangeUserLogin(string guid, string login)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    User UpUser = db.Users.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    UpUser.Login = login;
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch {
+                return "No!";
+            }
         }
 
         private string GetDepartaments(string guid)
@@ -581,14 +1083,13 @@ namespace HamsterServer
             {
                 User user = GlobalList.IsAuthed(new Guid(guid)).user;
                 int i = Convert.ToInt32(Num);
-                var data = db.TaskExecutors.Include("User").Include("Task").Where(p => p.User.UserID == user.UserID).ToList();
-                var d = data[i];
-                var task = db.Tasks.Include("User").Where(t => t.TaskID == d.Task.TaskID).FirstOrDefault();
+                var task = db.Tasks.Include("User").Where(t => t.TaskID == i).FirstOrDefault();
+                var data = db.TaskExecutors.Include("User").Include("Task").FirstOrDefault(d => d.Task.TaskID == task.TaskID);
                 string title = task.Title;
                 string Descript = task.Descript;
                 string deadline = task.Deadline.ToString();
                 string creater = task.User.FirstName + " " + task.User.SecondName;
-                string exec = data[i].User.FirstName + " " + data[i].User.SecondName;
+                string exec = data.User.FirstName + " " + data.User.SecondName;
                 string done = task.isDone.ToString();
                 string TaskID = Convert.ToString(task.TaskID);
                 return TaskID + "|" + title + "|" + Descript + "|" + deadline + "|" + creater + "|" + exec + "|" + done;
@@ -679,7 +1180,7 @@ namespace HamsterServer
                             employee.User = db.Users.Where(p => p.UserID == id).FirstOrDefault();
                             company.User = db.Users.Where(p => p.UserID == id).FirstOrDefault();
                         }
-                        else return "Логин или пароль введены неверно или такого пользователя не сущетствует";
+                        else return "No!";
                         db.Companies.Add(company);
                         db.SaveChanges();
                         

@@ -26,8 +26,9 @@ namespace HamsterTask
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Global.GlobTaskID = this.TaskID.Content.ToString();
+            Global.GlobTaskID = TaskID.Content.ToString();
             new TaskForm().Show();
         }
+
     }
 }

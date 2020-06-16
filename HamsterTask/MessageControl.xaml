@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HamsterTask"
-             mc:Ignorable="d" 
-             d:DesignHeight="135" d:DesignWidth="305">
+             mc:Ignorable="d" Height="93.667" Width="362.333">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -27,14 +26,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Name="Title" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="12" Content="Name"/>
+        <Label Name="Title" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="12" Content="Name" Background="{x:Null}"/>
         <Label x:Name="Content" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" FontSize="12">
             <TextBlock TextWrapping="Wrap" ></TextBlock>
         </Label>
-        <Label Name="From" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" FontSize="10" Content="{DynamicResource From}" VerticalContentAlignment="Top"/>
-        <Label Name="MessageID" Visibility="Visible"/>
-        <Label Name="To" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" FontSize="10" Content="{DynamicResource To}" VerticalContentAlignment="Bottom"/>
-        <Button x:Name="ViewMessage" Grid.Column="3" Grid.Row="2" Margin="29,1,10,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="ViewMessage_Click">
+        <Label Name="From" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontSize="10" Content="{DynamicResource From}" VerticalContentAlignment="Top"/>
+        <Label Name="MessageID" Visibility="Hidden"/>
+        <Label Name="Check" Visibility="Hidden"/>
+        <Label Name="Date" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" FontSize="10" Content="{DynamicResource Date}" VerticalContentAlignment="Top"/>
+
+        <Button x:Name="ViewMessage" Grid.Column="3" Margin="39,0,25,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="ViewMessage_Click" RenderTransformOrigin="0.782,0.472">
             <Button.Background>
                 <ImageBrush ImageSource="Image/search.png"/>
             </Button.Background>

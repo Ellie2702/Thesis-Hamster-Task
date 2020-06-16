@@ -23,11 +23,18 @@ namespace HamsterTask
         public MessageControl()
         {
             InitializeComponent();
+            Global.LanguageSwitchControll(this);
         }
 
+        string[] parts = Global.Guid.Split('|');
         private void ViewMessage_Click(object sender, RoutedEventArgs e)
         {
-
+            Global.GlobMessID = MessageID.Content.ToString();
+            if(Check.Content == "false")
+            {
+                var a = Helper.Http.GetRequest("http://localhost:8080/MessageCheck/" + parts[0] + "/" + Global.GlobMessID);
+            }
+            new Message().Show();
         }
     }
 }

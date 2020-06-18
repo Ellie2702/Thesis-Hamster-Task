@@ -192,4 +192,22 @@
     <system:String x:Key="SendMessage">Отправить сообщение</system:String>
     <system:String x:Key="CodeTool">Здесь вы можете активировать код компании!</system:String>
     <system:String x:Key="WrongData">Данные пользователя введены неверно!</system:String>
+
+    <system:String x:Key="TasksCount">Количество задач:</system:String>
+    <system:String x:Key="TasksCountDone">Количество завершённых задач:</system:String>
+    <system:String x:Key="TasksCountEnd">Количество просроченных задач:</system:String>
+    <system:String x:Key="TasksCountNotDone">Количество незавершённых задач:</system:String>
+    <system:String x:Key="ProjCount">Количество проектов:</system:String>
+    <system:String x:Key="ProjCountDone">Количество завершённых проектов:</system:String>
+    <system:String x:Key="ProjCountEnd">Количество просроченных проектов:</system:String>
+    <system:String x:Key="ProjCountNotDone">Количество незавершённых проектов:</system:String>
+    
+    <system:String x:Key="EmpCount">Количество сотрудников:</system:String>
+    <system:String x:Key="EmpBest">Сотрудники выполнившие больше всего задач:</system:String>
+    <system:String x:Key="JobLvl">Продуктивность:</system:String>
+    <system:String x:Key="DepBest">Департаменты выполнившие больше всего задач:</system:String>
+
+    <system:String x:Key="RemProj">Вы уверены, что хотите удалить проект?</system:String>
+
+    <system:String x:Key="RemovedProj">Проект удалён.</system:String>
 </ResourceDictionary>

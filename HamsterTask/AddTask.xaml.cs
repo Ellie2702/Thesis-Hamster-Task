@@ -89,6 +89,7 @@ namespace HamsterTask
                     if(data == "Task is added")
                     {
                         MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                        HamsterTask.Tasks.resave = true;
                     }
                     else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
                 }

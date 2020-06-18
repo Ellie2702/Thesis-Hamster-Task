@@ -43,14 +43,12 @@ namespace HamsterTask
             {
                 Global.FROM = "UserPanel";
                 new AddTask().Show();
-                this.Close();
 
             }
             else if (TabProject.IsSelected)
             {
                 Global.FROM = "UserPanel";
                 new AddProject().Show();
-                this.Close();
             }
         }
 
@@ -83,8 +81,8 @@ namespace HamsterTask
                 string taskend = Helper.Http.GetRequest("http://localhost:8080/GetTasksEndCount/" + parts[0]);
                 string taskdone = Helper.Http.GetRequest("http://localhost:8080/GetTasksDoneCount/" + parts[0]);
                 string tasknotdone = Helper.Http.GetRequest("http://localhost:8080/GetTasksNotDoneCount/" + parts[0]);
-
-                if (tasknotdone != "No!")
+//                int boost = 0;
+                if (tasknotdone != "No!" || tasknotdone != "0")
                 {
                     for (int i = 0; i < Convert.ToInt32(tasknotdone); i++)
                     {
@@ -99,7 +97,7 @@ namespace HamsterTask
                         control.Background = new LinearGradientBrush(Colors.Aqua, Colors.Wheat, 90);
                         control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
                         control.BorderThickness = new Thickness(2);
-                        if (i % 2 == 0)
+                        if (i % 2 != 0)
                         {
                             TaskStack2.Children.Add(control);
                             TaskStack2.UpdateLayout();
@@ -109,14 +107,15 @@ namespace HamsterTask
                             TaskStack1.Children.Add(control);
                             TaskStack1.UpdateLayout();
                         }
+ //                       boost = i;
                     }
                 }
 
-                if (taskdone != "No!")
+                if (taskdone != "No!" || taskdone != "0")
                 {
-                    for (int i = Convert.ToInt32(tasknotdone); i < Convert.ToInt32(tasknotdone) + Convert.ToInt32(tasknotdone); i++)
+                    for (int i = Convert.ToInt32(tasknotdone); i < Convert.ToInt32(tasknotdone) + Convert.ToInt32(taskdone); i++)
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksDone/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksDone/" + parts[0] + "/" + (i - Convert.ToInt32(tasknotdone)).ToString()).Split('|');
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
@@ -126,7 +125,7 @@ namespace HamsterTask
                         control.Margin = new Thickness(0, 5, 0, 5);
                         control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
                         control.BorderThickness = new Thickness(2);
-                        if (i % 2 == 0)
+                        if (i % 2 != 0)
                         {
                             TaskStack2.Children.Add(control);
                             TaskStack2.UpdateLayout();
@@ -139,11 +138,11 @@ namespace HamsterTask
                     }
                 }
 
-                if (taskend != "No!")
+                if (taskend != "No!" || taskend != "0")
                 {
-                    for (int i = Convert.ToInt32(tasknotdone) + Convert.ToInt32(tasknotdone); i < Convert.ToInt32(tasknotdone) + Convert.ToInt32(tasknotdone) + Convert.ToInt32(taskend); i++)
+                    for (int i = Convert.ToInt32(tasknotdone) + Convert.ToInt32(taskdone); i < Convert.ToInt32(tasknotdone) + Convert.ToInt32(taskdone) + Convert.ToInt32(taskend); i++)
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksEnd/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetTasksEnd/" + parts[0] + "/" + (i - Convert.ToInt32(tasknotdone) - Convert.ToInt32(taskdone)).ToString()).Split('|');
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
@@ -154,7 +153,7 @@ namespace HamsterTask
                         control.Margin = new Thickness(0, 5, 0, 5);
                         control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
                         control.BorderThickness = new Thickness(2);
-                        if (i % 2 == 0)
+                        if (i % 2 != 0)
                         {
                             TaskStack2.Children.Add(control);
                             TaskStack2.UpdateLayout();
@@ -175,7 +174,7 @@ namespace HamsterTask
                     NoneTask.Visibility = Visibility.Visible;
                 }
             }
-            catch
+            catch (Exception Ex)
             {
                 NoneTask.Visibility = Visibility.Visible;
             }
@@ -185,11 +184,42 @@ namespace HamsterTask
         {
             try
             {
+                StackProj1.Children.Clear();
+                StackProj2.Children.Clear();
+
+                string proj = Helper.Http.GetRequest("http://localhost:8080/GetProjectCount/" + parts[0]);
+                if (proj != "No!" && proj != "0")
+                {
+                    for (int i = 0; i < Convert.ToInt32(proj); i++)
+                    {
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProject/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var control = new ProjectControll();
+                        control.ProjectName.Content = data[0];
+                        control.Deadline.Content += " " +  data[1];
+                        control.TaskCount.Content +=  " " + data[2];
+                        control.UnTaskCount.Content += " " + data[3];
+                        control.ProjectID.Content = data[4];
+                        control.Margin = new Thickness(0, 5, 0, 5);
+                        control.Background = new LinearGradientBrush(Colors.Aqua, Colors.Wheat, 90);
+                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                        control.BorderThickness = new Thickness(2);
+                        if (i % 2 != 0)
+                        {
+                            StackProj2.Children.Add(control);
+                            StackProj2.UpdateLayout();
+                        }
+                        else
+                        {
+                            StackProj1.Children.Add(control);
+                            StackProj1.UpdateLayout();
+                        }
+                    }
+                } else NoneProj.Visibility = Visibility.Visible;
 
             }
-            catch
+            catch (Exception Ex)
             {
-
+                NoneProj.Visibility = Visibility.Visible;
             }
         }
     }

@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HamsterTask"
-             mc:Ignorable="d" 
-             d:DesignHeight="198" d:DesignWidth="264" >
+             mc:Ignorable="d" Width="378" Height="124.666" >
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -23,27 +22,17 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+           
         </Grid.RowDefinitions>
 
         <Label x:Name="ProjectName" FontSize="10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Name" VerticalContentAlignment="Center"/>
         <Label x:Name="ProjectID" Visibility="Hidden"/>
-        <Label x:Name="TasksDone" Grid.Column="2" Grid.Row="1" FontSize="9" Content="{DynamicResource TasksDone}" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
-        <Label x:Name="Deadline" Content="{DynamicResource TaskDeadline}" FontSize="9" Grid.Column="2" Grid.Row="1"  VerticalContentAlignment="Bottom"/>
-        <Label x:Name="DateDeadline" Grid.Column="2" Grid.Row="2" FontSize="9" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+        
+        <Label x:Name="Deadline" Content="{DynamicResource TaskDeadline}" FontSize="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalContentAlignment="Top"/>
+        <Label x:Name="TaskCount" Content="{DynamicResource TasksCount}" FontSize="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center"/>
+        <Label x:Name="UnTaskCount" Content="{DynamicResource TasksCountNotDone}" FontSize="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalContentAlignment="Bottom"/>
 
-        <ScrollViewer Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
-            <TextBlock x:Name="ProjectDesc" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Foreground="{x:Null}">
-                <TextBlock.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#33C4F7E4" Offset="0"/>
-                        <GradientStop Color="#33C6F5FF" Offset="1"/>
-                    </LinearGradientBrush>
-                </TextBlock.Background>
-            </TextBlock>
-        </ScrollViewer>
-
-        <Button x:Name="ViewProj" Grid.Column="2" Grid.Row="0" Margin="41,7,10,10" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="ViewProj_Click">
+        <Button x:Name="ViewProj" Grid.Column="2" Grid.Row="0" Margin="86,5,10,5" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="ViewProj_Click" RenderTransformOrigin="1.144,0.71">
             <Button.Background>
                 <ImageBrush ImageSource="Image/search.png"/>
             </Button.Background>

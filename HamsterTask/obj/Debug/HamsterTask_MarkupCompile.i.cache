@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\App.xaml
-28-1304708625
+29-1875664209
 
-331812642087
+34-1866924163
 18545928491
-AddDepartament.xaml;AddProject.xaml;AddTask.xaml;AdminPanel.xaml;Company.xaml;CompanyCode.xaml;EmployyesManagment.xaml;Language\ENG\EngDictionary.xaml;Language\RUS\RusDictionary.xaml;MainWindow.xaml;Message.xaml;MessageControl.xaml;Messages.xaml;MessageViewControl.xaml;NewEmployee.xaml;ProjectControll.xaml;ProjectForm.xaml;RegistrationOrg.xaml;RegistrationUser.xaml;RightsEmployeeEditor.xaml;Schedule.xaml;TaskControl.xaml;TaskForm.xaml;Tasks.xaml;UserMessage.xaml;UserPanel.xaml;UserProfileSettings.xaml;UserRegOrg.xaml;
+AddDepartament.xaml;AddProject.xaml;AddTask.xaml;AdminPanel.xaml;Company.xaml;CompanyCode.xaml;DepartamentControl.xaml;EmployyesManagment.xaml;Language\ENG\EngDictionary.xaml;Language\RUS\RusDictionary.xaml;MainWindow.xaml;Message.xaml;MessageControl.xaml;Messages.xaml;MessageViewControl.xaml;NewEmployee.xaml;ProjectControll.xaml;ProjectForm.xaml;RegistrationOrg.xaml;RegistrationUser.xaml;RightsEmployeeEditor.xaml;Schedule.xaml;TaskControl.xaml;TaskForm.xaml;Tasks.xaml;UserMessage.xaml;UserPanel.xaml;UserProfileSettings.xaml;UserRegOrg.xaml;
 
-False
+True
 

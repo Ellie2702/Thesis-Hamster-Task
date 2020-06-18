@@ -44,7 +44,7 @@ namespace HamsterTask
                     this.Close();
                 }
             }
-            catch 
+            catch (Exception ex)
             { 
                 MessageBox.Show(TryFindResource("MessRemTaskResFail").ToString());
                 this.Close();
@@ -56,7 +56,7 @@ namespace HamsterTask
             try
             {
                 string[] parts = Global.Guid.Split('|');
-                var res = Helper.Http.GetRequest("http://localhost:8080/DeleteTask/" + parts[0] + "/" + Global.GlobTaskID).Split('|');
+                var res = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + Global.GlobTaskID).Split('|');
 
                 TaskName.Content = res[1];
                 TaskDesk.Text = res[2];
@@ -64,19 +64,19 @@ namespace HamsterTask
                 Own.Content += " " + res[4];
                 Deadline.Content += " " + res[3];
 
-                if(Convert.ToDateTime(res[3]) >= DateTime.Today)
+                if(Convert.ToDateTime(res[3]) <= DateTime.Today)
                 {
                     TaskFailed.Visibility = Visibility.Visible;
                     IsDone.Visibility = Visibility.Hidden;
                 }
 
-                if(res[6] == "true")
+                if(res[6] == "True")
                 {
                     IsDone.Visibility = Visibility.Hidden;
                     Done.Visibility = Visibility.Visible;
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 MessageBox.Show(TryFindResource("SomethingBroke").ToString());
                 this.Close();

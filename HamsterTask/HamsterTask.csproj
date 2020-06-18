@@ -85,6 +85,9 @@
     <Compile Include="CompanyCode.xaml.cs">
       <DependentUpon>CompanyCode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DepartamentControl.xaml.cs">
+      <DependentUpon>DepartamentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmployyesManagment.xaml.cs">
       <DependentUpon>EmployyesManagment.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CompanyCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DepartamentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

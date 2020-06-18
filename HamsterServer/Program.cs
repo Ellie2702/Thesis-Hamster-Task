@@ -216,13 +216,261 @@ namespace HamsterServer
                         if (part.Length != 3) return part.Length.ToString();
                         return Inform(part[2]);
                     case "UpdateTask":
+                        if (part.Length != 8) return part.Length.ToString();
+                        return UpdateTask(part[2], part[3], part[4], part[5], part[6], part[7]);
+                    case "GetProjectTaskCountNotDone":
                         if (part.Length != 4) return part.Length.ToString();
-                        return UpdateTask(part[2], part[3]);
+                        return GetProjectTaskCountNotDone(part[2], part[3]);
+                    case "GetProjectTaskCountDone":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetProjectTaskCountDone(part[2], part[3]);
+                    case "GetProjectTaskCountEnd":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetProjectTaskCountEnd(part[2], part[3]);
+                    case "GetProjectTaskDone":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return GetProjectTaskDone(part[2], part[3], part[4]);
+                    case "GetProjectTaskNotDone":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return GetProjectTaskNotDone(part[2], part[3], part[4]);
+                    case "GetProjectTaskEnd":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return GetProjectTaskEnd(part[2], part[3], part[4]);
+                    case "RemoveProject":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return RemoveProject(part[2], part[3]);
+                    case "GetProjectCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetProjectCount(part[2]);
+                    case "GetProjectnum":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetProjecNum(part[2], part[3]);
                     default:
                         return "404";
                 }
             }
             else return "need more arguments!";
+        }
+
+        private string GetProjecNum(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.Projects.Include("User").Where(d => d.User.UserID == user.UserID).ToList();
+                        int i = Convert.ToInt32(num);
+                        var p = data[i];
+                        var taskcoun = db.ProjectsTasks.Where(t => t.ProjectID == p.ProjectID).Count();
+                        var taskcount = db.ProjectsTasks.Include("Task").Where(t => t.ProjectID == p.ProjectID && t.Task.isDone == false).Count();
+                        return p.Title + "|" + p.Deadline + "|" + taskcoun.ToString() + "|" + taskcount.ToString() + "|" + p.ProjectID.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectCount(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.Projects.Include("User").Where(d => d.User.UserID == user.UserID).Count();
+                        return data.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string RemoveProject(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int id = Convert.ToInt32(num);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        Projects project = db.Projects.Include("User").Where(p => p.ProjectID == id).FirstOrDefault();
+                        var tasks = db.ProjectsTasks.Include("Projects").Include("Task").Where(t => t.ProjectID == id).ToList();
+                        if(tasks.Count() != 0)
+                        {
+                            for(int i = 0; i < tasks.Count(); i++)
+                            {
+                                DATA.Entities.Task task = tasks[i].Task;
+                                db.Tasks.Remove(task);
+                                db.SaveChanges();
+                            }
+                        }
+                        db.Projects.Remove(project);
+                        db.SaveChanges();
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectTaskEnd(string guid, string num, string num1)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int idc = Convert.ToInt32(num);
+                    int idt = Convert.ToInt32(num1);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.ProjectsTasks.Include("Task").Include("Projects").Where(t => t.ProjectID == idc && t.Task.isDone == false && t.Task.Deadline > DateTime.Today).ToList();
+                        var d = data[idt];
+                        var ex = db.TaskExecutors.Include("User").Include("Task").FirstOrDefault(e => e.Task.TaskID == d.Task.TaskID);
+                        return d.Task.Title + "|" + ex.User.FirstName + " " + ex.User.SecondName + "|" + d.Task.Deadline + "|" + d.Task.User.FirstName + " " + d.Task.User.SecondName + "|" + d.Task.TaskID;
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectTaskNotDone(string guid, string num, string num1)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int idc = Convert.ToInt32(num);
+                    int idt = Convert.ToInt32(num1);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.ProjectsTasks.Include("Task").Include("Projects").Where(t => t.ProjectID == idc && t.Task.isDone == false && t.Task.Deadline < DateTime.Today).ToList();
+                        var d = data[idt];
+                        var ex = db.TaskExecutors.Include("User").Include("Task").FirstOrDefault(e => e.Task.TaskID == d.Task.TaskID);
+                        return d.Task.Title + "|" + ex.User.FirstName + " " + ex.User.SecondName + "|" + d.Task.Deadline + "|" + d.Task.User.FirstName + " " + d.Task.User.SecondName + "|" + d.Task.TaskID;
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectTaskCountEnd(string guid, string num)
+        {
+
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int id = Convert.ToInt32(num);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.ProjectsTasks.Include("Task").Include("Projects").Where(d => d.ProjectID == id && d.Task.isDone == false && d.Task.Deadline > DateTime.Today).Count();
+                        return data.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectTaskCountDone(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int id = Convert.ToInt32(num);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.ProjectsTasks.Include("Task").Include("Projects").Where(d => d.ProjectID == id && d.Task.isDone == true).Count();
+                        return data.ToString();
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectTaskDone(string guid, string num, string num1)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int idc = Convert.ToInt32(num);
+                    int idt = Convert.ToInt32(num1);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.ProjectsTasks.Include("Task").Include("Projects").Where(t => t.ProjectID == idc && t.Task.isDone == true).ToList();
+                        var d = data[idt];
+                        var ex = db.TaskExecutors.Include("User").Include("Task").FirstOrDefault(e => e.Task.TaskID == d.Task.TaskID);
+                        return d.Task.Title + "|" + ex.User.FirstName + " " + ex.User.SecondName + "|" + d.Task.Deadline + "|" + d.Task.User.FirstName + " " + d.Task.User.SecondName + "|" + d.Task.TaskID;
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetProjectTaskCountNotDone(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int id = Convert.ToInt32(num);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var data = db.ProjectsTasks.Include("Task").Include("Projects").Where(d => d.ProjectID == id && d.Task.isDone == false && d.Task.Deadline > DateTime.Today).Count();
+                        return data.ToString();
+                    } else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
         }
 
         private string UpdateTask(string guid, string num, string title, string desk, string deadline, string exec)
@@ -270,13 +518,17 @@ namespace HamsterServer
                     {
                         int i = Convert.ToInt32(num);
                         var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.Deadline <= DateTime.Today && t.Task.isDone == false).ToList();
-                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == data[i].Task.TaskID);
+                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(m);
+                        bool m(DATA.Entities.Task t)
+                        {
+                            return t.TaskID == data[i].Task.TaskID;
+                        }
                         return task.Title + "|" + data[i].User.FirstName + " " + data[i].User.SecondName + "|" + task.Deadline + "|" + task.User.FirstName + " " + task.User.SecondName + "|" + task.TaskID;
                     }
                     else return "No!";
                 }
             }
-            catch
+            catch (Exception Ex)
             {
                 return "No!";
             }
@@ -293,13 +545,14 @@ namespace HamsterServer
                     {
                         int i = Convert.ToInt32(num);
                         var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.isDone == false && t.Task.Deadline > DateTime.Today).ToList();
-                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == data[i].Task.TaskID);
+                        var d = data[i];
+                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == d.Task.TaskID);
                         return task.Title + "|" + data[i].User.FirstName + " " + data[i].User.SecondName + "|" + task.Deadline + "|" + task.User.FirstName + " " + task.User.SecondName + "|" + task.TaskID;
                     }
                     else return "No!";
                 }
             }
-            catch
+            catch (Exception Ex)
             {
                 return "No!";
             }
@@ -317,13 +570,14 @@ namespace HamsterServer
                     {
                         int i = Convert.ToInt32(num);
                         var data = db.TaskExecutors.Include("User").Include("Task").Where(t => t.User.UserID == user.UserID && t.Task.isDone == true).ToList();
-                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == data[i].Task.TaskID);
+                        var d = data[i];
+                        DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(t => t.TaskID == d.Task.TaskID);
                         return task.Title + "|" + data[i].User.FirstName + " " + data[i].User.SecondName + "|" + task.Deadline + "|" + task.User.FirstName + " " + task.User.SecondName + "|" + task.TaskID;
                     }
                     else return "No!";
                 }
             }
-            catch
+            catch (Exception Ex)
             {
                 return "No!";
             }
@@ -797,7 +1051,7 @@ namespace HamsterServer
             using (DataContext db = new DataContext())
             {
                 User user = GlobalList.IsAuthed(new Guid(guid)).user;
-                int count = db.TaskExecutors.Include("User").Where(u => u.User.UserID == user.UserID && u.Task.Deadline < DateTime.Now).Count();
+                int count = db.TaskExecutors.Include("User").Where(u => u.User.UserID == user.UserID && u.Task.Deadline > DateTime.Now && u.Task.isDone == false).Count();
 
                 if (count > 0)
                 {
@@ -1040,10 +1294,11 @@ namespace HamsterServer
                 User user = GlobalList.IsAuthed(new Guid(guid)).user;
                 int i = Convert.ToInt32(Num);
                 var data = db.Projects.Include("User").Where(p => p.User.UserID == user.UserID).ToList();
-                string title = data[i].Title;
-                string content = data[i].Descript;
-                string creater = data[i].User.FirstName + " " + data[i].User.SecondName;
-                return title + "|" +  content + "|" + creater;
+                var d = data[i];
+                string title = d.Title;
+                string content = d.Descript;
+                string creater = d.User.FirstName + " " + d.User.SecondName;
+                return title + "|" +  content + "|" + creater + "|" + d.Deadline.ToString() + "|" + d.ProjectID.ToString();
             }
         }
 

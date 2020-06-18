@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="{DynamicResource HamsterTask.ProjectForm}" Height="600" Width="950" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="{DynamicResource HamsterTask.ProjectForm}" Height="600" Width="1125.5" WindowStartupLocation="CenterScreen">
+    <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -24,6 +24,7 @@
 
 
 
+
         <Rectangle  Grid.Column="0" Grid.ColumnSpan="10" Grid.Row="40" Margin="0,29,0,0">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -35,13 +36,50 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <TabControl HorizontalAlignment="Left" Height="409" Margin="10,46,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="903" Grid.ColumnSpan="4">
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
+        <Label x:Name="ProjName" FontSize="18" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Margin="10">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#72BBE284" Offset="0"/>
+                    <GradientStop Color="#728BECE3" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+
+        <ScrollViewer Name="scrollDesc" CanContentScroll="True" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <TextBlock x:Name="ProjDesk"  FontSize="15" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                <TextBlock.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#7FACECE3" Offset="0"/>
+                        <GradientStop Color="#7FBAEC90" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+        </ScrollViewer>
+        <Button x:Name="Edit" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Height="54" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="Edit_Click" Margin="81,10,0,0">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/Edit.png"/>
+            </Button.Background>
+        </Button>
+
+        <Image x:Name="Done" Grid.Column="3" Visibility="Hidden" HorizontalAlignment="Right" Height="67" Margin="0,0,109,0" VerticalAlignment="Top" Width="89" Source="/Image/tick.png" Stretch="Fill"/>
+
+        <Button x:Name="RemTask" Grid.Column="3" HorizontalAlignment="Left" Margin="175,10,0,0" VerticalAlignment="Top" Width="64" Height="54" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="RemTask_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/delete.png"/>
+            </Button.Background>
+        </Button>
+
+
+
+        <Label x:Name="Own" Content="{DynamicResource TaskOwner}" FontSize="18" Grid.Column="2" Grid.Row="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <Label x:Name="Deadline" Content="{DynamicResource TaskDeadline}" FontSize="18" Grid.Column="2" Grid.Row="0"  HorizontalContentAlignment="Left"/>
+        <ScrollViewer Grid.Column="2" HorizontalAlignment="Left" Height="341" Margin="27,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="422" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <StackPanel x:Name="projstack"/>
+        </ScrollViewer>
+        <Button x:Name="AddThing" Grid.Column="3" HorizontalAlignment="Left" Margin="175,5,0,0" VerticalAlignment="Top" Width="68" Height="60" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="AddThing_Click" Grid.Row="1">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/plus.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

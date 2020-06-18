@@ -43,6 +43,7 @@ namespace HamsterTask
 
         private void UserTask_Click(object sender, RoutedEventArgs e)
         {
+            Global.FROM = "UserPanel";
             new Tasks().Show();
             this.Close();
         }
@@ -167,6 +168,20 @@ namespace HamsterTask
             }
             catch { }
             this.UpdateLayout();
+        }
+
+        private void UserCompany_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Global.FROM = "Company";
+                new Company().Show();
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+            }
         }
     }
 }

@@ -27,12 +27,19 @@ namespace HamsterTask
 
         private void BTNCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void AddBTN_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch
+            {
+
+            }
         }
     }
 }

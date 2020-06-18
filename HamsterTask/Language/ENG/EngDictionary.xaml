@@ -192,4 +192,23 @@
 
     <system:String x:Key="CodeTool">Here you can activate the company code!</system:String>
     <system:String x:Key="WrongData">User data entered incorrectly!</system:String>
+
+    <system:String x:Key="TasksCount">Number of tasks:</system:String>
+    <system:String x:Key="TasksCountDone">Number of completed tasks:</system:String>
+    <system:String x:Key="TasksCountEnd">Number of overdue issues:</system:String>
+    <system:String x:Key="TasksCountNotDone">Number of incomplete tasks:</system:String>
+
+    <system:String x:Key="ProjCount">Number of projects:</system:String>
+    <system:String x:Key="ProjCountDone">Number of completed projects:</system:String>
+    <system:String x:Key="ProjCountEnd">Number of overdue projects:</system:String>
+    <system:String x:Key="ProjCountNotDone">Number of incomplete projects:</system:String>
+
+    <system:String x:Key="EmpCount">Number of employees:</system:String>
+    <system:String x:Key="EmpBest">Employees who completed the most tasks:</system:String>
+    <system:String x:Key="JobLvl">Productivity:</system:String>
+    <system:String x:Key="DepBest">Departamet fulfilled more tasks:</system:String>
+
+    <system:String x:Key="RemProj">Are you sure you want to delete the project?</system:String>
+
+    <system:String x:Key="RemovedProj">The project was deleted.</system:String>
 </ResourceDictionary>

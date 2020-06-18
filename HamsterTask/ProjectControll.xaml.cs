@@ -28,6 +28,7 @@ namespace HamsterTask
         private void ViewProj_Click(object sender, RoutedEventArgs e)
         {
             Global.GlobProjectID = ProjectID.Content.ToString();
+            new ProjectForm();
         }
     }
 }

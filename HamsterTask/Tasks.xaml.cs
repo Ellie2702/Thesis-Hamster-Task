@@ -146,7 +146,7 @@ namespace HamsterTask
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
-                        control.deadLine.Content += " " + data[2];
+                        control.deadLine.Content += " " + Convert.ToDateTime(data[3]).ToShortDateString();
                         control.TaskID.Content = data[4];
                         control.Owner.Content += " " + data[3];
                         control.Background = new LinearGradientBrush(Colors.LightSlateGray, Colors.Wheat, 90);
@@ -195,12 +195,10 @@ namespace HamsterTask
                         var data = Helper.Http.GetRequest("http://localhost:8080/GetProject/" + parts[0] + "/" + i.ToString()).Split('|');
                         var control = new ProjectControll();
                         control.ProjectName.Content = data[0];
-                        control.Deadline.Content += " " +  data[1];
-                        control.TaskCount.Content +=  " " + data[2];
-                        control.UnTaskCount.Content += " " + data[3];
+                        control.Deadline.Content += Environment.NewLine + Convert.ToDateTime(data[3]).ToShortDateString();
+                        control.descript.Text = data[1];
                         control.ProjectID.Content = data[4];
                         control.Margin = new Thickness(0, 5, 0, 5);
-                        control.Background = new LinearGradientBrush(Colors.Aqua, Colors.Wheat, 90);
                         control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
                         control.BorderThickness = new Thickness(2);
                         if (i % 2 != 0)

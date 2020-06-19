@@ -16,6 +16,7 @@ namespace HamsterTask
         public static string GlobProjectID;
         public static string GlobMessID;
         public static string GlobUserID;
+        public static string GlobEmpID;
         public static string FROM;
 
         public static string GlobLang;

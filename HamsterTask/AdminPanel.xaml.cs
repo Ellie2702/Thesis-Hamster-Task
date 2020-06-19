@@ -32,7 +32,7 @@ namespace HamsterTask
 
         private void Messages_Click(object sender, RoutedEventArgs e)
         {
-
+            new UserMessage().Show();
         }
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)

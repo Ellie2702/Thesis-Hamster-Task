@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HamsterTask.Helper;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -111,6 +112,8 @@ namespace HamsterTask
             {
                 UserCompany.Visibility = Visibility.Hidden;
                 BTN_IHaveCode.Visibility = Visibility.Visible;
+                PositionLB.Visibility = Visibility.Hidden;
+                CompanyLBL.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -144,27 +147,7 @@ namespace HamsterTask
 
             try
             {
-                string[] avatar = Helper.Http.GetRequest("http://localhost:8080/GetAvatarUser/" + parts[0]).Split('|');
-
-                if (avatar[0] != "No Avatar")
-                {
-                    string[] temp = Directory.GetFiles(@"\UserFolder\Images\", avatar[1] + ".png", SearchOption.AllDirectories);
-                    if (temp != null)
-                    {
-
-                        UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
-                    }
-                    else
-                    {
-                        Encoding encoding = Encoding.Default;
-
-                        byte[] Img = encoding.GetBytes(avatar[0]);
-                        MemoryStream ms = new MemoryStream(Img);
-                        Bitmap image = new Bitmap(ms);
-                        image.Save(@"\UserFolder\Images\" + avatar[1] + ".png");
-                        UserA.Source = BitmapFrame.Create(new Uri("/UserFolder/Images/" + avatar[1] + ".png"));
-                    }
-                }
+                UserA.Source = Images.GetMyAvatar();
             }
             catch { }
             this.UpdateLayout();

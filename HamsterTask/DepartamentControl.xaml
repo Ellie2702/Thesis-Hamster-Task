@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HamsterTask"
-             mc:Ignorable="d" Height="215.217" Width="640.543">
-    <Grid>
+             mc:Ignorable="d" Height="138.913" Width="640.543">
+    <Grid Name="mygrid">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#59EDFFC8" Offset="0"/>
@@ -13,23 +13,12 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
 
-        <Label x:Name="depName" FontSize="12" Grid.ColumnSpan="3" />
-        <ScrollViewer Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2">
-            <TextBlock x:Name="depDesk" FontSize="12" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2" />
-        </ScrollViewer>
+        <TextBlock x:Name="depName" FontSize="15" TextWrapping="Wrap" Grid.ColumnSpan="3">
+            
+        </TextBlock>
+        
         
     </Grid>
 </UserControl>

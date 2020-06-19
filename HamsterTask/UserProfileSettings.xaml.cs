@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using HamsterTask.Helper;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,27 +26,20 @@ namespace HamsterTask
         {
             InitializeComponent();
             Global.LanguageSwitch(this);
+            this.Loaded += UserProfileSettings_Loaded;
+        }
+
+        private void UserProfileSettings_Loaded(object sender, RoutedEventArgs e)
+        {
+            MyAvaTAR.Source = Images.GetMyAvatar();
         }
 
         string[] parts = Global.Guid.Split('|');
 
         private void ChangeAvatar_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.FileOk += Dialog_FileOk;
-                dialog.ShowDialog();
-                void Dialog_FileOk(object s, System.ComponentModel.CancelEventArgs ex)
-                {
-                    dialog = (OpenFileDialog)s;
-                    var full = dialog.FileName;
-                    var bytes = File.ReadAllBytes(full);
-                }
-            } catch
-            {
-
-            }
+            Images.UploadImageAvatar();
+            MyAvaTAR.Source = Images.GetMyAvatar();
         }
 
         private void ExitCompany_Click(object sender, RoutedEventArgs e)

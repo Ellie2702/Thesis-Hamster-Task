@@ -210,4 +210,29 @@
     <system:String x:Key="RemProj">Вы уверены, что хотите удалить проект?</system:String>
 
     <system:String x:Key="RemovedProj">Проект удалён.</system:String>
+    
+    
+    <system:String x:Key="UploadLogo">Загрузить логотип</system:String>
+    <system:String x:Key="NewCode">Создать код сотрудника</system:String>
+    <system:String x:Key="remEmp">Удалить сотрудника</system:String>
+    <system:String x:Key="EmpRights">Настроить права доступа</system:String>
+    <system:String x:Key="EmpAddDep">Добавить сотрудника в департамент</system:String>
+    <system:String x:Key="RemDep">Удалить департамент</system:String>
+    <system:String x:Key="RemCompany">Удалить компанию</system:String>
+    <system:String x:Key="scheldue">График</system:String>
+
+    <system:String x:Key="NoDeps">Нет департаментов</system:String>
+    <system:String x:Key="NoEmps">Нет сотрудников</system:String>
+
+    <system:String x:Key="DepAdded">Департамент добавлен</system:String>
+    <system:String x:Key="NewDep">HamsterTask - Добавление департамента</system:String>
+    <system:String x:Key="Code">Код</system:String>
+
+    <system:String x:Key="CodeisAdded">Код создан и отправлен пользователю.</system:String>
+    <system:String x:Key="CodeNotAdded">Код не создан. Проверьте правильность написания почты.</system:String>
+
+    <system:String x:Key="HamsterTask.EmployeeCodeGener">HamsterTask - генерация кода</system:String>
+
+    <system:String x:Key="ProjectAdded">Проект добавлен!</system:String>
+    <system:String x:Key="ProjectNotAdded">Убедитесь, что заполнили все поля правильно!</system:String>
 </ResourceDictionary>

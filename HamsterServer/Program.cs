@@ -31,8 +31,8 @@ namespace HamsterServer
             new Program().ServerListener(new string[] { "http://localhost:8080/" });
         }
 
-       
 
+        private const string localImagesPath = "./Images/";
         private void ServerListener(string[] pref)
         {
             if (!HttpListener.IsSupported)
@@ -56,24 +56,85 @@ namespace HamsterServer
             {
                 HttpListenerContext context = Listener.GetContext();
                 HttpListenerRequest request = context.Request;
+                HttpListenerResponse response = context.Response;
 
                 Console.WriteLine("Got request from: {0}", request.Url);
 
+                if (request.Url.LocalPath.StartsWith("/getImageFile/")) // Получение изображения из папки
+                {
+                    byte[] buffer;
 
-                
-                HttpListenerResponse response = context.Response;
-                
-                string responseString = GetResult(WebUtility.UrlDecode(request.Url.LocalPath));
-                
-                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-                
-                response.ContentLength64 = buffer.Length;
-                System.IO.Stream output = response.OutputStream;
-                output.Write(buffer, 0, buffer.Length);
+                    buffer = File.ReadAllBytes(localImagesPath + request.Url.LocalPath.Substring(14).Replace("/", String.Empty));
+                    string responseStr = Convert.ToBase64String(buffer);
+                    buffer = System.Text.Encoding.UTF8.GetBytes(responseStr);
+                    response.ContentLength64 = buffer.Length;
+                    System.IO.Stream output = response.OutputStream;
+                    output.Write(buffer, 0, buffer.Length);
 
-                
-                
-                output.Close();
+                    output.Close();
+                }
+                else if (request.Url.LocalPath.StartsWith("/uploadImage/")) // загрузка изображения в папку
+                {
+                    string responseStr;
+                    byte[] buffer;
+                    try
+                    {
+                        string[] parts = request.Url.LocalPath.Split('/');
+                        string guid = parts[2];
+                        User user;
+                        using (DataContext db = new DataContext())
+                        {
+                            User temp = GlobalList.IsAuthed(new Guid(guid)).user;
+                            user = db.Users.Where(u => u.UserID == temp.UserID).FirstOrDefault();
+                        }
+
+                        if (user == null)
+                        {
+                            throw new Exception("auth err");
+                        }
+
+                        string base64 = WebUtility.UrlDecode((new StreamReader(request.InputStream)).ReadToEnd()); // сама картинка
+
+                        byte[] bytes = Convert.FromBase64String(base64.Substring(7)); // превращаем картинку в байты
+                        int id;
+                        using (DataContext db = new DataContext())
+                        {
+                            var img = new DATA.Entities.Image
+                            {
+                                User = user
+                            };
+                            db.Images.Add(img);
+                            db.SaveChanges();
+                            //img = db.Images.Last(); //??  :D
+                            id = img.ImageID;
+                        }
+                        File.WriteAllBytes(localImagesPath + id.ToString() + ".png", bytes); // записываем байты в папку
+                        responseStr = id.ToString();
+                    }
+                    catch (Exception Ex)
+                    {
+                        responseStr = "err";
+                    }
+
+                    buffer = System.Text.Encoding.UTF8.GetBytes(responseStr);
+                    response.ContentLength64 = buffer.Length;
+                    System.IO.Stream output = response.OutputStream;
+                    output.Write(buffer, 0, buffer.Length);
+
+                    output.Close();
+                }
+                else // Если нет работы с картинками используем обычную обработку запросов
+                {
+                    string responseString = GetResult(WebUtility.UrlDecode(request.Url.LocalPath));
+
+                    byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+
+                    response.ContentLength64 = buffer.Length;
+                    System.IO.Stream output = response.OutputStream;
+                    output.Write(buffer, 0, buffer.Length);
+
+                    output.Close();
+                }
             }
         }
 
@@ -99,8 +160,11 @@ namespace HamsterServer
                         if (part.Length != 9) return part.Length.ToString();
                         return TryRegistrationOrg("A", part);
                     case "GetAvatarUser":
-                        if(part.Length != 3) return part.Length.ToString();
+                        if (part.Length != 3) return part.Length.ToString();
                         return GetAvatar(part[2]);
+                    case "GetAvatarCompany":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetAvatarCompany(part[2]);
                     case "GetProjects":
                         if (part.Length != 3) return part.Length.ToString();
                         return GetProjects(part[2]);
@@ -129,14 +193,14 @@ namespace HamsterServer
                         if (part.Length != 4) return part.Length.ToString();
                         return GetTask(part[2], part[3]);
                     case "CreateProject":
-                        if (part.Length != 6) return part.Length.ToString();
-                        return CreateProject(part[2], part[3], part[4], part[5]);
+                        if (part.Length != 7) return part.Length.ToString();
+                        return CreateProject(part[2], part[3], part[4], part[5], part[6]);
                     case "CreateTask":
                         if (part.Length > 8) return part.Length.ToString();
                         return CreateTask(part[2], part);
                     case "GenerateEmployeeCode":
                         if (part.Length != 3) return part.Length.ToString();
-                        return EmpCode(part[2]);
+                        return EmpCode(part[2], part[3]);
                     case "SetPosition":
                         if (part.Length != 4) return part.Length.ToString();
                         return SetPosition(part[2], part[3]);
@@ -146,9 +210,15 @@ namespace HamsterServer
                     case "TaskExecutors":
                         if (part.Length != 5) return part.Length.ToString();
                         return SetExecutor(part[2], part[3], part[4]);
-                    case "UploadImage":
-                        if (part.Length != 6) return part.Length.ToString();
-                        return UpImage(part[2], part[4], part[5]);
+                        //case "UploadImage":
+                        //    if (part.Length != 6) return part.Length.ToString();
+                        //    return UpImage(part[2], part[4], part[5]);
+                    case "companyLogoUploaded":
+                        if (part.Length != 4) return "err";
+                        return companyLogoUploaded(part[2], part[3]);
+                    case "avatarUploaded":
+                        if (part.Length != 4) return "err";
+                        return avatarUploaded(part[2], part[3]);
                     case "MessageCount":
                         if (part.Length != 3) return part.Length.ToString();
                         return GetMesssagesCount(part[2]);
@@ -173,9 +243,9 @@ namespace HamsterServer
                     case "GetUserProjects":
                         if (part.Length != 4) return part.Length.ToString();
                         return GetUserProgects(part[2], part[3]);
-                    case "GetDepartaments":
+                    case "GetDepartamentsCount":
                         if (part.Length != 3) return part.Length.ToString();
-                        return GetDepartaments(part[2]);
+                        return GetDepartamentsCount(part[2]);
                     case "ChangeLogin":
                         if (part.Length != 4) return part.Length.ToString();
                         return ChangeUserLogin(part[2], part[3]);
@@ -245,11 +315,324 @@ namespace HamsterServer
                     case "GetProjectnum":
                         if (part.Length != 4) return part.Length.ToString();
                         return GetProjecNum(part[2], part[3]);
+                    case "GetDepartment":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetDepartment(part[2], part[3]);
+                    case "GetDepartmentInfo":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetDepartmentInfoCount(part[2], part[3]);
+                    case "GetDepartmentEmp":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return GetDepartmentEmp(part[2], part[3], part[4]);
+                    case "GetCompanyProjCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetCompanyProjCount(part[2]);
+                    case "GetCompanyProj":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetCompanyProj(part[2], part[3]);
+                    case "GetCompanyEmpsCount":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetCompanyEmpsCount(part[2]);
+                    case "GetCompanyEmps":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetCompanyEmps(part[2], part[3]);
+                    case "AddDepartament":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return AddDepartament(part[2], part[3]);
                     default:
                         return "404";
                 }
             }
             else return "need more arguments!";
+        }
+
+        private string companyLogoUploaded(string guid, string imageId)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        User user1 = db.Users.FirstOrDefault(u => u.UserID == user.UserID);
+                        var emp = db.Employees.Include("User").Include("Company").FirstOrDefault(c => c.User.UserID == user1.UserID);
+                        if (emp == null)
+                        {
+                            throw new Exception();
+                        }
+                        var comp = db.Companies.FirstOrDefault(c => c.CompanyID == emp.Company.CompanyID);
+
+                        var img = db.Images.FirstOrDefault(i => i.ImageID.ToString() == imageId);
+                        var olds = db.CompanyLogos.Include("Company").Where(a => a.Company.CompanyID == comp.CompanyID);
+                        foreach (var old in olds)
+                        {
+                            old.isUsed = false;
+                        }
+
+                        db.CompanyLogos.Add(new CompanyLogo
+                        {
+                            Company = comp,
+                            Image = img,
+                            isUsed = true
+                        });
+                        db.SaveChanges();
+                        return "Ok!";
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch (Exception Ex)
+            {
+                return "No!";
+            }
+        }
+        private string avatarUploaded(string guid, string imageId)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        User user1 = db.Users.FirstOrDefault(u => u.UserID == user.UserID);
+                        
+                        var img = db.Images.FirstOrDefault(i => i.ImageID.ToString() == imageId);
+                        var olds = db.Avatars.Include("Owner").Where(a => a.Owner.UserID == user1.UserID);
+                        foreach (var old in olds)
+                        {
+                            old.IsUsed = false;
+                        }
+
+                        db.Avatars.Add(new Avatar
+                        {
+                            Owner = user1,
+                            Image = img,
+                            IsUsed = true
+                        });
+                        db.SaveChanges();
+                        return "Ok!";
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch (Exception Ex)
+            {
+                return "No!";
+            }
+        }
+
+        private string AddDepartament(string guid, string title)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        User user1 = db.Users.FirstOrDefault(u => u.UserID == user.UserID);
+                        Employee employee = db.Employees.Include("Company").Include("User").FirstOrDefault(e => e.User.UserID == user1.UserID);
+                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID);
+                        db.Departments.Add(new Department { Company = company, DepartmentName = title });
+                        db.SaveChanges();
+                        return "Ok!";
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompanyEmps(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        var comp = db.Employees.Include("User").Include("Company").Where(c => c.User.UserID == user.UserID).FirstOrDefault();
+                        var res = db.Employees.Include("User").Include("Company").Where(r => r.Company.CompanyID == comp.Company.CompanyID).ToList();
+                        var emp = res[i];
+                        return emp.User.FirstName + " " + emp.User.SecondName + "|" + emp.Position + "|" + emp.User.Email + "|" + emp.EmployeeID;
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompanyEmpsCount(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var comp = db.Employees.Include("User").Include("Company").Where(c => c.User.UserID == user.UserID).FirstOrDefault();
+                        var res = db.Employees.Include("Company").Where(r => r.Company.CompanyID == comp.Company.CompanyID).ToList();
+                        return res.Count().ToString();
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompanyProj(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        var comp = db.Employees.Include("User").Include("Company").Where(c => c.User.UserID == user.UserID).FirstOrDefault();
+                        var proj = db.Projects.Include("User").Include("Company").Where(p => p.Company.CompanyID == comp.Company.CompanyID).ToList();
+                        var res = proj[i];
+                        return res.Title + "|" + res.Descript + "|" + res.User.FirstName + " " + res.User.SecondName + "|" + res.Deadline;
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompanyProjCount(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        var comp = db.Employees.Include("User").Include("Company").Where(c => c.User.UserID == user.UserID).FirstOrDefault();
+                        var proj = db.Projects.Include("User").Include("Company").Where(p => p.Company.CompanyID == comp.Company.CompanyID).ToList();
+                        return proj.Count().ToString();
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetDepartmentEmp(string guid, string num, string id)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int ic = Convert.ToInt32(num);
+                        int ie = Convert.ToInt32(id);
+
+                        var data = db.Employees.Include("Company").Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == data.Company.CompanyID);
+                        var dep = db.Departments.Include("Company").Where(d => d.Company.CompanyID == company.CompanyID).ToList();
+                        var r = dep[ic];
+                        var emps = db.DepartamentEmployees.Include("Departament").Include("Employee").Where(e => e.Department.DepartamentID == r.DepartamentID).ToList();
+                        var emp = emps[ie];
+                        var us = db.Employees.Include("User").FirstOrDefault(j => j.EmployeeID == emp.Employee.EmployeeID);
+                        return us.User.FirstName + " " + us.User.SecondName + "|" + emp.Employee.Position + "|" + us.User.Email + "|" + us.EmployeeID;
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetDepartmentInfoCount(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+
+                        var data = db.Employees.Include("Company").Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == data.Company.CompanyID);
+                        var dep = db.Departments.Include("Company").Where(d => d.Company.CompanyID == company.CompanyID).ToList();
+                        var r = dep[i];
+                        var emps = db.DepartamentEmployees.Include("Departament").Include("Employee").Where(e => e.Department.DepartamentID == r.DepartamentID).ToList();
+                        
+                        
+                        return emps.Count().ToString();
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetDepartment(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        
+                        var data = db.Employees.Include("Company").Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == data.Company.CompanyID);
+                        var dep = db.Departments.Include("Company").Where(d => d.Company.CompanyID == company.CompanyID).ToList();
+                        var r = dep[i];
+                        return r.DepartmentName;
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
         }
 
         private string GetProjecNum(string guid, string num)
@@ -656,17 +1039,35 @@ namespace HamsterServer
                 using (DataContext db = new DataContext())
                 {
                     User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    Employee infoEmp = db.Employees.Include("User").Include("Position").Include("Company").FirstOrDefault(emp => emp.User.UserID == user.UserID);
+                    Position positionName = null;
+                    Company companyName = null;
+                    if (infoEmp != null)
+                    {
+                        int pos = infoEmp.Position.PositionID;
+                        int comp = infoEmp.Company.CompanyID;
+                        positionName = db.Positions.Where(p => p.PositionID == pos).FirstOrDefault();
+                        companyName = db.Companies.Where(p => p.CompanyID == comp).FirstOrDefault();
+                    }
                     if (user != null)
                     {
-                        if(user.PhoneNumber != null)
+                        if (user.PhoneNumber != null)
                         {
-                            info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
-                            return guid + "|" + info;
-                        } else
-                        {
-                            info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email;
-                            return guid + "|" + info;
+                            if (infoEmp != null)
+                            {
+                                info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber + "|" + positionName.PositionName + "|" + companyName.CompanyName + "|" + "WP";
+                            }
+                            else info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + "|" + user.PhoneNumber;
                         }
+                        else
+                        {
+                            if (infoEmp != null)
+                            {
+                                info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email + positionName.PositionName + "|" + companyName.CompanyName + "|" + "W";
+                            }
+                            else info = user.UserID + "|" + user.RoleID + "|" + user.FirstName + "|" + user.SecondName + "|" + user.Birth + "|" + user.Email;
+                        }
+                        return guid.ToString() + "|" + info;
                     }
                     else return "No!";
                 }
@@ -924,7 +1325,7 @@ namespace HamsterServer
             }
         }
 
-        private string GetDepartaments(string guid)
+        private string GetDepartamentsCount(string guid)
         {
             try
             {
@@ -933,23 +1334,17 @@ namespace HamsterServer
                     User user = GlobalList.IsAuthed(new Guid(guid)).user;
                     var data = db.Employees.Include("Company").Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
                     Company company = db.Companies.FirstOrDefault(c => c.CompanyID == data.Company.CompanyID);
-                    var dep = db.Departments.Include("Company").Where(d => d.Company.CompanyID == company.CompanyID).ToList();
+                    var dep = db.Departments.Include("Company").Where(d => d.Company.CompanyID == company.CompanyID).Count();
                     if (dep != null)
                     {
-                        string info = dep.Count().ToString() + "/";
-                        for (int i = 0; i < dep.Count(); i++)
-                        {
-                            info += dep[i].DepartamentID;
-                            info += "|" + dep[i].DepartmentName;
-                        }
-                        return info;
+                        return dep.ToString();
                     }
-                    else return "No Departmens";
+                    else return "No!";
                 }
             }
             catch
             {
-                return "No Departmens";
+                return "No!";
             }
         }
 
@@ -1077,35 +1472,33 @@ namespace HamsterServer
             }
         }
 
-
-
-        private string UpImage(string guid, string bytes, string A)
+        private string UpImage(string guid, string A)
         {
             using (DataContext db = new DataContext())
             {
                 User user = GlobalList.IsAuthed(new Guid(guid)).user;
 
-                Encoding encoding = Encoding.Default;
-               
-                byte[] Img = encoding.GetBytes(bytes);
-                DATA.Entities.Image temp = db.Images.Add(new DATA.Entities.Image { User = user });
-                db.SaveChanges();
-                MemoryStream ms = new MemoryStream(Img);
-                Bitmap image = new Bitmap(ms);
-                switch (A)
-                {
-                    case "A":
-                        image.Save(@"\Documents\Users\" + user.UserID.ToString() + @"\Images\" + temp.ImageID.ToString());
-                        return "Saved!";
-                    case "B":
-                        Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
-                        String CompanyName = db.Companies.FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID).CompanyName;
-                        image.Save(@"\Documents\Companies\" + CompanyName + @"\Images\" + temp.ImageID.ToString());
-                        return "Saved!";
-                    default:
-                        return "We are can't upload this";
-                }
-                
+                //Encoding encoding = Encoding.Default;
+
+                //byte[] Img = encoding.GetBytes(bytes);
+                //DATA.Entities.Image temp = db.Images.Add(new DATA.Entities.Image { User = user });
+                //db.SaveChanges();
+                //MemoryStream ms = new MemoryStream(Img);
+                //Bitmap image = new Bitmap(ms);
+                //switch (A)
+                //{
+                //    case "A":
+                //        image.Save(@"\Documents\Users\" + user.UserID.ToString() + @"\Images\" + temp.ImageID.ToString());
+                //        return "Saved!";
+                //    case "B":
+                //        Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
+                //        String CompanyName = db.Companies.FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID).CompanyName;
+                //        image.Save(@"\Documents\Companies\" + CompanyName + @"\Images\" + temp.ImageID.ToString());
+                //        return "Saved!";
+                //    default:
+                //        return "We are can't upload this";
+                //}
+                return "ok";
             }
         }
 
@@ -1144,26 +1537,32 @@ namespace HamsterServer
 
         private string SetPosition(string guid, string pos)
         {
-            using (DataContext db = new DataContext())
+            try
             {
-                User user = GlobalList.IsAuthed(new Guid(guid)).user;
-                Employee emp = db.Employees.FirstOrDefault(e => e.User.UserID == user.UserID);
-                Position position = db.Positions.Where(p => p.PositionName == pos).FirstOrDefault();
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    Employee emp = db.Employees.FirstOrDefault(e => e.User.UserID == user.UserID);
+                    Position position = db.Positions.Where(p => p.PositionName == pos).FirstOrDefault();
 
-                if (position != null)
-                {
-                    emp.Position = position;
-                }
-                else
-                {
-                    position = new Position();
-                    position.PositionName = pos;
-                    db.Positions.Add(position);
+                    if (position != null)
+                    {
+                        emp.Position = position;
+                    }
+                    else
+                    {
+                        position = new Position();
+                        position.PositionName = pos;
+                        db.Positions.Add(position);
+                        db.SaveChanges();
+                        emp.Position = position;
+                    }
                     db.SaveChanges();
-                    emp.Position = position;
+                    return "Ok!";
                 }
-                db.SaveChanges();
-                return "It's ok";
+            } catch
+            {
+                return "No!";
             }
         }
 
@@ -1191,29 +1590,44 @@ namespace HamsterServer
             }
         }
 
-        private string EmpCode(string guid)
+        private string EmpCode(string guid, string email)
         {
-            using (DataContext db = new DataContext())
+            try
             {
-                User user = GlobalList.IsAuthed(new Guid(guid)).user;
-                var temp = db.Employees.Include("User").FirstOrDefault(u => u.User.UserID == user.UserID);
-                Company company = db.Companies.FirstOrDefault(c => c.CompanyID == temp.Company.CompanyID);
-                StringBuilder builder = new StringBuilder();
-                Random rnd = new Random();
-                char a;
-                for (int i = 0; i < 6; i++)
+                using (DataContext db = new DataContext())
                 {
-                    a = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * rnd.NextDouble() + 65)));
-                    builder.Append(a);
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user.UserID != null)
+                    {
+                        User user1 = db.Users.FirstOrDefault(u => user.UserID == u.UserID);
+                        User UserTo = db.Users.FirstOrDefault(t => t.Email == email);
+                        var temp = db.Employees.Include("User").FirstOrDefault(u => u.User.UserID == user.UserID);
+                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == temp.Company.CompanyID);
+                        StringBuilder builder = new StringBuilder();
+                        Random rnd = new Random();
+                        char a;
+                        for (int i = 0; i < 6; i++)
+                        {
+                            a = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * rnd.NextDouble() + 65)));
+                            builder.Append(a);
+                        }
+                        string res = builder.ToString();
+                        EmployeeCode code = new EmployeeCode();
+                        code.Code = res;
+                        code.Company = company;
+                        code.isUsed = false;
+                        db.EmployeeCodes.Add(code);
+                        db.SaveChanges();
+                        string mes = "You have a company code!" + " " + res;
+                        db.Messages.Add(new Message { Content = mes, Title = "Company Code", isCheck = false, TimeSend = DateTime.Now, UserFrom_UserId = user, UserTo_UserId = UserTo });
+                        db.SaveChanges();
+                        return "Code is created";
+                    }
+                    else return "No!";
                 }
-                string res = builder.ToString();
-                EmployeeCode code = new EmployeeCode();
-                code.Code = res;
-                code.Company = company;
-                code.isUsed = false;
-                db.EmployeeCodes.Add(code);
-                db.SaveChanges();
-                return "Code is created";
+            }
+            catch { 
+                return "No!";
             }
         }
 
@@ -1234,8 +1648,8 @@ namespace HamsterServer
                         return "Task is added";
                     case "E":
                         DATA.Entities.Task temp1 = db.Tasks.Add(new DATA.Entities.Task { User = user1, Deadline = dead, CreateDate = DateTime.Now, Descript = part[5], isDone = false });
-                        int id = Convert.ToInt32(part[7]);
-                        User exec = db.Users.FirstOrDefault(u => u.UserID == id);
+                        
+                        User exec = db.Users.FirstOrDefault(u => u.Email == part[7]);
                         db.TaskExecutors.Add(new TaskExecutors { Task = temp1, User = exec });
                         db.SaveChanges();
                         return "Task is added";
@@ -1246,33 +1660,36 @@ namespace HamsterServer
             }
         }
 
-        private string CreateProject(string guid, string A, string title, string descript)
+        private string CreateProject(string guid, string A, string title, string descript, string deadline)
         {
             using (DataContext db = new DataContext())
             {
                 User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                User user1 = db.Users.FirstOrDefault(u => u.UserID == user.UserID);
                 Projects projects = new Projects();
                 switch (A)
                 {
                     case "U":
                         projects.Title = title;
                         projects.Descript = descript;
-                        projects.User = user;
+                        projects.User = user1;
+                        projects.Deadline = Convert.ToDateTime(deadline);
                         db.Projects.Add(projects);
                         db.SaveChanges();
-                        return "It's done!";
+                        return "Ok!";
                     case "C":
                         projects.Title = title;
                         projects.Descript = descript;
-                        projects.User = user;
-                        int CompID = db.Employees.Include("Company").Include("User").FirstOrDefault(e => e.User.UserID == user.UserID).Company.CompanyID;
-                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == CompID);
+                        projects.User = user1;
+                        projects.Deadline = Convert.ToDateTime(deadline);
+                        Employee infoEmp = db.Employees.Include("User").Include("Position").Include("Company").FirstOrDefault(emp => emp.User.UserID == user.UserID);
+                        Company company = db.Companies.FirstOrDefault(c => c.CompanyID == infoEmp.Company.CompanyID);
                         projects.Company = company;
                         db.Projects.Add(projects);
                         db.SaveChanges();
-                        return "It's done!";
+                        return "Ok!";
                     default:
-                        return "Something wrong!";
+                        return "No!";
                 }
             }
         }
@@ -1357,20 +1774,52 @@ namespace HamsterServer
             {
                 User user = GlobalList.IsAuthed(new Guid(guid)).user;
                 var data = db.Avatars.Include("Owner").Include("Image").FirstOrDefault(a => a.Owner.UserID == user.UserID && a.IsUsed == true);
-                if(data == null)
+                if (data == null)
                 {
                     return "No Avatar";
-                } else
+                }
+                else
                 {
-                    var image = db.Images.FirstOrDefault(i => i.ImageID == data.ImageID);
-                    Encoding encoding = Encoding.Default;
-                    string path = "/Documents/Users/" + user.UserID.ToString() + "/Images/" + image.ImageID.ToString() + ".png";
-                    System.Drawing.Image img = System.Drawing.Image.FromFile(@"\Documents\Users\" + user.UserID.ToString() + @"\Images\" + image.ImageID.ToString() + ".png");
-                    System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
-                    img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
-                    byte[] bytes = memoryStream.ToArray();
-                    string res = encoding.GetString(bytes);
-                    return res + "|" + image.ImageID.ToString();
+                    string str = "no";
+                    try
+                    {
+                        byte[] buffer = File.ReadAllBytes(localImagesPath + "/" + data.ImageID + ".png");
+                        str = Convert.ToBase64String(buffer);
+                    }
+                    catch { }
+                    return str;
+                }
+            }
+        }
+
+
+        private string GetAvatarCompany(string guid)
+        {
+            using (DataContext db = new DataContext())
+            {
+                User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                var emp = db.Employees.Include("User").Include("Company").FirstOrDefault(c => c.User.UserID == user.UserID);
+                if (emp == null)
+                {
+                    throw new Exception();
+                }
+                var comp = db.Companies.FirstOrDefault(c => c.CompanyID == emp.Company.CompanyID);
+
+                var logo = db.CompanyLogos.Include("Company").Include("Image").FirstOrDefault(a => a.Company.CompanyID == comp.CompanyID);
+                if (logo == null)
+                {
+                    return "No Avatar";
+                }
+                else
+                {
+                    string str = "no";
+                    try
+                    {
+                        byte[] buffer = File.ReadAllBytes(localImagesPath + "/" + logo.Image.ImageID + ".png");
+                        str = Convert.ToBase64String(buffer);
+                    }
+                    catch { }
+                    return str;
                 }
             }
         }

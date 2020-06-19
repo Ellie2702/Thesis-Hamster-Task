@@ -37,32 +37,20 @@ namespace HamsterTask
             try
             {
                 string[] parts = Global.Guid.Split('|');
-                List<Global.Emps> emps = new List<Global.Emps>();
                 if (Global.FROM != null)
                 {
                     switch (Global.FROM)
                     {
                         case "UserPanel":
-                            TaskExec.Visibility = Visibility.Hidden;
+                            MailExec.Visibility = Visibility.Hidden;
                             TaskExecSel.Visibility = Visibility.Hidden;
+                            pastemail.Visibility = Visibility.Hidden;
                             break;
                         case "Company":
-                            Global.Emps emps1 = new Global.Emps();
-                            
-                            var data = Helper.Http.GetRequest("http://localhost:8080/ChooseExec/" + parts[0]).Split('|');
-                            string[] temp;
-                            for (int i = 0; i < data.Length; i++)
-                            {
-                                temp = data[i].Split('/');
-                                emps1.id = Convert.ToInt32(temp[0]);
-                                emps1.name = temp[1];
-                                emps.Add(emps1);
-                            }
-                            
-                            TaskExec.ItemsSource = emps;
-                            TaskExec.DisplayMemberPath = "name";
-                            TaskExec.SelectedValuePath= "id";
-                            TaskExec.UpdateLayout();
+                            MailExec.Visibility = Visibility.Visible;
+                            TaskExecSel.Visibility = Visibility.Visible;
+                            pastemail.Visibility = Visibility.Visible;
+
                             break;
                     }
                 }
@@ -85,19 +73,41 @@ namespace HamsterTask
                     MessageBox.Show(TryFindResource("DateNull").ToString());
                 } else
                 {
-                    string data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
-                    if(data == "Task is added")
+
+                    switch (Global.FROM)
                     {
-                        MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
-                        HamsterTask.Tasks.resave = true;
+                        case "UserPanel":
+                            string data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
+                            if (data == "Task is added")
+                            {
+                                MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                HamsterTask.Tasks.resave = true;
+                            }
+                            else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            break;
+                        case "Company":
+                            string d = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + MailExec.Text);
+                            if (d == "Task is added")
+                            {
+                                MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                HamsterTask.Tasks.resave = true;
+                            }
+                            else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            break;
                     }
-                    else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+
+                    
                 }
             }
             catch (Exception Ex)
             {
                
             }
+        }
+
+        private void pastemail_Click(object sender, RoutedEventArgs e)
+        {
+            MailExec.Text = Global.userMail;
         }
     }
 }

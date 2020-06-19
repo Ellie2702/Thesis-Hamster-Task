@@ -1,0 +1,81 @@
+﻿<Window x:Class="HamsterTask.Emp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HamsterTask"
+        mc:Ignorable="d"
+        Title="Emp" Height="290.543" Width="712.935">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="4">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF031419" Offset="0.989"/>
+                    <GradientStop Color="#FF126A7A" Offset="0.342"/>
+                    <GradientStop Color="#FF579CB6" Offset="0.232"/>
+                    <GradientStop Color="#FF0E6376" Offset="0.644"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Label x:Name="EmpName" FontSize="18" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="5,5,10,10">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#72BBE284" Offset="0"/>
+                    <GradientStop Color="#728BECE3" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label x:Name="EmpPos" FontSize="18" Content="{DynamicResource PositionName}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="5,10,10,5">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#72BBE284" Offset="0"/>
+                    <GradientStop Color="#728BECE3" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label x:Name="EmpWork" FontSize="18" Content="{DynamicResource LabelEmail}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="5,10,10,4">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#72BBE284" Offset="0"/>
+                    <GradientStop Color="#728BECE3" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Button x:Name="CopyMail" Grid.Column="2" HorizontalAlignment="Left" Margin="124,19,0,0" VerticalAlignment="Top" Width="42" Height="36" Foreground="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.682,0.806" Grid.Row="2" Click="CopyMail_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/copy.png"/>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource AdminCopyTOOL}" TextWrapping="Wrap"/>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="RemEmp" Grid.Column="3" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="54" Height="42" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="RemEmp_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="Image/delete.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="EditPos" Grid.Column="3" HorizontalAlignment="Left" Margin="24,10,0,0" VerticalAlignment="Top" Width="54" Height="42" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="0.517,0.722" Click="EditPos_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="Image/conversation.png"/>
+            </Button.Background>
+        </Button>
+    </Grid>
+</Window>

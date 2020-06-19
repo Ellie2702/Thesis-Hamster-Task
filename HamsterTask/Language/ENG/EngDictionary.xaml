@@ -211,4 +211,29 @@
     <system:String x:Key="RemProj">Are you sure you want to delete the project?</system:String>
 
     <system:String x:Key="RemovedProj">The project was deleted.</system:String>
+
+    <system:String x:Key="UploadLogo">Upload a logo</system:String>
+    <system:String x:Key="NewCode">Create an employee code</system:String>
+    <system:String x:Key="remEmp">Delete an employee</system:String>
+    <system:String x:Key="EmpRights">Configure access rights</system:String>
+    <system:String x:Key="EmpAddDep">Add an employee to the Department</system:String>
+    <system:String x:Key="RemDep">Delete a Department</system:String>
+    <system:String x:Key="RemCompany">Delete a company</system:String>
+    <system:String x:Key="scheldue">Schedule</system:String>
+
+    <system:String x:Key="NoDeps">No departments</system:String>
+    <system:String x:Key="NoEmps">No employees</system:String>
+
+    <system:String x:Key="DepAdded">The Department added</system:String>
+
+    <system:String x:Key="NewDep">HamsterTask - The addition of the Department</system:String>
+    <system:String x:Key="Code">Code:</system:String>
+
+    <system:String x:Key="CodeisAdded">The code was created and sent to the user.</system:String>
+    <system:String x:Key="CodeNotAdded">The code was not created. Check whether the email is spelled correctly.</system:String>
+
+    <system:String x:Key="HamsterTask.EmployeeCodeGener">HamsterTask - code generation</system:String>
+
+    <system:String x:Key="ProjectAdded">The project added!</system:String>
+    <system:String x:Key="ProjectNotAdded">Make sure that you fill in all the fields correctly!</system:String>
 </ResourceDictionary>

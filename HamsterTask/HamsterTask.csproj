@@ -73,6 +73,9 @@
     <Compile Include="AddProject.xaml.cs">
       <DependentUpon>AddProject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditTask.xaml.cs">
+      <DependentUpon>EditTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddTask.xaml.cs">
       <DependentUpon>AddTask.xaml</DependentUpon>
     </Compile>
@@ -88,11 +91,21 @@
     <Compile Include="DepartamentControl.xaml.cs">
       <DependentUpon>DepartamentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Emp.xaml.cs">
+      <DependentUpon>Emp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmpControl.xaml.cs">
+      <DependentUpon>EmpControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeCodeGener.xaml.cs">
+      <DependentUpon>EmployeeCodeGener.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmployyesManagment.xaml.cs">
       <DependentUpon>EmployyesManagment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Helper\Http.cs" />
+    <Compile Include="Helper\Images.cs" />
     <Compile Include="Message.xaml.cs">
       <DependentUpon>Message.xaml</DependentUpon>
     </Compile>
@@ -104,6 +117,9 @@
     </Compile>
     <Compile Include="MessageViewControl.xaml.cs">
       <DependentUpon>MessageViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewDep.xaml.cs">
+      <DependentUpon>NewDep.xaml</DependentUpon>
     </Compile>
     <Compile Include="NewEmployee.xaml.cs">
       <DependentUpon>NewEmployee.xaml</DependentUpon>
@@ -155,6 +171,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditTask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AddTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +192,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DepartamentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Emp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployeeCodeGener.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +246,10 @@
     <Page Include="MessageViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewDep.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewEmployee.xaml">
       <SubType>Designer</SubType>

@@ -512,7 +512,7 @@ namespace HamsterServer
                         var comp = db.Employees.Include("User").Include("Company").Where(c => c.User.UserID == user.UserID).FirstOrDefault();
                         var proj = db.Projects.Include("User").Include("Company").Where(p => p.Company.CompanyID == comp.Company.CompanyID).ToList();
                         var res = proj[i];
-                        return res.Title + "|" + res.Descript + "|" + res.User.FirstName + " " + res.User.SecondName + "|" + res.Deadline;
+                        return res.Title + "|" + res.Descript + "|" + res.User.FirstName + " " + res.User.SecondName + "|" + res.Deadline + "|" + res.ProjectID.ToString();
 
                     }
                     else return "No!";

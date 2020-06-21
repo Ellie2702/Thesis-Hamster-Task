@@ -235,4 +235,17 @@
 
     <system:String x:Key="ProjectAdded">Проект добавлен!</system:String>
     <system:String x:Key="ProjectNotAdded">Убедитесь, что заполнили все поля правильно!</system:String>
+
+    <system:String x:Key="ActivCodeDesc">Введите код, чтобы подтвердить сотрудничество!</system:String>
+    <system:String x:Key="ActivCode">Активировать</system:String>
+    <system:String x:Key="ActivCodeDone">Ваш код успешно активирован!</system:String>
+    <system:String x:Key="ActivCodeNotDone">Код не активирован. Убедитесь, что ввели его правильно.</system:String>
+
+    <system:String x:Key="SaveChanges">Сохранить изменения</system:String>
+
+    <system:String x:Key="ChangesIsSaved">Измененения сохранены</system:String>
+
+    <system:String x:Key="HamsterTask.EditProjects">HamsterTask - Измененение проекта</system:String>
+    <system:String x:Key="EditCompany">Изменить информацию</system:String>
+    <system:String x:Key="DepName">Департамент:</system:String>
 </ResourceDictionary>

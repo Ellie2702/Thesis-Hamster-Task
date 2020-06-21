@@ -33,5 +33,10 @@ namespace HamsterTask
         {
 
         }
+
+        private void pastemail_Click(object sender, RoutedEventArgs e)
+        {
+            EmpMail.Text = Global.userMail;
+        }
     }
 }

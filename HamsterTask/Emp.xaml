@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
         Title="Emp" Height="290.543" Width="712.935">
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -14,6 +14,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -57,7 +58,7 @@
                 </LinearGradientBrush>
             </Label.Background>
         </Label>
-        <Button x:Name="CopyMail" Grid.Column="2" HorizontalAlignment="Left" Margin="124,19,0,0" VerticalAlignment="Top" Width="42" Height="36" Foreground="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.682,0.806" Grid.Row="2" Click="CopyMail_Click">
+        <Button x:Name="CopyMail" Grid.Column="2" HorizontalAlignment="Left" Margin="124,12,0,0" VerticalAlignment="Top" Width="42" Height="36" Foreground="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.682,0.806" Grid.Row="2" Click="CopyMail_Click">
             <Button.Background>
                 <ImageBrush ImageSource="Image/copy.png"/>
             </Button.Background>
@@ -77,5 +78,13 @@
                 <ImageBrush ImageSource="Image/conversation.png"/>
             </Button.Background>
         </Button>
+        <Label x:Name="Department" Content="{DynamicResource DepName}" FontSize="18" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="5,10,10,5">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#72BBE284" Offset="0"/>
+                    <GradientStop Color="#728BECE3" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
     </Grid>
 </Window>

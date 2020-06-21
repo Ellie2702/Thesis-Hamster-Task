@@ -32,12 +32,12 @@
         <Label Name="Company" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Margin="135,0,62,0" Grid.ColumnSpan="2"/>
         <Label Name="Iswork" Grid.Column="1" Grid.ColumnSpan="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10,33,25,0"/>
 
-        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}" Grid.Column="2" Grid.Row="1" FontSize="15" Visibility="Hidden" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="1,63,0,0"/>
-        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}" Grid.Column="2" Grid.Row="1" FontSize="15" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,95,1,56"/>
+        <Label x:Name="TaskCount" Content="{DynamicResource TaskCount}"  Visibility="Hidden" Grid.Column="2" Grid.Row="1" FontSize="15" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="1,63,10,0"/>
+        <Label x:Name="MessagesCount" Content="{DynamicResource MessagesCount}"  Visibility="Hidden" Grid.Column="2" Grid.Row="1" FontSize="15"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.RowSpan="2" Margin="0,95,10,56"/>
 
         <Label Name="BirthLB" Content="{DynamicResource LabelUserBirth}" Grid.Row="1" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="180,0,106,0" Grid.ColumnSpan="2"/>
-        <Label Name="Birth" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="286" Grid.ColumnSpan="2" Margin="140,0,0,0"/>
-        <Label Name="EmailLB" Content="{DynamicResource LabelEmail}" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Margin="0,0,106,0"/>
+        <Label Name="Birth" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="291" Grid.ColumnSpan="2" Margin="135,0,0,0"/>
+        <Label Name="EmailLB" Content="{DynamicResource LabelEmail}" Grid.Row="1" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Margin="196,0,106,0" Grid.ColumnSpan="2"/>
         <Label Name="Email" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Grid.ColumnSpan="2" Margin="135,0,25,0"/>
 
 
@@ -48,7 +48,11 @@
                     <GradientStop Color="#7272FF8C" Offset="1"/>
                 </LinearGradientBrush>
             </GroupBox.Background>
-            <Image x:Name="UserA" HorizontalAlignment="Left" Height="174" Margin="0,91,0,0" VerticalAlignment="Top" Width="164" Source="Image/user.png"/>
+            <Ellipse x:Name="UserA" HorizontalAlignment="Left" Height="148" Margin="22,126,0,0" VerticalAlignment="Top" Width="156">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="user.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
 
         </GroupBox>
 

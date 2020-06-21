@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="{DynamicResource HamsterTask.Company}" Height="800" Width="1225" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="{DynamicResource HamsterTask.Company}" Height="660.5" Width="1226.5" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,-51,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -23,7 +23,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="605" Margin="10,26,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="1050" Grid.ColumnSpan="4">
+        <TabControl HorizontalAlignment="Left" Height="499" Margin="10,26,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="1050" Grid.ColumnSpan="4">
 
             <TabItem x:Name="TabDepartament" Header="{DynamicResource TabDepartament}">
                 <TabItem.Background>
@@ -32,7 +32,7 @@
                         <GradientStop Color="#4CADD473" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <Grid Loaded="Grid_Loaded" Margin="0,-3,-1,-1" >
+                <Grid Loaded="Grid_Loaded" Margin="0,-3,2,-1" >
                     <Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFF3FEFF"/>
@@ -51,17 +51,16 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <Label x:Name="LBDepartments"  Content="{DynamicResource TabDepartament}" FontSize="15" Grid.ColumnSpan="2" Margin="30,23,186,91"/>
-                    <Grid HorizontalAlignment="Left" Height="498" Margin="30,54,0,0" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="White">
-                        <ListView  x:Name="Departaments" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+                    <Grid HorizontalAlignment="Left" Height="382" Margin="30,54,0,0" VerticalAlignment="Top" Width="300" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="White">
+                        <ListView  x:Name="Departaments" HorizontalAlignment="Left" Width="300"/>
                     </Grid>
 
                     <Label x:Name="LbProjects"  Content="{DynamicResource TabProject}" FontSize="15" Grid.ColumnSpan="2" Margin="120,23,96,91" Grid.Column="1"/>
-                    <Grid HorizontalAlignment="Left" Height="498" Margin="90,54,0,0" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2" Grid.Column="1">
-                        <StackPanel  x:Name="Projects" HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="300" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="White"/>
+                    <Grid HorizontalAlignment="Left" Height="382" Margin="90,54,0,0" VerticalAlignment="Top" Width="300" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="1">
+                        <StackPanel  x:Name="Projects" HorizontalAlignment="Left" Height="380" VerticalAlignment="Top" Width="300" Background="White"/>
                     </Grid>
 
                     <Button x:Name="AddDepartament" Grid.Column="1" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="42" Height="34" BorderBrush="{x:Null}" Foreground="{x:Null}"  RenderTransformOrigin="0.214,-0.265" Click="AddDepartament_Click">
@@ -74,14 +73,14 @@
                             <ImageBrush ImageSource="Image/plus.png"/>
                         </Button.Background>
                     </Button>
-                    <GroupBox x:Name="Information" FontSize="15" Grid.ColumnSpan="2" Grid.Column="2" Header="{DynamicResource InfoHeader}" HorizontalAlignment="Left" Height="516" Margin="148,40,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="364">
+                    <GroupBox x:Name="Information" FontSize="15" Grid.ColumnSpan="2" Grid.Column="2" Header="{DynamicResource InfoHeader}" HorizontalAlignment="Left" Height="396" Margin="148,40,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="364">
                         <GroupBox.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#99FBFCFD" Offset="0"/>
                                 <GradientStop Color="#8CD1FFF9" Offset="1"/>
                             </LinearGradientBrush>
                         </GroupBox.Background>
-                        <ScrollViewer>
+                        <ScrollViewer Margin="0,0,0,-5">
                             <StackPanel x:Name="EmpsComp" />
                         </ScrollViewer>
                     </GroupBox>
@@ -116,8 +115,8 @@
                     </Grid.RowDefinitions>
 
 
-                    <Image HorizontalAlignment="Left" Name="LogoImg" Height="167" Margin="37,26,0,0" VerticalAlignment="Top" Width="183" Source="Image/gallery.png"/>
-                    <Button x:Name="UploadLogo" Content="{DynamicResource UploadLogo}"  BorderBrush="{x:Null}" Margin="10,134,107,23" Click="UploadLogo_Click" Grid.Column="1">
+                    <Image HorizontalAlignment="Left" Name="LogoImg" Height="174" Margin="37,26,0,0" VerticalAlignment="Top" Width="183" Source="Image/gallery.png" Grid.RowSpan="2"/>
+                    <Button x:Name="UploadLogo" Content="{DynamicResource UploadLogo}"  BorderBrush="{x:Null}" Margin="52,39,65,79" Click="UploadLogo_Click" Grid.Row="1">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                 <GradientStop Color="#FFF4FAFF"/>
@@ -126,7 +125,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="Newemp" Content="{DynamicResource NewCode}"  BorderBrush="{x:Null}" Margin="10,10,107,146"  Grid.Column="1" Grid.Row="1" Click="Newemp_Click">
+                    <Button x:Name="Newemp" Content="{DynamicResource NewCode}"  BorderBrush="{x:Null}" Margin="52,83,65,35" Grid.Row="1" Click="Newemp_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                 <GradientStop Color="#FFF4FAFF"/>
@@ -135,7 +134,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="remdep" Content="{DynamicResource RemDep}"  BorderBrush="{x:Null}" Margin="52,10,65,146" Grid.Row="1">
+                    <Button x:Name="remcomp" Content="{DynamicResource RemCompany}"  BorderBrush="{x:Null}" Margin="52,127,65,148" Grid.Row="1" Click="remcomp_Click" Grid.RowSpan="2">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                 <GradientStop Color="#FFF4FAFF"/>
@@ -144,7 +143,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="remcomp" Content="{DynamicResource RemCompany}"  BorderBrush="{x:Null}" Margin="52,73,65,83" Grid.Row="1" Click="remcomp_Click">
+                    <Button x:Name="Sheldue" Content="{DynamicResource scheldue}"  BorderBrush="{x:Null}" Margin="52,14,65,104" Grid.Row="2" Click="Sheldue_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                 <GradientStop Color="#FFF4FAFF"/>
@@ -153,19 +152,37 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="Sheldue" Content="{DynamicResource scheldue}"  BorderBrush="{x:Null}" Margin="10,73,107,83" Grid.Row="1" Grid.Column="1">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFF4FAFF"/>
-                                <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
-                                <GradientStop Color="#FF60B4DA" Offset="0.919"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
+                    <Label x:Name="CompanyName" FontSize="18" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="225,47,248,59" Background="#CCFFFFFF"/>
+                    <Label x:Name="CompanyType" FontSize="18" Grid.Row="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="225,135,249,127" Background="#CCFFFFFF" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleY="-0.493"/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-1.491"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <Label x:Name="CompanyDate" FontSize="18" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="226,70,248,35" Background="#CCFFFFFF" Grid.Row="1"/>
+                    <Label x:Name="CompanyOwner" FontSize="18" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" Margin="226,0,248,105" Background="#CCFFFFFF" Grid.Row="2"/>
+                    <ListView x:Name="BestEmp" Grid.Column="2" HorizontalAlignment="Left" Height="370" Margin="44,47,0,0" VerticalAlignment="Top" Width="207" Grid.RowSpan="3">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView x:Name="BestDep" Grid.Column="3" HorizontalAlignment="Left" Height="370" Margin="10,47,0,0" VerticalAlignment="Top" Width="207" Grid.RowSpan="3">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,32,0,0">
+        <Rectangle  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,32,51,0">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -176,7 +193,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="BTNExit" Content="{DynamicResource BackToPanel}"  BorderBrush="{x:Null}" Grid.Row="4" Margin="162,76,10,10" Click="BTNExit_Click" Grid.Column="3">
+        <Button x:Name="BTNExit" Content="{DynamicResource BackToPanel}"  BorderBrush="{x:Null}" Grid.Row="4" Margin="113,66,59,0" Click="BTNExit_Click" Grid.Column="3">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>

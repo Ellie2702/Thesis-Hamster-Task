@@ -130,9 +130,9 @@ namespace HamsterTask
                         var control = new ProjectControll();
                         control.ProjectName.Content = r[0];
                         control.descript.Text = r[1];
-                        control.Deadline.Content = Environment.NewLine + r[3];
+                        control.Deadline.Content = Environment.NewLine + Convert.ToDateTime(r[3]).ToShortDateString();
                         control.ProjectID.Content = r[4];
-                        control.Margin = new Thickness(5, 5, 5, 5);
+                        control.Margin = new Thickness(0, 10, 0, 5);
                         control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
                         control.BorderThickness = new Thickness(2);
                         Projects.Children.Add(control);
@@ -196,6 +196,11 @@ namespace HamsterTask
         private void rememp_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Sheldue_Click(object sender, RoutedEventArgs e)
+        {
+            new Schedule().Show();
         }
     }
 }

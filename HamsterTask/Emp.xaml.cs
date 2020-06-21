@@ -25,6 +25,7 @@ namespace HamsterTask
             Global.LanguageSwitch(this);
         }
 
+        string[] parts = Global.Guid.Split('|');
         private void CopyMail_Click(object sender, RoutedEventArgs e)
         {
             Global.userMail = EmpWork.Content.ToString();
@@ -32,12 +33,35 @@ namespace HamsterTask
 
         private void EditPos_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void RemEmp_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var res = Helper.Http.GetRequest("http://localhost:8080/GetEmp/" + parts[0] + "/" + Global.GlobEmpID).Split('|');
+                if (res[0] != null && res[0] != "No!")
+                {
+                    EmpName.Content += " " + res[0];
+                    EmpPos.Content += " " + res[1];
+                    EmpWork.Content += " " + res[2];
+                    Department.Content += " " + res[3];
+                }
+                else
+                {
+                    MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                }
+            } catch
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                this.Close();
+            }
         }
     }
 }

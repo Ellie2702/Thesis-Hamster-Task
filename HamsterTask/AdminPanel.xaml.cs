@@ -27,7 +27,9 @@ namespace HamsterTask
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            Global.Guid = string.Empty;
+            new MainWindow().Show();
+            this.Close();
         }
 
         private void Messages_Click(object sender, RoutedEventArgs e)

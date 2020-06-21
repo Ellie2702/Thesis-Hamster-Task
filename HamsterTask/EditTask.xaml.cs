@@ -53,9 +53,28 @@ namespace HamsterTask
 
                             break;
                     }
+                    var data = Helper.Http.GetRequest("http://localhost:8080/GetEditTask/" + parts[0] + "/" + Global.GlobTaskID).Split('|');
+                    if(data[0] != null && data[0] != "No!")
+                    {
+                        TaskName.Text = data[0];
+                        TaskDesc.Text = data[1];
+                        TaskDeadline.SelectedDate = Convert.ToDateTime(data[2]);
+                        if(MailExec.Visibility == Visibility.Visible)
+                        {
+                            MailExec.Text = data[4];
+                        } else
+                        {
+                            Me.IsChecked = true;
+                        }
+                    } else 
+                    {
+                        MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                    }
+
                 }
             }
-            catch {
+            catch (Exception ex)
+            {
                 MessageBox.Show(TryFindResource("Fail").ToString());
             }
         }
@@ -77,31 +96,41 @@ namespace HamsterTask
                     switch (Global.FROM)
                     {
                         case "UserPanel":
-                            string data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
-                            if (data == "Task is added")
+                            string data = Helper.Http.GetRequest("http://localhost:8080/EditTask/" + parts[0] + "/U/" + "/" + Global.GlobTaskID + "/"+ title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
+                            if (data == "Ok!")
                             {
-                                MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                MessageBox.Show(TryFindResource("ChangesIsSaved").ToString());
                                 HamsterTask.Tasks.resave = true;
                             }
-                            else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            else MessageBox.Show(TryFindResource("SomethingBroke").ToString());
                             break;
                         case "Company":
-                            string d = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + MailExec.Text);
-                            if (d == "Task is added")
+                            string d = string.Empty;
+                            if (Me.IsChecked == false)
                             {
-                                MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                d = Helper.Http.GetRequest("http://localhost:8080/EditTask/" + parts[0] + "/C/" + "/" + Global.GlobTaskID + "/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + MailExec.Text);
+                            } else
+                            {
+                                d = Helper.Http.GetRequest("http://localhost:8080/EditTask/" + parts[0] + "/C/" + "/" + Global.GlobTaskID + "/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + parts[5]);
+                            }
+                            if (d == "Ok!")
+                            {
+                                MessageBox.Show(TryFindResource("ChangesIsSaved").ToString());
                                 HamsterTask.Tasks.resave = true;
                             }
-                            else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            else MessageBox.Show(TryFindResource("SomethingBroke").ToString());
                             break;
                     }
-
+                    new TaskForm().Show();
+                    this.Close();
                     
                 }
             }
             catch (Exception Ex)
             {
-               
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                new UserPanel().Show();
+                this.Close();
             }
         }
 

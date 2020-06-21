@@ -32,10 +32,12 @@ namespace HamsterTask
             {
                 if (Mail.Text != null)
                 {
-                    var res = Helper.Http.GetRequest("http://localhost:8080/GenerateEmployeeCode/" + parts[0] + "/" + Mail.Text);
-                    if (res == "Code is created")
+                    var res = Helper.Http.GetRequest("http://localhost:8080/GenerateEmployeeCode/" + parts[0] + "/" + Mail.Text).Split('|');
+                    if (res[0] == "Code is created")
                     {
                         MessageBox.Show(TryFindResource("CodeisAdded").ToString());
+                        donecode.Content = res[1];
+
                     } else
                     {
                         MessageBox.Show(TryFindResource("CodeNotAdded").ToString());

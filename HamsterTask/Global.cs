@@ -18,6 +18,7 @@ namespace HamsterTask
         public static string GlobUserID;
         public static string GlobEmpID;
         public static string FROM;
+        public static string FROM1;
 
         public static string GlobLang;
         public static void LanguageSwitch(Window win)

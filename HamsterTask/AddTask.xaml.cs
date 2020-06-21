@@ -73,26 +73,63 @@ namespace HamsterTask
                     MessageBox.Show(TryFindResource("DateNull").ToString());
                 } else
                 {
-
+                    string data = string.Empty;
                     switch (Global.FROM)
                     {
+                        
                         case "UserPanel":
-                            string data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
-                            if (data == "Task is added")
+                            if (Global.FROM1 == "Project")
                             {
-                                MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
-                                HamsterTask.Tasks.resave = true;
+                                data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/UP/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + Global.GlobProjectID);
+                                if (data == "Task is added")
+                                {
+                                    MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                    HamsterTask.Tasks.resave = true;
+                                }
+                                else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
                             }
-                            else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            else
+                            {
+                                data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline);
+                                if (data == "Task is added")
+                                {
+                                    MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                    HamsterTask.Tasks.resave = true;
+                                }
+                                else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            }
                             break;
                         case "Company":
-                            string d = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/U/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + MailExec.Text);
-                            if (d == "Task is added")
+                            if (Global.FROM1 == "Project")
                             {
-                                MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
-                                HamsterTask.Tasks.resave = true;
+                                if (Me.IsChecked == true)
+                                {
+                                    data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/CP/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + parts[5] + "/" + Global.GlobProjectID);
+                                }
+                                else
+                                    data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/CP/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + MailExec.Text + "/" + Global.GlobProjectID);
+                                if (data == "Task is added")
+                                {
+                                    MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                    HamsterTask.Tasks.resave = true;
+                                }
+                                else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
                             }
-                            else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            else
+                            {
+                                if (Me.IsChecked == true)
+                                {
+                                    data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/C/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + parts[5]);
+                                }
+                                else
+                                    data = Helper.Http.GetRequest("http://localhost:8080/CreateTask/" + parts[0] + "/C/" + title + "/" + WebUtility.UrlEncode(descript) + "/" + deadline + "/" + MailExec.Text);
+                                if (data == "Task is added")
+                                {
+                                    MessageBox.Show(TryFindResource("TaskIsAdded").ToString());
+                                    HamsterTask.Tasks.resave = true;
+                                }
+                                else MessageBox.Show(TryFindResource("TaskIsNotAdded").ToString());
+                            }
                             break;
                     }
 

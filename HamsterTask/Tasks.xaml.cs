@@ -146,7 +146,7 @@ namespace HamsterTask
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
-                        control.deadLine.Content += " " + Convert.ToDateTime(data[3]).ToShortDateString();
+                        control.deadLine.Content += " " + Convert.ToDateTime(data[2]).ToShortDateString();
                         control.TaskID.Content = data[4];
                         control.Owner.Content += " " + data[3];
                         control.Background = new LinearGradientBrush(Colors.LightSlateGray, Colors.Wheat, 90);
@@ -192,7 +192,7 @@ namespace HamsterTask
                 {
                     for (int i = 0; i < Convert.ToInt32(proj); i++)
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProject/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjects1/" + parts[0] + "/" + i.ToString()).Split('|');
                         var control = new ProjectControll();
                         control.ProjectName.Content = data[0];
                         control.Deadline.Content += Environment.NewLine + Convert.ToDateTime(data[3]).ToShortDateString();

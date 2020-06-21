@@ -58,6 +58,7 @@ namespace HamsterTask
         private void BTN_IHaveCode_Click(object sender, RoutedEventArgs e)
         {
             new CompanyCode().Show();
+            this.Close();
         }
 
         private void CopyAdmin_Click(object sender, RoutedEventArgs e)
@@ -147,7 +148,9 @@ namespace HamsterTask
 
             try
             {
-                UserA.Source = Images.GetMyAvatar();
+                UserA.Fill = new ImageBrush(Images.GetMyAvatar());
+                UserA.Width = 156;
+                UserA.Height = 148;
             }
             catch { }
             this.UpdateLayout();

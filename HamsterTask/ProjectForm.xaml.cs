@@ -29,7 +29,14 @@ namespace HamsterTask
         string[] parts = Global.Guid.Split('|');
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch
+            {
+
+            }
         }
 
    
@@ -61,6 +68,7 @@ namespace HamsterTask
 
         private void AddThing_Click(object sender, RoutedEventArgs e)
         {
+            Global.FROM1 = "Project";
             new AddTask().Show();
         }
 
@@ -82,7 +90,7 @@ namespace HamsterTask
                 {
                     for (int i = 0; i < Convert.ToInt32(taskcountnotdone); i++)
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskNotDone/" + parts[0] + "/" + i.ToString()).Split('|');
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskNotDone/" + parts[0] + "/" + Global.GlobProjectID + "/" + i.ToString()).Split('|');
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
@@ -103,7 +111,7 @@ namespace HamsterTask
                 {
                     for (int i = Convert.ToInt32(taskcountnotdone); i < Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone); i++)
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskDone/" + parts[0] + "/" + (i - Convert.ToInt32(taskcountnotdone)).ToString()).Split('|');
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskDone/" + parts[0] + "/"  + Global.GlobProjectID + "/" + (i - Convert.ToInt32(taskcountnotdone)).ToString()).Split('|');
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
@@ -122,11 +130,11 @@ namespace HamsterTask
                 {
                     for (int i = Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone); i < Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone) + Convert.ToInt32(taskcountend); i++)
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskEnd/" + parts[0] + "/" + (i - Convert.ToInt32(taskcountnotdone) - Convert.ToInt32(taskcountdone)).ToString()).Split('|');
+                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskEnd/" + parts[0] + "/" + Global.GlobProjectID + "/" + (i - Convert.ToInt32(taskcountnotdone) - Convert.ToInt32(taskcountdone)).ToString()).Split('|');
                         var control = new TaskControl();
                         control.TaskName.Content = data[0];
                         control.TaskExecutor.Content += " " + data[1];
-                        control.deadLine.Content += " " + data[2];
+                        control.deadLine.Content += " " + Convert.ToDateTime(data[2]).ToShortDateString();
                         control.TaskID.Content = data[4];
                         control.Owner.Content += " " + data[3];
                         control.Background = new LinearGradientBrush(Colors.LightSlateGray, Colors.Wheat, 90);
@@ -145,7 +153,7 @@ namespace HamsterTask
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
                 MessageBox.Show(TryFindResource("SomethingBroke").ToString());
                 this.Close();

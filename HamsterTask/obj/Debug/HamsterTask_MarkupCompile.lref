@@ -1,18 +1,23 @@
 ﻿
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\App.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AddDepartament.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EditProjects.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AddProject.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EditTask.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AddTask.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AdminPanel.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Company.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\CompanyCode.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\DepartamentControl.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Emp.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EmpControl.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EmployeeCodeGener.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EmployyesManagment.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\MainWindow.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Message.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\MessageControl.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Messages.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\MessageViewControl.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\NewEmployee.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\NewDep.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\ProjectControll.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\ProjectForm.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\RegistrationOrg.xaml;;
@@ -26,10 +31,4 @@ FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserMessage.xaml
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserPanel.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserProfileSettings.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserRegOrg.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\DepartamentControl.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Emp.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EmpControl.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\NewDep.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EmployeeCodeGener.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EditTask.xaml;;
 

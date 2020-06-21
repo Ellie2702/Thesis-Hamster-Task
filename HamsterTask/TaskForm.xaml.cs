@@ -108,7 +108,17 @@ namespace HamsterTask
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                new EditTask().Show();
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                new UserPanel().Show();
+                this.Close();
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="EmployeeCodeGener" Height="196" Width="574">
+        Title="{DynamicResource HamsterTask.CompanyCode}" Height="196" Width="574">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

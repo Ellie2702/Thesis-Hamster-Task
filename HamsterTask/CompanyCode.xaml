@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="{DynamicResource HamsterTask.CompanyCode}" Height="245" Width="715" WindowStartupLocation="CenterScreen">
+        Title="{DynamicResource HamsterTask.CompanyCode}" Height="192.306" Width="715" WindowStartupLocation="CenterScreen">
     <Grid>
+        <TextBox x:Name="Code" FontSize="14" Margin="227,42,229,89"/>
+        <Label Content="{DynamicResource Code}" Grid.Column="0" FontSize="15" HorizontalAlignment="Right" Margin="0,41,494,89" RenderTransformOrigin="-0.125,0.677" Width="152" />
+        <Button x:Name="ActBTN" Content="{DynamicResource ActivCode}" HorizontalAlignment="Left" Margin="511,39,0,0" VerticalAlignment="Top" Width="129" Height="36" BorderBrush="{x:Null}" Foreground="Black" Click="ActBTN_Click" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBlock Text="{DynamicResource ActivCodeDesc}" TextWrapping="Wrap" Margin="61,10,83,127"/>
+        <Button x:Name="BackBTN" Content="{DynamicResource BackToPanel}" HorizontalAlignment="Left" Margin="511,95,0,0" VerticalAlignment="Top" Width="129" Height="36" BorderBrush="{x:Null}" Foreground="Black" Click="BackBTN_Click" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFF"/>
+                    <GradientStop Color="#FFBCEAFF" Offset="0.608"/>
+                    <GradientStop Color="#FF60B4DA" Offset="0.919"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

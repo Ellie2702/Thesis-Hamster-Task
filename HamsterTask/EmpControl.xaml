@@ -33,7 +33,6 @@
         <Label x:Name="Email" Content="{DynamicResource LabelEmail}" Grid.Row="1" Grid.ColumnSpan="3" FontSize="12" VerticalContentAlignment="Top" Grid.Column="1"/>
         <Label x:Name="Position" Content="{DynamicResource PositionName}" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12" VerticalContentAlignment="Bottom" Grid.Column="1"/>
         <Label x:Name="EmpID" Visibility="Hidden" />
-        <Image Grid.RowSpan="2" Margin="10,34,5,0" Height="74" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

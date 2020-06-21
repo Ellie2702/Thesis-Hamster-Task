@@ -39,7 +39,6 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Company
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\TaskControl.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserMessage.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserProfileSettings.g.cs
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddProject.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddProject.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Company.baml
@@ -49,7 +48,6 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserMes
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\UserProfileSettings.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddDepartament.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EmployyesManagment.g.cs
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\NewEmployee.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\ProjectControll.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\ProjectForm.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\RightsEmployeeEditor.g.cs
@@ -57,14 +55,11 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Schedul
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\TaskForm.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\AddDepartament.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EmployyesManagment.baml
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\NewEmployee.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\ProjectControll.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\ProjectForm.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\RightsEmployeeEditor.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Schedule.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\TaskForm.baml
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Messages.g.cs
-C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Messages.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\MessageControl.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\MessageControl.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Message.g.cs
@@ -83,3 +78,5 @@ C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\Employe
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EmployeeCodeGener.baml
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EditTask.g.cs
 C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EditTask.baml
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EditProjects.g.cs
+C:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\obj\Debug\EditProjects.baml

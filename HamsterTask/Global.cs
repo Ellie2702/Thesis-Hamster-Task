@@ -16,9 +16,18 @@ namespace HamsterTask
         public static string GlobProjectID;
         public static string GlobMessID;
         public static string GlobUserID;
+        public static string GlobDepID;
+        public static string GlobDepName;
         public static string GlobEmpID;
         public static string FROM;
         public static string FROM1;
+
+        public static string d;
+        public static string e;
+        public static string p;
+        public static string s;
+        public static string t;
+
 
         public static string GlobLang;
         public static void LanguageSwitch(Window win)

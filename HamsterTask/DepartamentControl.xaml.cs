@@ -27,7 +27,8 @@ namespace HamsterTask
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Global.GlobDepID = ID.Content.ToString();
+            new Department().Show();
         }
     }
 }

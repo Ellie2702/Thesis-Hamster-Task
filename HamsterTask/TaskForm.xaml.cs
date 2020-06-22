@@ -56,6 +56,15 @@ namespace HamsterTask
             try
             {
                 string[] parts = Global.Guid.Split('|');
+                if(Global.FROM == "Company")
+                {
+                    if (Global.t == "false")
+                    {
+                        Edit.Visibility = Visibility.Hidden;
+                        RemTask.Visibility = Visibility.Hidden;
+                    }
+                }
+
                 var res = Helper.Http.GetRequest("http://localhost:8080/GetTask/" + parts[0] + "/" + Global.GlobTaskID).Split('|');
 
                 TaskName.Content = res[1];

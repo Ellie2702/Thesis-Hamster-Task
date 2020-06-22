@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="UserPanel" Height="700" Width="950" WindowStartupLocation="CenterScreen">
+        Title="{DynamicResource UserPanel}" Height="700" Width="950" WindowStartupLocation="CenterScreen">
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -23,7 +23,7 @@
 
         </Grid.RowDefinitions>
 
-        <Label x:Name="UserProfileHello" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,33,0,0" HorizontalAlignment="Left" Width="426"/>
+        <Label x:Name="UserProfileHello" Content="{DynamicResource HamsterHello}" FontSize="20" Grid.ColumnSpan="3" Margin="10,33,10,0" HorizontalContentAlignment="Center"/>
         <Label Name="UserNameLB" Content="{DynamicResource LBUserName}" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Margin="10,0,106,0"/>
         <Label Name="UserName" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Margin="140,0,10,0" Grid.ColumnSpan="2"/>
         <Label Name="PositionLB" Content="{DynamicResource PositionName}" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0,0,106,0"/>

@@ -39,16 +39,29 @@ namespace HamsterTask
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
-
+            new RemoveUser().Show();
         }
 
         private void DeleteCompany_Click(object sender, RoutedEventArgs e)
         {
-
+            new Companys().Show();
         }
 
         private void AddAdmin_Click(object sender, RoutedEventArgs e)
         {
+            new AddAdmin().Show();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parts = Global.Guid.Split('|');
+                AdminName.Content += ", " + parts[3] + " " + parts[4];
+            } catch
+            {
+                AdminName.Content += ", Admin";
+            }
 
         }
     }

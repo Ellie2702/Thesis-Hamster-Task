@@ -31,11 +31,12 @@ namespace HamsterTask
         {
             try
             {
+                new EditProjects().Show();
 
             }
             catch
             {
-
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
             }
         }
 
@@ -76,88 +77,127 @@ namespace HamsterTask
         {
             try
             {
-                var proj = Helper.Http.GetRequest("http://localhost:8080/GetProject/" + parts[0] + "/" + Global.GlobProjectID).Split('|');
-                var taskcountnotdone = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskCountNotDone/" + parts[0] + "/" + Global.GlobProjectID);
-                var taskcountdone = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskCountDone/" + parts[0] + "/" + Global.GlobProjectID);
-                var taskcountend = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskCountEnd/" + parts[0] + "/" + Global.GlobProjectID);
-
-                ProjName.Content = proj[0];
-                ProjDesk.Text = proj[1];
-                Own.Content += " " + proj[2];
-                Deadline.Content += " " + proj[3];
-
-                if (taskcountnotdone != "No!" || taskcountnotdone != "0")
-                {
-                    for (int i = 0; i < Convert.ToInt32(taskcountnotdone); i++)
+                string[] acc = Helper.Http.GetRequest("http://localhost:8080/GetAccesRights/" + parts[0]).Split('|');
+                    if (acc[0] == "Ok!")
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskNotDone/" + parts[0] + "/" + Global.GlobProjectID + "/" + i.ToString()).Split('|');
-                        var control = new TaskControl();
-                        control.TaskName.Content = data[0];
-                        control.TaskExecutor.Content += " " + data[1];
-                        control.deadLine.Content += " " + data[2];
-                        control.TaskID.Content = data[4];
-                        control.Owner.Content += " " + data[3];
-                        control.Margin = new Thickness(0, 5, 0, 5);
-                        control.Background = new LinearGradientBrush(Colors.Aqua, Colors.Wheat, 90);
-                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
-                        control.BorderThickness = new Thickness(2);
-                        projstack.Children.Add(control);
-                        projstack.UpdateLayout();
-                      
+                        Global.d = "true";
+                        Global.e = "true";
+                        Global.p = "true";
+                        Global.s = "true";
+                        Global.t = "true";
                     }
-                }
-
-                if (taskcountdone != "No!" || taskcountdone != "0")
-                {
-                    for (int i = Convert.ToInt32(taskcountnotdone); i < Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone); i++)
+                    else if (acc[0] == null && acc[0] == "No!")
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskDone/" + parts[0] + "/"  + Global.GlobProjectID + "/" + (i - Convert.ToInt32(taskcountnotdone)).ToString()).Split('|');
-                        var control = new TaskControl();
-                        control.TaskName.Content = data[0];
-                        control.TaskExecutor.Content += " " + data[1];
-                        control.deadLine.Content += " " + data[2];
-                        control.TaskID.Content = data[4];
-                        control.Owner.Content += " " + data[3];
-                        control.Margin = new Thickness(0, 5, 0, 5);
-                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
-                        control.BorderThickness = new Thickness(2);
-                        projstack.Children.Add(control);
-                        projstack.UpdateLayout();
+                        Global.d = "true";
+                        Global.e = "true";
+                        Global.p = "true";
+                        Global.s = "true";
+                        Global.t = "true";
                     }
-                }
-
-                if (taskcountend != "No!" || taskcountend != "0")
-                {
-                    for (int i = Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone); i < Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone) + Convert.ToInt32(taskcountend); i++)
+                    else
                     {
-                        var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskEnd/" + parts[0] + "/" + Global.GlobProjectID + "/" + (i - Convert.ToInt32(taskcountnotdone) - Convert.ToInt32(taskcountdone)).ToString()).Split('|');
-                        var control = new TaskControl();
-                        control.TaskName.Content = data[0];
-                        control.TaskExecutor.Content += " " + data[1];
-                        control.deadLine.Content += " " + Convert.ToDateTime(data[2]).ToShortDateString();
-                        control.TaskID.Content = data[4];
-                        control.Owner.Content += " " + data[3];
-                        control.Background = new LinearGradientBrush(Colors.LightSlateGray, Colors.Wheat, 90);
-                        control.Margin = new Thickness(0, 5, 0, 5);
-                        control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
-                        control.BorderThickness = new Thickness(2);
-                        projstack.Children.Add(control);
-                        projstack.UpdateLayout();
+                        Global.d = acc[0];
+                        Global.e = acc[1];
+                        Global.p = acc[2];
+                        Global.s = acc[3];
+                        Global.t = acc[4];
                     }
+
+
+                    if (Global.p == "false")
+                    {
+                        Edit.Visibility = Visibility.Hidden;
+                        RemTask.Visibility = Visibility.Hidden;
+                    }
+                    if (Global.t == "false")
+                    {
+                        AddThing.Visibility = Visibility.Hidden;
+
+                    }
+
+                    var proj = Helper.Http.GetRequest("http://localhost:8080/GetProject/" + parts[0] + "/" + Global.GlobProjectID).Split('|');
+                    var taskcountnotdone = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskCountNotDone/" + parts[0] + "/" + Global.GlobProjectID);
+                    var taskcountdone = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskCountDone/" + parts[0] + "/" + Global.GlobProjectID);
+                    var taskcountend = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskCountEnd/" + parts[0] + "/" + Global.GlobProjectID);
+
+                    ProjName.Content = proj[0];
+                    ProjDesk.Text = proj[1];
+                    Own.Content += " " + proj[2];
+                    Deadline.Content += " " + proj[3];
+
+                    if (taskcountnotdone != "No!" || taskcountnotdone != "0")
+                    {
+                        for (int i = 0; i < Convert.ToInt32(taskcountnotdone); i++)
+                        {
+                            var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskNotDone/" + parts[0] + "/" + Global.GlobProjectID + "/" + i.ToString()).Split('|');
+                            var control = new TaskControl();
+                            control.TaskName.Content = data[0];
+                            control.TaskExecutor.Content += " " + data[1];
+                            control.deadLine.Content += " " + data[2];
+                            control.TaskID.Content = data[4];
+                            control.Owner.Content += " " + data[3];
+                            control.Margin = new Thickness(0, 5, 0, 5);
+                            control.Background = new LinearGradientBrush(Colors.Aqua, Colors.Wheat, 90);
+                            control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                            control.BorderThickness = new Thickness(2);
+                            projstack.Children.Add(control);
+                            projstack.UpdateLayout();
+
+                        }
+                    }
+
+                    if (taskcountdone != "No!" || taskcountdone != "0")
+                    {
+                        for (int i = Convert.ToInt32(taskcountnotdone); i < Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone); i++)
+                        {
+                            var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskDone/" + parts[0] + "/" + Global.GlobProjectID + "/" + (i - Convert.ToInt32(taskcountnotdone)).ToString()).Split('|');
+                            var control = new TaskControl();
+                            control.TaskName.Content = data[0];
+                            control.TaskExecutor.Content += " " + data[1];
+                            control.deadLine.Content += " " + data[2];
+                            control.TaskID.Content = data[4];
+                            control.Owner.Content += " " + data[3];
+                            control.Margin = new Thickness(0, 5, 0, 5);
+                            control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                            control.BorderThickness = new Thickness(2);
+                            projstack.Children.Add(control);
+                            projstack.UpdateLayout();
+                        }
+                    }
+
+                    if (taskcountend != "No!" || taskcountend != "0")
+                    {
+                        for (int i = Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone); i < Convert.ToInt32(taskcountnotdone) + Convert.ToInt32(taskcountdone) + Convert.ToInt32(taskcountend); i++)
+                        {
+                            var data = Helper.Http.GetRequest("http://localhost:8080/GetProjectTaskEnd/" + parts[0] + "/" + Global.GlobProjectID + "/" + (i - Convert.ToInt32(taskcountnotdone) - Convert.ToInt32(taskcountdone)).ToString()).Split('|');
+                            var control = new TaskControl();
+                            control.TaskName.Content = data[0];
+                            control.TaskExecutor.Content += " " + data[1];
+                            control.deadLine.Content += " " + Convert.ToDateTime(data[2]).ToShortDateString();
+                            control.TaskID.Content = data[4];
+                            control.Owner.Content += " " + data[3];
+                            control.Background = new LinearGradientBrush(Colors.LightSlateGray, Colors.Wheat, 90);
+                            control.Margin = new Thickness(0, 5, 0, 5);
+                            control.BorderBrush = new SolidColorBrush(Colors.LightSlateGray);
+                            control.BorderThickness = new Thickness(2);
+                            projstack.Children.Add(control);
+                            projstack.UpdateLayout();
+                        }
+                    }
+
+
+                    if (taskcountend == "No!" && taskcountdone == "No!" && taskcountnotdone == "No!")
+                    {
+                        projstack.Children.Add(new Label { Content = TryFindResource("NoneTask").ToString() });
+                    }
+
                 }
-
-
-                if (taskcountend == "No!" && taskcountdone == "No!" && taskcountnotdone == "No!")
+                catch (Exception ex)
                 {
-                    projstack.Children.Add(new Label { Content = TryFindResource("NoneTask").ToString() });
+                    MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                    this.Close();
                 }
-
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
-                this.Close();
-            }
-        }
+        
     }
 }

@@ -25,11 +25,54 @@ namespace HamsterTask
             InitializeComponent();
             Global.LanguageSwitch(this);
         }
-
+        string[] part = Global.Guid.Split('|');
+        
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+            string[] acc = Helper.Http.GetRequest("http://localhost:8080/GetAccesRights/" + part[0]).Split('|');
             try
             {
+                if(acc[0] == "Ok!")
+                {
+                    Global.d = "true";
+                    Global.e = "true";
+                    Global.p = "true";
+                    Global.s = "true";
+                    Global.t = "true";
+                } else if (acc[0] == null && acc[0] == "No!")
+                {
+                    Global.d = "false";
+                    Global.e = "false";
+                    Global.p = "false";
+                    Global.s = "false";
+                    Global.t = "false";
+                } else
+                {
+                    Global.d = acc[0];
+                    Global.e = acc[1];
+                    Global.p = acc[2];
+                    Global.s = acc[3];
+                    Global.t = acc[4];
+                }
+
+                if(Global.d == "false")
+                {
+                    AddDepartament.Visibility = Visibility.Hidden;
+                }
+                if (Global.e == "false")
+                {
+                    Newemp.Visibility = Visibility.Hidden;
+                }
+                if (Global.p == "false")
+                {
+                    AddProject.Visibility = Visibility.Hidden;
+                }
+                if (Global.s == "false")
+                {
+                    Sheldue.Visibility = Visibility.Hidden;
+                }
+                
+
                 Departaments.Items.Clear();
                 Projects.Children.Clear();
                 EmpsComp.Children.Clear();
@@ -70,7 +113,7 @@ namespace HamsterTask
 
                     if (r != "No!" && r != "0" && r != null)
                     {
-                        for (int k = 0; k < Convert.ToInt32(r); i++)
+                        for (int k = 0; k < Convert.ToInt32(r); k++)
                         {
                             var res = Helper.Http.GetRequest("http://localhost:8080/GetDepartmentEmp/" + parts[0] + "/" + i.ToString()).Split('|');
                             var control = new EmpControl();
@@ -162,7 +205,33 @@ namespace HamsterTask
         private void UploadLogo_Click(object sender, RoutedEventArgs e)
         {
             Images.UploadImageCompany();
-            LogoImg.Source = Images.GetCompanyLogo();
+            var img = Images.GetCompanyLogo();
+            if (img != null)
+            {
+                LogoImg.Source = img;
+            }
+        }
+
+        private void GetBestEmps()
+        {
+            try
+            {
+                string[] parts = Global.Guid.Split('|');
+                var r = Helper.Http.GetRequest("http://localhost:8080/BestEmp/" + parts[0]);
+                var superParts = r.Split('\n');
+                BestEmp.Items.Clear();
+                foreach (var part in superParts)
+                {
+                    if (part.Length == 0) continue;
+                    Label l = new Label();
+                    l.Content = part.Replace("|", " (выполнено ") + " задач)";
+                    BestEmp.Items.Add(l);
+                }
+            }
+            catch (Exception Ex)
+            {
+
+            }
         }
 
         private void AddDepartament_Click(object sender, RoutedEventArgs e)
@@ -185,22 +254,84 @@ namespace HamsterTask
         {
             try
             {
-
+                string[] parts = Global.Guid.Split('|');
+                var r = Helper.Http.GetRequest("http://localhost:8080/RemoveCompany/" + parts[0]);
+                if (r == "Ok!")
+                {
+                    MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                } else
+                {
+                    MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                }
             }
             catch
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+            }
+        }
+
+       
+        private void Sheldue_Click(object sender, RoutedEventArgs e)
+        {
+            new Schedule().Show();
+        }
+
+        private void Grid_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                
+                string[] parts = Global.Guid.Split('|');
+                var r = Helper.Http.GetRequest("http://localhost:8080/GetCompany/" + parts[0]).Split('|');
+                if(r[0] != "No!" && r[0] != null)
+                {
+                    CompanyName.Content = r[0];
+                    CompanyType.Content += Environment.NewLine + r[1];
+                    CompanyDate.Content += Environment.NewLine + Convert.ToDateTime(r[2]).ToShortDateString();
+                    CompanyOwner.Content += Environment.NewLine + r[3];
+                } else MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+
+                GetBestEmps();
+                GetBestDepts();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+            }
+        }
+
+        private void GetBestDepts()
+        {
+            try
+            {
+                string[] parts = Global.Guid.Split('|');
+                var r = Helper.Http.GetRequest("http://localhost:8080/BestDep/" + parts[0]);
+                var superParts = r.Split('\n');
+                BestDep.Items.Clear();
+                foreach (var part in superParts)
+                {
+                    if (part.Length == 0) continue;
+                    Label l = new Label();
+                    l.Content = part.Replace("|", " (выполнено ") + " задач)";
+                    BestDep.Items.Add(l);
+                }
+            }
+            catch (Exception Ex)
             {
 
             }
         }
 
-        private void rememp_Click(object sender, RoutedEventArgs e)
+        private void accrights_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                new RightsEmployeeEditor().Show();
+            }
+            catch
+            {
 
-        }
-
-        private void Sheldue_Click(object sender, RoutedEventArgs e)
-        {
-            new Schedule().Show();
+            }
         }
     }
 }

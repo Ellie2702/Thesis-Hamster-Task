@@ -30,15 +30,39 @@ namespace HamsterTask
         {
             Global.userMail = EmpWork.Content.ToString();
         }
-
+        
         private void EditPos_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                new SetPosition().Show();
+            } catch
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+            }
         }
 
         private void RemEmp_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if(MessageBox.Show(TryFindResource("RemEmp").ToString()) == MessageBoxResult.OK)
+                {
+                    var res = Helper.Http.GetRequest("http://localhost:8080/RemEmp/" + parts[0] + "/" + Global.GlobEmpID);
+                    if(res == "Ok!")
+                    {
+                        MessageBox.Show(TryFindResource("DelEmp").ToString());
+                        this.Close();
+                    } else
+                    {
+                        MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                    }
+                }
+            } catch
+            {
+                MessageBox.Show(TryFindResource("SomethingBroke").ToString());
+                this.Close();
+            }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -51,13 +75,19 @@ namespace HamsterTask
                     EmpName.Content += " " + res[0];
                     EmpPos.Content += " " + res[1];
                     EmpWork.Content += " " + res[2];
-                    Department.Content += " " + res[3];
+                    if (res[3] != "null")
+                    {
+                        Department.Content += " " + res[3];
+                    } else
+                    {
+                        Department.Content += " " + TryFindResource("DepNotSet").ToString();
+                    }
                 }
                 else
                 {
                     MessageBox.Show(TryFindResource("SomethingBroke").ToString());
                 }
-            } catch
+            } catch(Exception ex)
             {
                 MessageBox.Show(TryFindResource("SomethingBroke").ToString());
                 this.Close();

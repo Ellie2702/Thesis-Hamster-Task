@@ -31,7 +31,11 @@ namespace HamsterTask
 
         private void UserProfileSettings_Loaded(object sender, RoutedEventArgs e)
         {
-            MyAvaTAR.Source = Images.GetMyAvatar();
+            var img = Images.GetMyAvatar();
+            if (img != null)
+            {
+                MyAvaTAR.Source = img;
+            }
         }
 
         string[] parts = Global.Guid.Split('|');
@@ -39,7 +43,11 @@ namespace HamsterTask
         private void ChangeAvatar_Click(object sender, RoutedEventArgs e)
         {
             Images.UploadImageAvatar();
-            MyAvaTAR.Source = Images.GetMyAvatar();
+            var img = Images.GetMyAvatar();
+            if (img != null)
+            {
+                MyAvaTAR.Source = img;
+            }
         }
 
         private void ExitCompany_Click(object sender, RoutedEventArgs e)

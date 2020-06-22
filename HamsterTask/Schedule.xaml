@@ -34,7 +34,7 @@
         <Label  Content="{DynamicResource emp}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,0,57,28" Grid.Row="1" />
         <Label Content="{DynamicResource startwork}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,48,24,40" Grid.Row="1" Grid.RowSpan="2" />
         <Label Content="{DynamicResource endwork}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,27,24,0" Grid.Row="2" />
-        <Button x:Name="BTNSave" Content="{DynamicResource save}" Grid.Column="1"  BorderBrush="{x:Null}" Grid.Row="3" Margin="10,10,10,20">
+        <Button x:Name="BTNSave" Content="{DynamicResource save}" Grid.Column="1"  BorderBrush="{x:Null}" Grid.Row="3" Margin="10,10,10,20" Click="BTNSave_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FFF4FAFF"/>
@@ -52,9 +52,19 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBox x:Name="EmpMail" FontSize="14" Margin="0,0,47,29" RenderTransformOrigin="0.503,1.199" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" />
+        <TextBox x:Name="EmpMail" FontSize="14" Margin="0,0,77,29" RenderTransformOrigin="0.503,1.199" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" />
         <DatePicker x:Name="Start" Grid.Row="1" Grid.Column="1" FontSize="18" Margin="0,48,145,40" Grid.ColumnSpan="2" Grid.RowSpan="2" DisplayDate="2021-06-06"/>
         <DatePicker x:Name="End" Grid.Row="2" Grid.Column="1" FontSize="18" Margin="0,26,145,1" Grid.ColumnSpan="2" DisplayDate="2021-06-06"/>
         <Label  Content="{DynamicResource EmpSchDesc}"  FontSize="15" VerticalContentAlignment="Center" Margin="10,10,10,18" Grid.ColumnSpan="3" />
+        <Button x:Name="pastemail" Grid.Column="2" HorizontalAlignment="Left" Margin="89,0,0,0" VerticalAlignment="Top" Width="33" Height="30" Foreground="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.682,0.806" Grid.Row="1" Click="pastemail_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Image/lnput.png"/>
+            </Button.Background>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="{DynamicResource AdminCopyTOOL}" TextWrapping="Wrap"/>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </Window>

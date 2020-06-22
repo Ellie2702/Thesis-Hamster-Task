@@ -1,6 +1,8 @@
 ﻿
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\App.xaml;;
-FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AddDepartament.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Companys.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Department.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EditDep.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EditProjects.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AddProject.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\EditTask.xaml;;
@@ -22,11 +24,14 @@ FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\ProjectControll.
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\ProjectForm.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\RegistrationOrg.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\RegistrationUser.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\RemoveUser.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\RightsEmployeeEditor.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Schedule.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\SetPosition.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\TaskControl.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\TaskForm.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\Tasks.xaml;;
+FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\AddAdmin.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserMessage.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserPanel.xaml;;
 FC:\Users\somebody\Desktop\Диплом\HamsterTask\HamsterTask\UserProfileSettings.xaml;;

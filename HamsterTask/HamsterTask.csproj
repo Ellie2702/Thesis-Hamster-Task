@@ -67,8 +67,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddDepartament.xaml.cs">
-      <DependentUpon>AddDepartament.xaml</DependentUpon>
+    <Compile Include="Companys.xaml.cs">
+      <DependentUpon>Companys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Department.xaml.cs">
+      <DependentUpon>Department.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditDep.xaml.cs">
+      <DependentUpon>EditDep.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditProjects.xaml.cs">
       <DependentUpon>EditProjects.xaml</DependentUpon>
@@ -133,11 +139,17 @@
     <Compile Include="RegistrationUser.xaml.cs">
       <DependentUpon>RegistrationUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RemoveUser.xaml.cs">
+      <DependentUpon>RemoveUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RightsEmployeeEditor.xaml.cs">
       <DependentUpon>RightsEmployeeEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetPosition.xaml.cs">
+      <DependentUpon>SetPosition.xaml</DependentUpon>
     </Compile>
     <Compile Include="TaskControl.xaml.cs">
       <DependentUpon>TaskControl.xaml</DependentUpon>
@@ -147,6 +159,9 @@
     </Compile>
     <Compile Include="Tasks.xaml.cs">
       <DependentUpon>Tasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAdmin.xaml.cs">
+      <DependentUpon>AddAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserMessage.xaml.cs">
       <DependentUpon>UserMessage.xaml</DependentUpon>
@@ -160,7 +175,15 @@
     <Compile Include="UserRegOrg.xaml.cs">
       <DependentUpon>UserRegOrg.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddDepartament.xaml">
+    <Page Include="Companys.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Department.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditDep.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,11 +287,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RemoveUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RightsEmployeeEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetPosition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

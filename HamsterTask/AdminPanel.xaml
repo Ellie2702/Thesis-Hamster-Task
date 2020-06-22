@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
         Title="{DynamicResource HamsterTask.AdminPanel}" Height="408.403" Width="423.109" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

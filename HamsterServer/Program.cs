@@ -79,26 +79,24 @@ namespace HamsterServer
                     byte[] buffer;
                     try
                     {
-                        string[] parts = request.Url.LocalPath.Split('/');
-                        string guid = parts[2];
-                        User user;
                         using (DataContext db = new DataContext())
                         {
+                            string[] parts = request.Url.LocalPath.Split('/');
+                            string guid = parts[2];
+                            User user;
                             User temp = GlobalList.IsAuthed(new Guid(guid)).user;
                             user = db.Users.Where(u => u.UserID == temp.UserID).FirstOrDefault();
-                        }
 
-                        if (user == null)
-                        {
-                            throw new Exception("auth err");
-                        }
+                            if (user == null)
+                            {
+                                throw new Exception("auth err");
+                            }
 
-                        string base64 = WebUtility.UrlDecode((new StreamReader(request.InputStream)).ReadToEnd()); // сама картинка
+                            string base64 = WebUtility.UrlDecode((new StreamReader(request.InputStream)).ReadToEnd()); // сама картинка
 
-                        byte[] bytes = Convert.FromBase64String(base64.Substring(7)); // превращаем картинку в байты
-                        int id;
-                        using (DataContext db = new DataContext())
-                        {
+                            byte[] bytes = Convert.FromBase64String(base64.Substring(7)); // превращаем картинку в байты
+                            int id;
+                         
                             var img = new DATA.Entities.Image
                             {
                                 User = user
@@ -107,9 +105,9 @@ namespace HamsterServer
                             db.SaveChanges();
                             //img = db.Images.Last(); //??  :D
                             id = img.ImageID;
+                            File.WriteAllBytes(localImagesPath + id.ToString() + ".png", bytes); // записываем байты в папку
+                            responseStr = id.ToString();
                         }
-                        File.WriteAllBytes(localImagesPath + id.ToString() + ".png", bytes); // записываем байты в папку
-                        responseStr = id.ToString();
                     }
                     catch (Exception Ex)
                     {
@@ -208,8 +206,8 @@ namespace HamsterServer
                         if (part.Length != 5) return part.Length.ToString();
                         return SetPosition(part[2], part[3], part[4]);
                     case "SetRights":
-                        if (part.Length != 11) return part.Length.ToString();
-                        return SetRights(part[2], part[3], part[4], part[5], part[6], part[7], part[8], part[9], part[10]);
+                        if (part.Length != 9) return part.Length.ToString();
+                        return SetRights(part[2], part[3], part[4], part[5], part[6], part[7], part[8]);
                     case "TaskExecutors":
                         if (part.Length != 5) return part.Length.ToString();
                         return SetExecutor(part[2], part[3], part[4]);
@@ -357,6 +355,60 @@ namespace HamsterServer
                     case "GetEmp":
                         if (part.Length != 4) return part.Length.ToString();
                         return GetEmp(part[2], part[3]);
+                    case "SetEmpPos":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return SetEmpPos(part[2], part[3], part[4]);
+                    case "RemEmp":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return RemEmp(part[2], part[3]);
+                    case "GetDepEmpCount":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return GetDepEmpCount(part[2], part[3]);
+                    case "GetDepEmp":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return GetDepEmp(part[2], part[3], part[4]);
+                    case "EditDep":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return EditDep(part[2], part[3], part[4]);
+                    case "RemDepartment":
+                        if (part.Length != 4) return part.Length.ToString();
+                        return RemDepartment(part[2], part[3]);
+                    case "AddEmpInDepartment":
+                        if (part.Length != 5) return part.Length.ToString();
+                        return AddEmpInDepartment(part[2], part[3], part[4]);
+                    case "Scheldule":
+                        if (part.Length != 6) return part.Length.ToString();
+                        return Scheldule(part[2], part[3], part[4], part[5]);
+                    case "RemoveCompany":
+                        if (part.Length != 6) return part.Length.ToString();
+                        return RemoveCompany(part[2]);
+                    case "GetCompany":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetCompany(part[2]);
+                    case "BestEmp":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return BestEmp(part[2]);
+                    case "BestDep":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return BestDep(part[2]);
+                    case "GetAccesRights":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return GetAccesRights(part[2]);
+                    case "RemUser":
+                        if (part.Length != 3) return part.Length.ToString();
+                        return RemUser(part[2]);
+                    case "GetCompanysCount":
+                        if (part.Length > 3) return part.Length.ToString();
+                        return GetCompanysCount();
+                    case "GetCompanys":
+                        if (part.Length > 3) return part.Length.ToString();
+                        return GetCompanys(part[2]);
+                    case "RemCompany":
+                        if (part.Length > 3) return part.Length.ToString();
+                        return RemCompany(part[2]);
+                    case "newAdmin":
+                        if (part.Length > 3) return part.Length.ToString();
+                        return newAdmin(part[2]);
                     default:
                         return "404";
                 }
@@ -364,7 +416,104 @@ namespace HamsterServer
             else return "need more arguments!";
         }
 
-        private string GetEmp(string guid, string mail)
+        private string newAdmin(string mail)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = db.Users.Include("Role").FirstOrDefault(u => u.Email == mail);
+                    if(user != null)
+                    {
+                        Role role = db.Roles.Where(r => r.RoleId == 1).FirstOrDefault();
+                        user.Role = role;
+                        db.SaveChanges();
+                        return "Ok!";
+                    } else return "No!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string RemCompany(string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int i = Convert.ToInt32(num);
+                    Company company = db.Companies.Where(c => c.CompanyID == i).FirstOrDefault();
+                    db.Companies.Remove(company);
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompanys(string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    int i = Convert.ToInt32(num);
+                    var data = db.Companies.ToList();
+                    var t = data[i];
+                    var emps = db.Employees.Include("Company").Where(e => e.Company.CompanyID == t.CompanyID).ToList();
+                    if (emps.Count() == null && emps.Count() == 0)
+                    {
+                        return t.CompanyName + "|" + t.CompanyID + "|" + emps.Count();
+                    } else return "No!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompanysCount()
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    var data = db.Companies.ToList();
+                    return data.Count().ToString();
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string RemUser(string mail)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = db.Users.FirstOrDefault(m => m.Email == mail);
+                    db.Users.Remove(user);
+                    db.SaveChanges();
+                    return "Ok!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string GetAccesRights(string guid)
         {
             try
             {
@@ -373,15 +522,422 @@ namespace HamsterServer
                     User user = GlobalList.IsAuthed(new Guid(guid)).user;
                     if (user != null)
                     {
-                        var us = db.Users.FirstOrDefault(u => u.Email == mail);
-                        var emp = db.Employees.Include("User").Include("Company").Include("Position").FirstOrDefault(e => e.User.UserID == us.UserID);
-                        var dep = db.DepartamentEmployees.Include("Employee").Include("Department").FirstOrDefault(d => d.Employee.EmployeeID == emp.EmployeeID);
-                        return us.FirstName + " " + us.SecondName + "|" + emp.Position.PositionName + "|" + us.Email + "|" + dep.Department.DepartmentName + "|" + us.PhoneNumber;
+                        Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        var r = db.AccessRights.Include("Employee").Where(a => a.Employee.EmployeeID == employee.EmployeeID).FirstOrDefault();
+                        if(r == null)
+                        {
+                            return "Ok!";
+                        }
+                        else
+                        {
+                            return r.Departament + "|" + r.EmpCode + "|" + r.Projects + "|" + r.Schedule + "|" + r.Tasks;
+                        }
+                    }
+                    else return "No!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string BestDep(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+
+                        Employee employee = db.Employees.Include("User").Include("Company").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        Company company = db.Companies.Include("User").FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID);
+
+                        var depts = db.Departments.Include("DepartamentEmployees").Include("Company").Where(p => p.DepartamentEmployees.Count > 0 && p.Company.CompanyID == company.CompanyID);
+                        Dictionary<Department, int> kvp = new Dictionary<Department, int>();
+                        foreach (var dept in depts.ToList())
+                        {
+                            var emps = db.DepartamentEmployees.Include("Employee").Include("User").Where(p => p.Department.DepartamentID == dept.DepartamentID);
+                            var users = emps.Select(u => u.Employee);
+
+                            var sum = 0;
+                            foreach (var usr in users)
+                            {
+                                var row = db.TaskExecutors.Include("User").Include("Task");
+                                var row1 = row.Where(p => p.User.UserID == usr.User.UserID && p.Task.isDone);
+                                var row2 = row1.ToList();
+                                var value = row2.Count;
+                                sum += value;
+                            }
+                            kvp.Add(dept, sum);
+                        }
+
+                        var ordered = kvp.OrderByDescending(p => p.Value);
+                        List<string> l = new List<string>();
+                        foreach (var ia in ordered)
+                        {
+                            l.Add(ia.Key.DepartmentName + "|" + ia.Value.ToString() + "\n");
+                        }
+
+                        string s = string.Join("\n", l.ToArray());
+                        return s;
+                    }
+                    else return "No!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string BestEmp(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        
+                        Employee employee = db.Employees.Include("User").Include("Company").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        Company company = db.Companies.Include("User").FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID);
+
+                        var users = db.Employees.Include("User").Include("Company").Where(u => u.Company.CompanyID == company.CompanyID);
+                        Dictionary<User, int> kvp = new Dictionary<User, int>();
+                        foreach (var usr in users)
+                        {
+                            var key = usr;
+                            var row = db.TaskExecutors.Include("User").Include("Task");
+                            var row1 = row.Where(p => p.User.UserID == usr.User.UserID && p.Task.isDone);
+                            var row2 = row1.ToList();
+                            var value = row2.Count;
+                            kvp.Add(key.User, value);
+                        }
+                        var ordered = kvp.OrderByDescending(p => p.Value);
+                        List<string> l = new List<string>();
+                        foreach (var ia in ordered) {
+                            l.Add(ia.Key.FirstName + " " + ia.Key.SecondName + "|" + ia.Value.ToString() + "\n");
+                        }
+
+                        string s = string.Join("\n", l.ToArray());
+                        return s;
+                    }
+                    else return "No!";
+                }
+            }
+            catch (Exception x)
+            {
+                return "No!";
+            }
+        }
+
+        private string GetCompany(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        Employee employee = db.Employees.Include("User").Include("Company").FirstOrDefault(e => e.User.UserID == user.UserID);
+                        Company company = db.Companies.Include("User").FirstOrDefault(c => c.CompanyID == employee.Company.CompanyID);
+                        return company.CompanyName + "|" + company.CompanyType + "|" + company.FoundationDate + "|" + company.User.FirstName + " " + company.User.SecondName;
+                    } else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string RemoveCompany(string guid)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        Company company = db.Companies.Include("User").FirstOrDefault(c => c.User.UserID == user.UserID);
+                        var emps = db.Employees.Include("Company").Include("Employee").Where(e => e.Company.CompanyID == company.CompanyID).ToList();
+                        for(int i = 0; i < emps.Count(); i++)
+                        {
+                            Employee employee = emps[i];
+                            db.Employees.Remove(employee);
+                            db.SaveChanges();
+                        }
+                        return "Ok!";
                     }
                     else return "No!";
                 }
             }
             catch
+            {
+                return "No!";
+            }
+        }
+
+        private string Scheldule(string guid, string mail, string start, string end)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.Email == mail);
+                        DateTime s = Convert.ToDateTime(start);
+                        DateTime f = Convert.ToDateTime(end);
+                        db.Scheldues.Add(new Sсheldue { Employee = employee, DateStart = s, DateEnd = f });
+                        db.SaveChanges();
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string AddEmpInDepartment(string guid, string num, string mail)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        Department department = db.Departments.FirstOrDefault(d => d.DepartamentID == i);
+                        Employee employee = db.Employees.Include("Company").Include("User").FirstOrDefault(c => c.User.Email == mail);
+                        DepartamentEmployees departamentEmployees = db.DepartamentEmployees.Include("Employee").FirstOrDefault(l => l.Employee.EmployeeID == employee.EmployeeID);
+                        db.DepartamentEmployees.Remove(departamentEmployees);
+                        db.SaveChanges();
+                        db.DepartamentEmployees.Add(new DepartamentEmployees { Department = department, Employee = employee });
+                        db.SaveChanges();
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string RemDepartment(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        Department department = db.Departments.FirstOrDefault(d => d.DepartamentID == i);
+                        var emps = db.DepartamentEmployees.Include("Employee").Include("Depatment").Where(e => e.Department.DepartamentID == department.DepartamentID).ToList();
+                        for(int j = 0; j < emps.Count(); j++)
+                        {
+                            DepartamentEmployees employees = emps[i];
+                            db.DepartamentEmployees.Remove(employees);
+                            db.SaveChanges();
+                        }
+                        db.Departments.Remove(department);
+                        db.SaveChanges();
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string EditDep(string guid, string num, string name)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        Department department = db.Departments.FirstOrDefault(d => d.DepartamentID == i);
+                        department.DepartmentName = name;
+                        db.SaveChanges();
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetDepEmp(string guid, string num, string d)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+                        int id = Convert.ToInt32(d);
+                        var dep = db.Departments.Include("Company").Where(f => f.DepartamentID == i).FirstOrDefault();
+                        var emps = db.DepartamentEmployees.Include("Departament").Include("Employee").Where(e => e.Department.DepartamentID == dep.DepartamentID).ToList();
+                        var em = emps[id];
+                        var emp = db.Employees.Include("User").Include("Position").FirstOrDefault(j => j.EmployeeID == em.Employee.EmployeeID);
+                        return emp.User.FirstName + " " + emp.User.SecondName + "|" + emp.Position + "|" + emp.User.Email + "|" + emp.EmployeeID;
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetDepEmpCount(string guid, string num)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(num);
+
+                        var dep = db.Departments.Include("Company").Where(d => d.DepartamentID == i).FirstOrDefault();
+                        var emps = db.DepartamentEmployees.Include("Departament").Include("Employee").Where(e => e.Department.DepartamentID == dep.DepartamentID).ToList();
+
+
+                        return emps.Count().ToString();
+
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string RemEmp(string guid, string id)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int EmpId = Convert.ToInt32(id);
+                        Employee emp = db.Employees.Include("Position").Include("User").FirstOrDefault(e => e.EmployeeID == EmpId);
+                        var t = db.TaskExecutors.Include("User").Include("Task").Where(k => k.User.UserID == emp.User.UserID).ToList();
+                        for(int i = 0; i < t.Count(); i++)
+                        {
+                            TaskExecutors ta = t[i];
+                            DATA.Entities.Task task = db.Tasks.Include("User").FirstOrDefault(a => a.TaskID == ta.Task.TaskID);
+                            User user1 = db.Users.FirstOrDefault(u => u.UserID == task.User.UserID);
+                            ta.User = user1;
+                            db.SaveChanges();
+                        }
+                        db.Employees.Remove(emp);
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string SetEmpPos(string guid, string id, string pos)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int EmpId = Convert.ToInt32(id);
+                        Employee emp = db.Employees.Include("Position").Include("User").FirstOrDefault(e => e.EmployeeID == EmpId);
+                        Position position = db.Positions.FirstOrDefault(p => p.PositionName == pos);
+                        if(position != null)
+                        {
+                            emp.Position = position;
+                            db.SaveChanges();
+                        } else
+                        {
+                            position = db.Positions.Add(new Position {PositionName = pos});
+                            db.SaveChanges();
+                            emp.Position = position;
+                            db.SaveChanges();
+                        }
+                        return "Ok!";
+                    }
+                    else return "No!";
+                }
+            }
+            catch
+            {
+                return "No!";
+            }
+        }
+
+        private string GetEmp(string guid, string id)
+        {
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    User user = GlobalList.IsAuthed(new Guid(guid)).user;
+                    if (user != null)
+                    {
+                        int i = Convert.ToInt32(id);
+                        
+                        var emp = db.Employees.Include("User").Include("Company").Include("Position").FirstOrDefault(e => e.EmployeeID == i);
+                        var dep = db.DepartamentEmployees.Include("Employee").FirstOrDefault(d => d.Employee.EmployeeID == emp.EmployeeID);
+                        
+                        if (dep != null)
+                        {
+                            return emp.User.FirstName + " " + emp.User.SecondName + "|" + emp.Position.PositionName + "|" + emp.User.Email + "|" + dep.Department.DepartmentName;
+                        } else
+                        {
+                            return emp.User.FirstName + " " + emp.User.SecondName + "|" + emp.Position.PositionName + "|" + emp.User.Email + "|" + "null";
+                        }
+                    }
+                    else return "No!";
+                }
+            }
+            catch(Exception ex)
             {
                 return "No!";
             }
@@ -1697,15 +2253,14 @@ namespace HamsterServer
             }
         }
 
-        private string SetRights(string guid, string UserID, string Report, string Task, string Departament, string Projects, string EmpCode, string Schedule, string Marks)
+        private string SetRights(string guid, string mail,  string Task, string Departament, string Projects, string EmpCode, string Schedule)
         {
             try
             {
                 using (DataContext db = new DataContext())
                 {
                     User user = GlobalList.IsAuthed(new Guid(guid)).user;
-                    int ID = Convert.ToInt32(UserID);
-                    Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.UserID == ID);
+                    Employee employee = db.Employees.Include("User").FirstOrDefault(e => e.User.Email == mail);
                     bool T = Convert.ToBoolean(Task);
                     bool D = Convert.ToBoolean(Departament);
                     bool P = Convert.ToBoolean(Projects);
@@ -1713,7 +2268,7 @@ namespace HamsterServer
                     bool S = Convert.ToBoolean(Schedule);
                     db.AccessRights.Add(new AccessRight { Tasks = T, Departament = D, Projects = P, EmpCode = E, Schedule = S, Employee = employee });
                     db.SaveChanges();
-                    return "Access rights saved";
+                    return "Ok!";
                 }
             } catch
             {

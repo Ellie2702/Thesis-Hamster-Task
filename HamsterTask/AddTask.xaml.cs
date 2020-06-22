@@ -31,12 +31,12 @@ namespace HamsterTask
             new Tasks().Show();
             this.Close();
         }
-
+        string[] parts = Global.Guid.Split('|');
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                string[] parts = Global.Guid.Split('|');
+                
                 if (Global.FROM != null)
                 {
                     switch (Global.FROM)
@@ -50,7 +50,6 @@ namespace HamsterTask
                             MailExec.Visibility = Visibility.Visible;
                             TaskExecSel.Visibility = Visibility.Visible;
                             pastemail.Visibility = Visibility.Visible;
-
                             break;
                     }
                 }
@@ -64,7 +63,7 @@ namespace HamsterTask
         {
             try
             {
-                string[] parts = Global.Guid.Split('|');
+                
                 string title = TaskName.Text;
                 string descript = TaskDesc.Text;
                 string deadline = TaskDeadline.SelectedDate.ToString();

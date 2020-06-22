@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HamsterTask"
         mc:Ignorable="d"
-        Title="" Height="446.484" Width="971.926" WindowStartupLocation="CenterScreen">
+        Title="{DynamicResource editt}" Height="446.484" Width="971.926" WindowStartupLocation="CenterScreen">
     <Grid  Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

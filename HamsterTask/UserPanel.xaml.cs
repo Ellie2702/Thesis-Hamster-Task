@@ -77,12 +77,13 @@ namespace HamsterTask
             string[] part = Global.Guid.Split('|');
             string[] parts = Helper.Http.GetRequest("http://localhost:8080/Inform/" + part[0]).Split('|');
             UserName.Content = parts[3] + " " + parts[4];
+            UserProfileHello.Content += parts[3];
             if (parts[parts.Length - 1] == "W")
             {
                 Position.Content = parts[7];
                 Company.Content = parts[8];
                 var work = Helper.Http.GetRequest("http://localhost:8080/IsWork/" + parts[0]).Split('|');
-                if (work != null || work[0] != "NotWorking")
+                if (work != null && work[0] != "NotWorking")
                 {
                     Iswork.Visibility = Visibility.Visible;
                     Iswork.Content = TryFindResource("IsWork").ToString() + work[1] + " - " + work[2];

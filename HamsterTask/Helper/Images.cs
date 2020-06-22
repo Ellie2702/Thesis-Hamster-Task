@@ -74,11 +74,18 @@ namespace HamsterTask.Helper
         {
             using (var ms = new MemoryStream(Convert.FromBase64String(Http.GetRequest("http://localhost:8080/GetAvatarUser/" + Global.Guid.Split('|')[0]))))
             {
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
+                BitmapImage bi = new BitmapImage();
+                try
+                {
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.StreamSource = ms;
+                    bi.EndInit();
+                }
+                catch
+                {
+                    bi = null;
+                }
 
                 return bi;
             }
@@ -87,11 +94,17 @@ namespace HamsterTask.Helper
         {
             using (var ms = new MemoryStream(Convert.FromBase64String(Http.GetRequest("http://localhost:8080/GetAvatarCompany/" + Global.Guid.Split('|')[0]))))
             {
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
+                BitmapImage bi = new BitmapImage();
+                try {
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.StreamSource = ms;
+                    bi.EndInit();
+                }
+                catch
+                {
+                    bi = null;
+                }
 
                 return bi;
             }

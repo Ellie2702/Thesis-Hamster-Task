@@ -248,4 +248,31 @@
     <system:String x:Key="HamsterTask.EditProjects">HamsterTask - Измененение проекта</system:String>
     <system:String x:Key="EditCompany">Изменить информацию</system:String>
     <system:String x:Key="DepName">Департамент:</system:String>
+
+    <system:String x:Key="PosisSeе">Должность назначена!</system:String>
+    <system:String x:Key="PosNotSet">Должность не назначена!</system:String>
+    <system:String x:Key="DepNotSet">Не назначен</system:String>
+
+    <system:String x:Key="RemEmp">Вы уверены, что хотите удалить сотрудника?</system:String>
+    <system:String x:Key="DelEmp">Сотрудник удалён из компании!</system:String>
+    <system:String x:Key="DelDep">Департамент удалён!</system:String>
+    <system:String x:Key="AddEmp">Добавить</system:String>
+    <system:String x:Key="EmpAdded">Сотрудник направлен в этот департамент!</system:String>
+    <system:String x:Key="Save">Сохранено</system:String>
+    <system:String x:Key="Rights">Права доступа</system:String>
+    <system:String x:Key="UserPanel">HamsterTask - Панель пользователя</system:String>
+    <system:String x:Key="SetPosition">HamsterTask - Назначить должность</system:String>
+    <system:String x:Key="EmpW">HamsterTask - Сотрудник</system:String>
+    <system:String x:Key="editt">HamsterTask - Измененение задачи</system:String>
+    <system:String x:Key="editdep">HamsterTask - Измененение департамента</system:String>
+    <system:String x:Key="deprw">HamsterTask - Департамент</system:String>
+    <system:String x:Key="remUs">HamsterTask - Удаление пользователя</system:String>
+    <system:String x:Key="rem">Удалить</system:String>
+    <system:String x:Key="dethComp">Мёртвые компании</system:String>
+    <system:String x:Key="empCount">Сотрудников</system:String>
+    <system:String x:Key="newAd">Администратор добавлен!</system:String>
+    <system:String x:Key="HamsterHello">Добро пожаловать, </system:String>
+
+    <system:String x:Key="addadmin">HamsterTask - Добавить админа</system:String>
+    <system:String x:Key="deth">HamsterTask - пустые компании</system:String>
 </ResourceDictionary>

@@ -237,14 +237,36 @@
     <system:String x:Key="ProjectAdded">The project added!</system:String>
     <system:String x:Key="ProjectNotAdded">Make sure that you fill in all the fields correctly!</system:String>
 
-    <system:String x:Key="ActivCodeDesc">Введите код, чтобы подтвердить сотрудничество!</system:String>
-    <system:String x:Key="ActivCode">Активировать</system:String>
-    <system:String x:Key="ActivCodeDone">Ваш код успешно активирован!</system:String>
-    <system:String x:Key="ActivCodeNotDone">Код не активирован. Убедитесь, что ввели его правильно.</system:String>
+    <system:String x:Key="ActivCodeDesc">Enter the code to confirm your cooperation!</system:String>
+    <system:String x:Key="ActivCode">Activate</system:String>
+    <system:String x:Key="ActivCodeDone">Your code has been successfully activated!</system:String>
+    <system:String x:Key="ActivCodeNotDone">The code is not activated. Make sure that you entered it correctly.</system:String>
 
-    <system:String x:Key="SaveChanges">Сохранить изменения</system:String>
-    <system:String x:Key="ChangesIsSaved">Измененения сохранены</system:String>
-    <system:String x:Key="HamsterTask.EditProjects">HamsterTask - Измененение проекта</system:String>
-    <system:String x:Key="EditCompany">Изменить информацию</system:String>
-    <system:String x:Key="DepName">Департамент:</system:String>
+    <system:String x:Key="SaveChanges">Save the changes</system:String>
+    <system:String x:Key="ChangesIsSaved">Changes are saved</system:String>
+    <system:String x:Key="HamsterTask.EditProjects">HamsterTask - Changing the project</system:String>
+    <system:String x:Key="EditCompany">Change information</system:String>
+    <system:String x:Key="DepName">The department:</system:String>
+    <system:String x:Key="DepNotSet">Not assigned</system:String>
+    <system:String x:Key="RemEmp">Are you sure you want to delete an employee?</system:String>
+    <system:String x:Key="DelEmp">Employee removed from the company!</system:String>
+    <system:String x:Key="DelDep">The Department deleted!</system:String>
+    <system:String x:Key="AddEmp">Add</system:String>
+    <system:String x:Key="EmpAdded">The employee is assigned to this Department!</system:String>
+    <system:String x:Key="Save">saved</system:String>
+    <system:String x:Key="Rights">Access right</system:String>
+    <system:String x:Key="UserPanel">HamsterTask - User panel</system:String>
+    <system:String x:Key="SetPosition">HamsterTask - Assign a position</system:String>
+    <system:String x:Key="EmpW">HamsterTask - Employee</system:String>
+    <system:String x:Key="editt">HamsterTask - Changing an issue</system:String>
+    <system:String x:Key="editdep">HamsterTask - Changing the Department</system:String>
+    <system:String x:Key="deprw">HamsterTask - The department</system:String>
+    <system:String x:Key="remUs">HamsterTask - Deleting a user</system:String>
+    <system:String x:Key="rem">Remove</system:String>
+    <system:String x:Key="dethComp">Dead companies</system:String>
+    <system:String x:Key="empCount">Employees</system:String>
+    <system:String x:Key="newAd">The administrator added!</system:String>
+    <system:String x:Key="HamsterHello">Welcome, </system:String>
+    <system:String x:Key="addadmin">HamsterTask - Add admin</system:String>
+    <system:String x:Key="deth">HamsterTask - empty companies</system:String>
 </ResourceDictionary>
